@@ -3,6 +3,7 @@
  * All rights reserved.
  */
 
+#include <cmath>
 #include <stdexcept>
 
 namespace sml
@@ -21,8 +22,8 @@ namespace sml
  * \f}
  *
  * @tparam Vector3 3-Vector type
- * @param  vector1 A vector
- * @param  vector2 A vector
+ * @param  vector1 A 3-vector
+ * @param  vector2 A 3-vector
  * @return Vector resulting from cross-product
  */
 template< typename Vector3 >
@@ -34,7 +35,6 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
         throw std::runtime_error( "ERROR: Cross product can only be computed for 3-vectors!" );
     }
 
-    // Declare the resulting 3-vector.
     Vector3 result( 3 );
 
     // Compute components of resulting 3-vector.
@@ -42,50 +42,123 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
     result[ 1 ] = vector1[ 2 ] * vector2[ 0 ] - vector1[ 0 ] * vector2[ 2 ];
     result[ 2 ] = vector1[ 0 ] * vector2[ 1 ] - vector1[ 1 ] * vector2[ 0 ];
 
-    // Return result vector.
     return result;
 }
 
-// template< typename Vector, typename Real >
-// Real squaredNorm( const Vector& vector )
-// {
-//     // Declare norm;
-//     Real squaredNorm = 0.0;
+//! Compute dot-product of two equal-length vectors.
+/*!
+ * Computes the dot-product (inner-product) of two vectors of length N. Throws an exception if the
+ * vectors are unequal in length. The dot-product \f$r = \bar{X} \cdot \bar{Y}\f$ is computed as 
+ * follows:
+ * 
+ * \f[
+ *      r = \sum_{i=1}^{N} X_{i} * Y_{i}
+ * \f]
+ *
+ * @tparam Real Real type
+ * @tparam Vector Vector type
+ * @param  vector1 A vector of length N
+ * @param  vector2 A vector of length N
+ * @return Scalar resulting from dot-product
+ */
+template< typename Real, typename Vector >
+Real dot( const Vector& vector1, const Vector& vector2 )
+{
+    // Check if vectors are of different length. If so, throw an exception.
+    if ( vector1.size( ) != vector2.size( ) )
+    {
+        throw std::runtime_error( 
+            "ERROR: Dot product can only be computed for vectors of equal length!" );
+    }
 
-//     // Loop through vector to compute norm.
-//     for ( unsigned int i = 0; i < vector.size( ); i++ )
-//     {
-//         squaredNorm += vector[ i ] * vector[ i ];
-//     }
+    Real result = 0.0;
 
-//     // Return computed norm.
-//     return squaredNorm;
-// }
+    // Loop through vector and compute dot product.
+    for ( unsigned int i = 0; i < vector1.size( ); i++ )
+    {
+        result += vector1[ i ] * vector2[ i ];
+    }
 
-// template< typename Vector, typename Real >
-// Real norm( const Vector& vector )
-// {
-//     return std::sqrt( squaredNorm< Vector, Real >( vector ) );
-// }
+    return result;
+}
 
-// template< typename Vector, typename Real >
-// Vector normalize( const Vector& vector )
-// {
-//     // Declare normalized vector.
-//     Vector normalizedVector( vector.size( ) );
+//! Compute squared-norm of vector.
+/*!
+ * Computes the square of the Euclidean norm of a vector of length N. This is computed as the dot-
+ * product of the vector with itself. The squared-norm \f$r\f$ of vector \f$X\f$ is computed as
+ * follows:
+ * 
+ * \f[
+ *      r = \sum_{i=1}^{N} X_{i}^{2}
+ * \f]
+ * 
+ * @sa dot
+ * @tparam Real Real type
+ * @tparam Vector Vector type
+ * @param  vector A vector of length N
+ * @return Scalar squared-norm of vector
+ */
+template< typename Real, typename Vector >
+Real squaredNorm( const Vector& vector )
+{
+    return dot< Real, Vector >( vector, vector );
+}
 
-//     // Compute the norm of the vector.
-//     Real vectorNorm = norm< Vector, Real >( vector );
+//! Compute norm of vector.
+/*!
+ * Computes the Euclidean norm of a vector of length N. This is computed as the square-root of the 
+ * dot-product of the vector with itself. The norm \f$r\f$ of vector \f$X\f$ is computed as
+ * follows:
+ * 
+ * \f[
+ *      r = \sqrt{\sum_{i=1}^{N} X_{i}^{2}}
+ * \f]
+ * 
+ * @sa squaredNorm, dot
+ * @tparam Real Real type
+ * @tparam Vector Vector type
+ * @param  vector A vector of length N
+ * @return Scalar norm of vector
+ */
+template< typename Real, typename Vector >
+Real norm( const Vector& vector )
+{
+    return std::sqrt( squaredNorm< Real, Vector >( vector ) );
+}
 
-//     // Loop through vector and divide each component by the norm of the vector.
-//     for ( unsigned int i = 0; i < vector.size( ); i++ )
-//     {
-//         normalizedVector[ i ] = vector[ i ] / vectorNorm;
-//     }   
+//! Normalize vector.
+/*!
+ * Normalizes a vector of length N by computing the Euclidean norm of the vector and dividing by
+ * the norm component-wise. The result is a unit-vector. A vector \f$X\f$ is normalized as follows:
+ *
+ * \f[
+ *      \hat{\bar{X}} = \frac{\bar{X}}{|\bar{X}|}
+ * \f]
+ * 
+ * @sa norm, dot
+ * @tparam Real Real type
+ * @tparam Vector Vector type
+ * @param  vector A vector of length N
+ * @return Normalized vector
+ */
+template< typename Real, typename Vector >
+Vector normalize( const Vector& vector )
+{
+    // Declare normalized vector.
+    Vector normalizedVector( vector.size( ) );
 
-//     // Return normalized vector.
-//     return normalizedVector;
-// }
+    // Compute the norm of the vector.
+    Real vectorNorm = norm< Real, Vector >( vector );
+
+    // Loop through vector and divide each component by the norm of the vector.
+    for ( unsigned int i = 0; i < vector.size( ); i++ )
+    {
+        normalizedVector[ i ] = vector[ i ] / vectorNorm;
+    }   
+
+    // Return normalized vector.
+    return normalizedVector;
+}
 
 // template< typename Vector >
 // Vector getZUnitVector( )

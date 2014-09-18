@@ -93,19 +93,19 @@ if(BUILD_DOCS)
   if(NOT DOXYGEN_FOUND)
     message(FATAL_ERROR 
             "Doxygen is needed to build the documentation. Please install it correctly.")
-  endif()
+  endif(NOT DOXYGEN_FOUND)
 
   # Configure the Template Doxyfile for our specific project.
   configure_file(${PROJECT_ROOT}/Doxyfile.in 
                  ${PROJECT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
 
   # Add a custom target to run Doxygen when ever the project is built.
-  # IF you do NOT want the documentation to be generated EVERY time you build the project
-  # then leave out the 'ALL' keyword from the above command.
+  # If you do NOT want the documentation to be generated EVERY time you build the project
+  # then leave out the 'ALL' keyword from the command below.
   add_custom_target (docs ALL COMMAND ${DOXYGEN_EXECUTABLE} 
                      ${PROJECT_BINARY_DIR}/Doxyfile 
                      SOURCES ${PROJECT_BINARY_DIR}/Doxyfile)
-endif()
+endif(BUILD_DOCS)
 
 # Add unit tests for SML.
 set(SML_UNIT_TESTS
