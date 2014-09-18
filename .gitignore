@@ -33,3 +33,6 @@ bin
 lib
 doc
 tests
+
+# Project files
+*.sublime*

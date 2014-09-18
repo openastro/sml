@@ -11,7 +11,7 @@ project(SML)
 set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Define the project root directory.
-set(PROJECT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
+set(PROJECT_ROOT "${SOURCE_ROOT}/..")
 
 # Set path to local CMake modules.
 set(CMAKE_MODULE_PATH ${PROJECT_ROOT}/CMakeModules)

@@ -3,12 +3,28 @@
  * All rights reserved.
  */
 
-// #include <cmath>
 #include <stdexcept>
 
 namespace sml
 {
 
+//! Compute cross-product of two 3-vectors.
+/*!
+ * Computes the cross-product of two 3-vectors. Throws an exception if either of the vectors do not
+ * have dimension 3. The cross-product \f$\bar{R} = \bar{X} \times \bar{Y}\f$ is computed as 
+ * follows:
+ * 
+ * \f{eqnarray*}{
+ *      R_{1} &=& X_{2} * Y_{3} - X_{3} * Y{2} \\ 
+ *      R_{2} &=& X_{3} * Y_{1} - X_{1} * Y{3} \\ 
+ *      R_{3} &=& X_{1} * Y_{2} - X_{2} * Y{1}
+ * \f}
+ *
+ * @tparam Vector3 3-Vector type
+ * @param  vector1 A vector
+ * @param  vector2 A vector
+ * @return Vector resulting from cross-product
+ */
 template< typename Vector3 >
 Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
 {
@@ -23,8 +39,8 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
 
     // Compute components of resulting 3-vector.
     result[ 0 ] = vector1[ 1 ] * vector2[ 2 ] - vector1[ 2 ] * vector2[ 1 ];
-    result[ 0 ] = vector1[ 2 ] * vector2[ 0 ] - vector1[ 0 ] * vector2[ 2 ];
-    result[ 0 ] = vector1[ 0 ] * vector2[ 1 ] - vector1[ 1 ] * vector2[ 0 ];
+    result[ 1 ] = vector1[ 2 ] * vector2[ 0 ] - vector1[ 0 ] * vector2[ 2 ];
+    result[ 2 ] = vector1[ 0 ] * vector2[ 1 ] - vector1[ 1 ] * vector2[ 0 ];
 
     // Return result vector.
     return result;

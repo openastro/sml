@@ -23,7 +23,6 @@
 # built into libc) for the transcoding. See http://www.gnu.org/software/libiconv
 # for the list of possible encodings.
 # The default value is: UTF-8.
-
 DOXYFILE_ENCODING      = UTF-8
 
 # The PROJECT_NAME tag is a single word (or a sequence of words surrounded by
@@ -44,7 +43,7 @@ PROJECT_NUMBER         = 0.0.1
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = Simple maths library
+PROJECT_BRIEF          = "Simple maths library"
 
 # With the PROJECT_LOGO tag one can specify an logo or icon that is included in
 # the documentation. The maximum height of the logo should not exceed 55 pixels
@@ -776,7 +775,7 @@ INPUT_ENCODING         = UTF-8
 # *.md, *.mm, *.dox, *.py, *.f90, *.f, *.for, *.tcl, *.vhd, *.vhdl, *.ucf,
 # *.qsf, *.as and *.js.
 
-FILE_PATTERNS          = *.h \
+FILE_PATTERNS          = *.hpp \
                          *.cpp
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
