@@ -1,4 +1,4 @@
-sml
+SML
 ===
 
 Simple maths library
