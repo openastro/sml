@@ -23,8 +23,8 @@ namespace sml
  * description of congruence see: http://mathworld.wolfram.com/Congruence.html.
  *
  * @tparam Real Real type 
- * @param dividend Number to be divided.
- * @param divisor Number that divides dividend
+ * @param  dividend Number to be divided.
+ * @param  divisor Number that divides dividend
  * @return Remainder of division of dividend by divisor
  */
 template< typename Real >
