@@ -3,6 +3,9 @@
  * All rights reserved.
  */
 
+#ifndef SML_LINEAR_ALGEBRA_HPP
+#define SML_LINEAR_ALGEBRA_HPP
+
 #include <cmath>
 #include <stdexcept>
 
@@ -176,3 +179,5 @@ Vector normalize( const Vector& vector )
 // }
 
 } // namespace sml
+
+#endif // SML_LINEAR_ALGEBRA_HPP

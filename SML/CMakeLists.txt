@@ -109,8 +109,10 @@ endif(BUILD_DOCS)
 
 # Add unit tests for SML.
 set(SML_UNIT_TESTS
+  "${SOURCE_ROOT}/UnitTests/unitTestBasicFunctions.cpp"
+  "${SOURCE_ROOT}/UnitTests/unitTestConstants.cpp"
+  "${SOURCE_ROOT}/UnitTests/unitTestLinearAlgebra.cpp"
   "${SOURCE_ROOT}/UnitTests/unitTestSml.cpp"
-  "${SOURCE_ROOT}/UnitTests/unitTestLinearAlgebra.cpp"  
 )
 
 add_executable(sml_tests ${SML_UNIT_TESTS})
