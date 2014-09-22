@@ -10,7 +10,7 @@ namespace sml
 {
 
 //! Define Pi.
-#define SML_PI 3.14159265358979323846
+static const double SML_PI = 3.14159265358979323846;
 
 }
 

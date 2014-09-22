@@ -27,7 +27,7 @@ namespace sml
  * @tparam Vector3 3-Vector type
  * @param  vector1 A 3-vector
  * @param  vector2 A 3-vector
- * @return Vector resulting from cross-product
+ * @return Vector  resulting from cross-product
  */
 template< typename Vector3 >
 Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
@@ -59,10 +59,10 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
  * \f]
  *
  * @tparam Real Real type
- * @tparam Vector Vector type
+ * @tparam Vector  Vector type
  * @param  vector1 A vector of length N
  * @param  vector2 A vector of length N
- * @return Scalar resulting from dot-product
+ * @return Scalar  resulting from dot-product
  */
 template< typename Real, typename Vector >
 Real dot( const Vector& vector1, const Vector& vector2 )
@@ -96,7 +96,7 @@ Real dot( const Vector& vector1, const Vector& vector2 )
  * \f]
  * 
  * @sa dot
- * @tparam Real Real type
+ * @tparam Real   Real type
  * @tparam Vector Vector type
  * @param  vector A vector of length N
  * @return Scalar squared-norm of vector
@@ -118,7 +118,7 @@ Real squaredNorm( const Vector& vector )
  * \f]
  * 
  * @sa squaredNorm, dot
- * @tparam Real Real type
+ * @tparam Real   Real type
  * @tparam Vector Vector type
  * @param  vector A vector of length N
  * @return Scalar norm of vector
@@ -139,7 +139,7 @@ Real norm( const Vector& vector )
  * \f]
  * 
  * @sa norm, dot
- * @tparam Real Real type
+ * @tparam Real   Real type
  * @tparam Vector Vector type
  * @param  vector A vector of length N
  * @return Normalized vector
@@ -163,20 +163,143 @@ Vector normalize( const Vector& vector )
     return normalizedVector;
 }
 
-// template< typename Vector >
-// Vector getZUnitVector( )
-// {
-//     // Declare vector of size 3.
-//     Vector zUnitVector( 3 );
+//! Get unit-vector in x-direction.
+/*!
+ * Returns unit-vector in the x-direction as column vector.
+ *
+ * @tparam Vector3 Type for 3-vector
+ * @return Unit-vector in x-direction
+ */
+template< typename Vector3 >
+Vector3 getXUnitVector( )
+{
+    Vector3 xUnitVector( 3 );
 
-//     // Set components of unit-vector.
-//     zUnitVector[ 0 ] = 0.0;
-//     zUnitVector[ 1 ] = 0.0;
-//     zUnitVector[ 2 ] = 1.0;
+    // Set components of unit-vector.
+    xUnitVector[ 0 ] = 1.0;
+    xUnitVector[ 1 ] = 0.0;
+    xUnitVector[ 2 ] = 0.0;
 
-//     // Return unit vector in z-direction.
-//     return zUnitVector;
-// }
+    return xUnitVector;
+}
+
+//! Get unit-vector in y-direction.
+/*!
+ * Returns unit-vector in the y-direction as column vector.
+ *
+ * @tparam Vector3 Type for 3-vector
+ * @return Unit-vector in y-direction
+ */
+template< typename Vector3 >
+Vector3 getYUnitVector( )
+{
+    Vector3 yUnitVector( 3 );
+
+    // Set components of unit-vector.
+    yUnitVector[ 0 ] = 0.0;
+    yUnitVector[ 1 ] = 1.0;
+    yUnitVector[ 2 ] = 0.0;
+
+    return yUnitVector;
+}
+
+//! Get unit-vector in z-direction.
+/*!
+ * Returns unit-vector in the z-direction as column vector.
+ *
+ * @tparam Vector3 Type for 3-vector
+ * @return Unit-vector in z-direction
+ */
+template< typename Vector3 >
+Vector3 getZUnitVector( )
+{
+    Vector3 zUnitVector( 3 );
+
+    // Set components of unit-vector.
+    zUnitVector[ 0 ] = 0.0;
+    zUnitVector[ 1 ] = 0.0;
+    zUnitVector[ 2 ] = 1.0;
+
+    return zUnitVector;
+}
+
+//! Multiply element-wise.
+/*!
+ * Multiply each element of a vector of length N by a scalar.
+ *
+ * @tparam Real       Real type
+ * @tparam Vector     Vector type
+ * @param  vector     Vector to multiply element-wise
+ * @param  multiplier Multiplier to multiply vector element-wise
+ * @return Vector multiplied element-wise
+ */
+template< typename Real, typename Vector >
+Vector multiply( const Vector& vector, const Real multiplier )
+{
+    Vector result( vector.size( ) );
+
+    // Loop through vector and multiply each element by the multiplier.
+    for ( unsigned int i = 0; i < vector.size( ); i++ )
+    {
+        result[ i ] = multiplier * vector[ i ];
+    }
+
+    return result;
+}
+
+//! Add element-wise.
+/*!
+ * Add a scalar to each element of a vector of length N.
+ *
+ * @tparam Real   Real type
+ * @tparam Vector Vector type
+ * @param  vector Vector to add to element-wise
+ * @param  adder  Added to multiply vector element-wise
+ * @return Vector added to element-wise
+ */
+template< typename Real, typename Vector >
+Vector add( const Vector& vector, const Real adder )
+{
+    Vector result( vector.size( ) );
+
+    // Loop through vector and add adder to each element.
+    for ( unsigned int i = 0; i < vector.size( ); i++ )
+    {
+        result[ i ] = adder + vector[ i ];
+    }
+
+    return result;
+}
+
+//! Add element-wise.
+/*!
+ * Add two vectors of length N element-wise.
+ *
+ * @tparam Vector  Vector type
+ * @param  vector1 A vector to add to element-wise
+ * @param  vector2 A vector to add to element-wise 
+ * @return Vector resulting from element-wise addition of two vectors
+ */
+template< typename Vector >
+Vector add( const Vector& vector1, const Vector& vector2 )
+{
+    // Check if vectors are of different length. If so, throw an exception.
+    if ( vector1.size( ) != vector2.size( ) )
+    {
+        throw std::runtime_error( 
+            "ERROR: Dot product can only be computed for vectors of equal length!" );
+    }
+
+    Vector result( vector1.size( ) );
+
+    // Loop through vectors and add element-wise.
+    for ( unsigned int i = 0; i < vector1.size( ); i++ )
+    {
+        result[ i ] = vector1[ i ] + vector2[ i ];
+    }
+
+    return result;
+}
 
 } // namespace sml
 

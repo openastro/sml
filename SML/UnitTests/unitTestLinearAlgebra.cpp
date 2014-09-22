@@ -192,5 +192,214 @@ TEST_CASE( "Normalize vector", "[norm]" )
     }
 }
 
+TEST_CASE( "Return unit-vectors", "[unit-vector]" )
+{
+    SECTION( "Return unit-vector in x-direction" )
+    {
+        Vector xUnitVector( 3 );        
+
+        xUnitVector[ 0 ] = 1.0; 
+        xUnitVector[ 1 ] = 0.0;
+        xUnitVector[ 2 ] = 0.0;           
+
+        REQUIRE( getXUnitVector< Vector >( ) == xUnitVector ); 
+    }
+
+    SECTION( "Return unit-vector in y-direction" )
+    {
+        Vector yUnitVector( 3 );        
+
+        yUnitVector[ 0 ] = 0.0; 
+        yUnitVector[ 1 ] = 1.0;
+        yUnitVector[ 2 ] = 0.0;           
+
+        REQUIRE( getYUnitVector< Vector >( ) == yUnitVector ); 
+    }
+            
+    SECTION( "Return unit-vector in z-direction" )
+    {
+        Vector zUnitVector( 3 );        
+
+        zUnitVector[ 0 ] = 0.0; 
+        zUnitVector[ 1 ] = 0.0;
+        zUnitVector[ 2 ] = 1.0;           
+
+        REQUIRE( getZUnitVector< Vector >( ) == zUnitVector ); 
+    }
+}
+
+TEST_CASE( "Perform element-wise operations", "[element-wise]" )
+{
+    SECTION( "Multiply arbitrary vector element-wise" )
+    {
+        Vector vector( 3 );  
+        vector[ 0 ] = 12.3; 
+        vector[ 1 ] = -15.4;
+        vector[ 2 ] = 0.17;  
+
+        Vector result( 3 ); 
+
+        REAL multiplier = 0.0;   
+
+        SECTION( "Multiply vector element-wise by 1 to give same vector")
+        {
+            multiplier = 1.0;  
+
+            result = vector;      
+
+            REQUIRE( multiply( vector, multiplier ) == result ); 
+        }
+
+        SECTION( "Multiply vector element-wise by 0 to give 0-vector")
+        {
+            multiplier = 0.0;  
+
+            result[ 0 ] = 0.0; 
+            result[ 1 ] = 0.0;
+            result[ 2 ] = 0.0; 
+
+            REQUIRE( multiply( vector, multiplier ) == result ); 
+        }
+
+        SECTION( "Multiply by positive multiplier with magnitude greater than unity")
+        {
+            multiplier = 6.35;        
+
+            result[ 0 ] = 78.105; 
+            result[ 1 ] = -97.78999999999999;
+            result[ 2 ] = 1.0795000000000001; 
+
+            REQUIRE( multiply( vector, multiplier ) == result ); 
+        }   
+
+        SECTION( "Multiply by negative multiplier with magnitude greater than unity")
+        {
+            multiplier = -4.65;        
+
+            result[ 0 ] = -57.19500000000001; 
+            result[ 1 ] = 71.61000000000001;
+            result[ 2 ] = -0.7905000000000001; 
+
+            REQUIRE( multiply( vector, multiplier ) == result ); 
+        }  
+
+        SECTION( "Multiply by positive multiplier with magnitude less than unity")
+        {
+            multiplier = 0.146;        
+
+            result[ 0 ] = 1.7958;  
+            result[ 1 ] = -2.2483999999999997;
+            result[ 2 ] = 0.024820000000000002;
+
+            REQUIRE( multiply( vector, multiplier ) == result ); 
+        }   
+
+        SECTION( "Multiply by negative multiplier with magnitude less than unity")
+        {
+            multiplier = -0.0488;        
+
+            result[ 0 ] = -0.6002400000000001; 
+            result[ 1 ] = 0.7515200000000001;
+            result[ 2 ] = -0.008296000000000001; 
+
+            REQUIRE( multiply( vector, multiplier ) == result ); 
+        }                        
+    }
+
+    SECTION( "Add to arbitrary vector element-wise" )
+    {
+        Vector vector( 3 );  
+        vector[ 0 ] = 12.3; 
+        vector[ 1 ] = -15.4;
+        vector[ 2 ] = 0.17;  
+
+        Vector result( 3 ); 
+
+        REAL adder = 0.0;   
+
+        SECTION( "Add 0 to vector element-wise to give same vector")
+        {
+            adder = 0.0; 
+
+            REQUIRE( add( vector, adder ) == vector ); 
+        }
+
+        SECTION( "Add positive adder")
+        {
+            adder = 6.35;        
+
+            result[ 0 ] = 18.65; 
+            result[ 1 ] = -9.05;
+            result[ 2 ] = 6.52;  
+
+            REQUIRE( add( vector, adder ) == result ); 
+        }   
+
+        SECTION( "Add negative adder")
+        {
+            adder = -3.64;        
+
+            result[ 0 ] = 8.66; 
+            result[ 1 ] = -19.04;
+            result[ 2 ] = -3.47;  
+
+            REQUIRE( add( vector, adder ) == result ); 
+        }
+    }  
+
+    SECTION( "Add two vectors of equal length element-wise" )
+    {
+        SECTION( "Add two vectors of unequal length" )
+        {
+            Vector vector1( 4 );
+            Vector vector2( 5 );
+
+            REQUIRE_THROWS( add( vector1, vector2 ) );
+        }
+
+        SECTION( "Add two 0-vectors" )
+        {
+            Vector vector( 2 );
+
+            vector[ 0 ] = 0.0;
+            vector[ 1 ] = 0.0;
+
+            REQUIRE( add( vector, vector ) == vector );
+        }
+
+        SECTION( "Add two arbitrary equal-vectors" )
+        {
+            Vector vector( 2 );
+            Vector result( 2 );
+
+            vector[ 0 ] = 2.6;
+            vector[ 1 ] = -9.4;
+
+            result[ 0 ] = 5.2;
+            result[ 1 ] = -18.8;
+
+            REQUIRE( add( vector, vector ) == result );
+        }        
+
+        SECTION( "Add two arbitrary unequal-vectors" )
+        {
+            Vector vector1( 2 );
+            Vector vector2( 2 );
+            Vector result( 2 );
+
+            vector1[ 0 ] = 2.6;
+            vector1[ 1 ] = -9.4;
+
+            vector2[ 0 ] = -0.54;
+            vector2[ 1 ] = 12.3;
+
+            result[ 0 ] = 2.06;
+            result[ 1 ] = 2.9000000000000004;
+
+            REQUIRE( add( vector1, vector2 ) == result );
+        }                
+    }  
+}
+
 } // namespace unit_tests
 } // namespace sml
