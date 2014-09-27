@@ -5,9 +5,12 @@
 
 #define REAL double
 
+#include <limits>
+
 #include <catch.hpp>
 
 #include <SML/basicFunctions.hpp>
+#include <SML/constants.hpp> 
 
 namespace sml
 {
@@ -33,6 +36,31 @@ TEST_CASE( "Test modulo function", "[modulo]" )
 
         REQUIRE( computeModulo( dividend, divisor ) == remainder );
     }    
+}
+
+TEST_CASE( "Test radian-to-degree conversion function", "[radians-to-degrees]")
+{
+    SECTION( "PI/2 radians to degrees" )
+    {
+        REQUIRE( convertRadiansToDegrees( SML_PI / 2.0 ) == 90.0 );
+    }
+
+    SECTION( "0 radians to degrees" )
+    {
+        REQUIRE( convertRadiansToDegrees( 0.0 ) == 0.0 );
+    }
+
+    SECTION( "PI radians to degrees" )
+    {
+        REQUIRE( convertRadiansToDegrees( SML_PI ) == 180.0 );
+    }    
+
+    SECTION( "Arbitrary radians to degrees" )
+    {
+        REQUIRE( convertRadiansToDegrees( 2.573 ) 
+                 == Approx( 147.4220406871608 ).epsilon( 
+                        std::numeric_limits< REAL >::epsilon( ) ) );
+    }        
 }
 
 } // namespace unit_tests

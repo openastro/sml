@@ -10,6 +10,8 @@
 
 #include <catch.hpp>
 
+#include <SML/constants.hpp>
+
 namespace sml
 {
 
@@ -31,6 +33,23 @@ template< typename Real >
 Real computeModulo( const Real dividend, const Real divisor )
 {
     return dividend - divisor * std::floor( dividend / divisor );
+}
+
+//! Convert angle in radians to degrees.
+/*!
+ * Converts angle given in radians to degrees using the following equation:
+ *
+ * \f[
+ *      \theta_{deg} = \theta_{rad} * 180
+ * \f]
+ *
+ * @param  angleInRadians Angle in radians
+ * @return                Angle in degrees
+ */
+template < typename Real >
+Real convertRadiansToDegrees( const Real angleInRadians )
+{ 
+    return angleInRadians / SML_PI * 180.0; 
 }
 
 } // namespace sml
