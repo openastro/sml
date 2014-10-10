@@ -12,7 +12,7 @@
 
 namespace sml
 {
-namespace unit_tests
+namespace tests
 {
 
 //! Define typedef for vector of reals.
@@ -401,5 +401,5 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
     }  
 }
 
-} // namespace unit_tests
+} // namespace tests
 } // namespace sml

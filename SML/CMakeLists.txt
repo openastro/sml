@@ -59,17 +59,17 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
 endif()
 
-# Set directory unit tests are built.
+# Set directory tests are built.
 if(NOT TEST_ROOT)
-  set(TEST_ROOT "${PROJECT_BINARY_DIR}/../tests")
+  set(TEST_ROOT "${PROJECT_BINARY_DIR}/../test")
 endif()
 
 # Set the global macros for setting up targets.
-macro(setup_unit_test_target target_name)
+macro(setup_test_target target_name)
   set_property(TARGET ${target_name} PROPERTY RUNTIME_OUTPUT_DIRECTORY "${TEST_ROOT}")
   get_property(CUSTOM_TEST_PROGRAM_NAME TARGET ${target_name} PROPERTY OUTPUT_NAME)
   add_test("${target_name}" "${TEST_ROOT}/${target_name}")
-endmacro(setup_unit_test_target)
+endmacro(setup_test_target)
 
 # Include the top-level directories.
 include_directories(AFTER "${PROJECT_ROOT}")
@@ -107,14 +107,14 @@ if(BUILD_DOCS)
                      SOURCES ${PROJECT_BINARY_DIR}/Doxyfile)
 endif(BUILD_DOCS)
 
-# Add unit tests for SML.
-set(SML_UNIT_TESTS
-  "${SOURCE_ROOT}/UnitTests/unitTestBasicFunctions.cpp"
-  "${SOURCE_ROOT}/UnitTests/unitTestConstants.cpp"
-  "${SOURCE_ROOT}/UnitTests/unitTestLinearAlgebra.cpp"
-  "${SOURCE_ROOT}/UnitTests/unitTestSml.cpp"
+# Add tests for SML.
+set(SML_TESTS
+  "${SOURCE_ROOT}/Tests/testBasicFunctions.cpp"
+  "${SOURCE_ROOT}/Tests/testConstants.cpp"
+  "${SOURCE_ROOT}/Tests/testLinearAlgebra.cpp"
+  "${SOURCE_ROOT}/Tests/testSml.cpp"
 )
 
-add_executable(sml_tests ${SML_UNIT_TESTS})
-setup_unit_test_target(sml_tests)
+add_executable(sml_tests ${SML_TESTS})
+setup_test_target(sml_tests)
 target_link_libraries(sml_tests)

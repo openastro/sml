@@ -14,7 +14,7 @@
 
 namespace sml
 {
-namespace unit_tests
+namespace tests
 {
 
 TEST_CASE( "Test modulo function", "[modulo]" )
@@ -63,5 +63,5 @@ TEST_CASE( "Test radian-to-degree conversion function", "[radians-to-degrees]")
     }        
 }
 
-} // namespace unit_tests
+} // namespace tests
 } // namespace sml

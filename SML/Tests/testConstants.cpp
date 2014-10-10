@@ -9,7 +9,7 @@
 
 namespace sml
 {
-namespace unit_tests
+namespace tests
 {
 
 TEST_CASE( "Test definition of constants", "[constants]" )
@@ -20,5 +20,5 @@ TEST_CASE( "Test definition of constants", "[constants]" )
     }
 }
 
-} // namespace unit_tests
+} // namespace tests
 } // namespace sml
