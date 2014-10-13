@@ -58,7 +58,7 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
  *      r = \sum_{i=1}^{N} X_{i} * Y_{i}
  * \f]
  *
- * @tparam Real Real type
+ * @tparam Real    Real type
  * @tparam Vector  Vector type
  * @param  vector1 A vector of length N
  * @param  vector2 A vector of length N
@@ -287,7 +287,7 @@ Vector add( const Vector& vector1, const Vector& vector2 )
     if ( vector1.size( ) != vector2.size( ) )
     {
         throw std::runtime_error( 
-            "ERROR: Dot product can only be computed for vectors of equal length!" );
+            "ERROR: Element-wise sum can only be computed for vectors of equal length!" );
     }
 
     Vector result( vector1.size( ) );

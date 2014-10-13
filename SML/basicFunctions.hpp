@@ -43,6 +43,7 @@ Real computeModulo( const Real dividend, const Real divisor )
  *      \theta_{deg} = \theta_{rad} * 180
  * \f]
  *
+ * @tparam Real Real type 
  * @param  angleInRadians Angle in radians
  * @return                Angle in degrees
  */
