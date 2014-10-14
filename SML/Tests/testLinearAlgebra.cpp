@@ -5,7 +5,14 @@
 
 #define REAL double
 
-#include <vector>
+#ifdef BUILD_WITH_EIGEN
+ #include <Eigen/Core>
+ typedef Eigen::Matrix< REAL, Eigen::Dynamic, 1 > Vector;
+#else
+ #include <vector>
+ typedef std::vector< REAL > Vector;
+#endif // BUILD_WITH_EIGEN
+
 #include <catch.hpp>
 
 #include <SML/linearAlgebra.hpp>
@@ -14,9 +21,6 @@ namespace sml
 {
 namespace tests
 {
-
-//! Define typedef for vector of reals.
-typedef std::vector< REAL > Vector;
 
 TEST_CASE( "Cross-product", "[cross]" ) 
 {

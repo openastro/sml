@@ -38,7 +38,8 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
         throw std::runtime_error( "ERROR: Cross product can only be computed for 3-vectors!" );
     }
 
-    Vector3 result( 3 );
+    Vector3 result;
+    result.resize( 3 );
 
     // Compute components of resulting 3-vector.
     result[ 0 ] = vector1[ 1 ] * vector2[ 2 ] - vector1[ 2 ] * vector2[ 1 ];

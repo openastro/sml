@@ -1,30 +1,27 @@
 # Copyright (c) 2014, K. Kumar (me@kartikkumar.com)
 # All rights reserved.
 
-# Specify minimum CMake version required.
 cmake_minimum_required(VERSION 2.6)
-
-# Specify project name.
 project(SML)
 
-# Define the directory with the source code.
+enable_testing()
+
 set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
-
-# Define the project root directory.
 set(PROJECT_ROOT "${SOURCE_ROOT}/..")
-
-# Set path to local CMake modules.
 set(CMAKE_MODULE_PATH ${PROJECT_ROOT}/CMakeModules)
 
-# Set testing options based on platform.
-enable_testing()
+# Set options.
+OPTION(INSTALL_HEADERS          "Install header files" OFF)
+OPTION(BUILD_DOCS               "Build docs" OFF)
+OPTION(BUILD_TESTS              "Build tests" OFF)
+OPTION(BUILD_WITH_EIGEN         "Build tests with Eigen" OFF)
 
 # Set platform-specific compiler flags.
 if (WIN32)
   if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /Ox /W3 /FC -D_SCL_SECURE_NO_WARNINGS")
-    # Because we are using static boost libraries, with static runtime, we need to force MSVC to
-    # also use static runtime: (from http://www.cmake.org/Wiki/CMake_FAQ#Dynamic_Replace).
+    # We need to force MSVC to use static runtime: 
+    # (from http://www.cmake.org/Wiki/CMake_FAQ#Dynamic_Replace).
     foreach(flag_var
           CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
           CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
@@ -42,12 +39,6 @@ else()
       "${CMAKE_CXX_FLAGS} -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif()
 
-# -------------------------------------------------------------------------------------------------
-# DO NOT MANUALLY EDIT ANY SETTINGS AFTER THIS POINT IN THE FILE.
-# 
-# Pass any additional settings directly to CMake (e.g., via command-line).
-# -------------------------------------------------------------------------------------------------
-
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release". 
 if((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
     message(STATUS "WARNING: building release version!")
@@ -59,32 +50,14 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
 endif()
 
-# Set directory tests are built.
-if(NOT TEST_ROOT)
-  set(TEST_ROOT "${PROJECT_BINARY_DIR}/../test")
-endif()
-
-# Set the global macros for setting up targets.
-macro(setup_test_target target_name)
-  set_property(TARGET ${target_name} PROPERTY RUNTIME_OUTPUT_DIRECTORY "${TEST_ROOT}")
-  get_property(CUSTOM_TEST_PROGRAM_NAME TARGET ${target_name} PROPERTY OUTPUT_NAME)
-  add_test("${target_name}" "${TEST_ROOT}/${target_name}")
-endmacro(setup_test_target)
-
-# Include the top-level directories.
 include_directories(AFTER "${PROJECT_ROOT}")
 
-# Find required libraries on local system.
-find_package(CATCH REQUIRED)
-
-# Include directories.
-# Set CMake flag to suppress warnings on Apple.
-if(NOT APPLE)
-  include_directories(SYSTEM AFTER 
-                      "${CATCH_INCLUDE_DIR}")
-else(APPLE)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIR}\"")
-endif(NOT APPLE)
+# Install header files. Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations,
+# unless overridden by user.
+install(DIRECTORY ${PROJECT_ROOT}/SML 
+        DESTINATION ${CMAKE_INSTALL_PREFIX}
+        FILES_MATCHING PATTERN "*.hpp"
+                       PATTERN "Tests" EXCLUDE)
 
 # If documentation should be built, find Doxygen package and setup config file.
 if(BUILD_DOCS)
@@ -95,11 +68,10 @@ if(BUILD_DOCS)
             "Doxygen is needed to build the documentation. Please install it correctly.")
   endif(NOT DOXYGEN_FOUND)
 
-  # Configure the Template Doxyfile for our specific project.
   configure_file(${PROJECT_ROOT}/Doxyfile.in 
                  ${PROJECT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
 
-  # Add a custom target to run Doxygen when ever the project is built.
+  # Add a custom target to run Doxygen whenever the project is built.
   # If you do NOT want the documentation to be generated EVERY time you build the project
   # then leave out the 'ALL' keyword from the command below.
   add_custom_target (docs ALL COMMAND ${DOXYGEN_EXECUTABLE} 
@@ -108,13 +80,42 @@ if(BUILD_DOCS)
 endif(BUILD_DOCS)
 
 # Add tests for SML.
-set(SML_TESTS
+if(BUILD_TESTS)
+  if(NOT TEST_ROOT)
+    set(TEST_ROOT "${PROJECT_BINARY_DIR}/../test")
+  endif()
+
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_ROOT})
+
+  find_package(CATCH REQUIRED)
+  if(NOT APPLE)
+    include_directories(SYSTEM AFTER "${CATCH_INCLUDE_DIR}")
+  else(APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIR}\"")
+  endif(NOT APPLE)
+
+  set(SML_TESTS
   "${SOURCE_ROOT}/Tests/testBasicFunctions.cpp"
   "${SOURCE_ROOT}/Tests/testConstants.cpp"
   "${SOURCE_ROOT}/Tests/testLinearAlgebra.cpp"
   "${SOURCE_ROOT}/Tests/testSml.cpp"
 )
 
-add_executable(sml_tests ${SML_TESTS})
-setup_test_target(sml_tests)
-target_link_libraries(sml_tests)
+  add_executable(sml_tests ${SML_TESTS})
+  target_link_libraries(sml_tests)
+  add_test(NAME sml_tests COMMAND "${TEST_ROOT}/sml_tests")
+
+  # Build tests using the Eigen library if requested.
+  if(BUILD_WITH_EIGEN)
+    find_package(Eigen3 REQUIRED)
+    if(NOT APPLE)
+      include_directories(SYSTEM AFTER "${EIGEN3_INCLUDE_DIR}")
+    else(APPLE)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${EIGEN3_INCLUDE_DIR}\"")
+    endif(NOT APPLE)
+
+    add_executable(sml_tests_eigen ${SML_TESTS})
+    target_link_libraries(sml_tests_eigen)
+    add_test(NAME sml_tests_eigen COMMAND "${TEST_ROOT}/sml_tests_eigen")  
+  endif(BUILD_WITH_EIGEN)  
+endif(BUILD_TESTS)
