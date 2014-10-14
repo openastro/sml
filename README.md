@@ -40,4 +40,4 @@ The copyright holders are not liable for any damage(s) incurred due to improper 
 Contact
 ------
 
-For any questions, you can send an email to [kumar@dinamicatech.com](kumar@dinamicatech.com?subject="SML").
+Shoot an [email](mailto:me@kartikkumar.com?subject=SML) if you have any questions.
