@@ -10,7 +10,6 @@ set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
 set(PROJECT_ROOT "${SOURCE_ROOT}/..")
 set(CMAKE_MODULE_PATH ${PROJECT_ROOT}/CMakeModules)
 
-# Set options.
 OPTION(INSTALL_HEADERS          "Install header files" OFF)
 OPTION(BUILD_DOCS               "Build docs" OFF)
 OPTION(BUILD_TESTS              "Build tests" OFF)
