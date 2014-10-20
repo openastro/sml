@@ -115,6 +115,11 @@ if(BUILD_TESTS)
 
     add_executable(sml_tests_eigen ${SML_TESTS})
     target_link_libraries(sml_tests_eigen)
-    add_test(NAME sml_tests_eigen COMMAND "${TEST_ROOT}/sml_tests_eigen")  
+    add_test(NAME sml_tests_eigen COMMAND "${TEST_ROOT}/sml_tests_eigen")
+
+    string(REPLACE "Algebra" "AlgebraEigenFixedVector" SML_TESTS_EIGEN_FIXED "${SML_TESTS}")
+    add_executable(sml_tests_eigen_fixed ${SML_TESTS_EIGEN_FIXED})
+    target_link_libraries(sml_tests_eigen_fixed)
+    add_test(NAME sml_tests_eigen_fixed COMMAND "${TEST_ROOT}/sml_tests_eigen_fixed")
   endif(BUILD_WITH_EIGEN)  
 endif(BUILD_TESTS)
