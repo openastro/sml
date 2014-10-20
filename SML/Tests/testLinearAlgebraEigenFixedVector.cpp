@@ -22,7 +22,7 @@ typedef Eigen::Matrix< REAL, 4, 1 > Vector4;
 
 TEST_CASE( "Cross-product", "[cross]" ) 
 {
-    SECTION( "cross-product of non-3-vectors")
+    SECTION( "cross-product of non-3-vectors" )
     {
         Vector2 vector1;
         Vector2 vector2;
@@ -79,7 +79,7 @@ TEST_CASE( "Dot-product", "[dot]" )
 {
     SECTION( "dot-product of vectors of zeros" )
     {
-        SECTION( "2-vector")
+        SECTION( "2-vector" )
         {
             Vector2 vector;        
 
@@ -89,7 +89,7 @@ TEST_CASE( "Dot-product", "[dot]" )
             REQUIRE( dot< REAL >( vector, vector ) == 0.0 );            
         }
 
-        SECTION( "3-vector")
+        SECTION( "3-vector" )
         {
             Vector3 vector;        
 
@@ -100,7 +100,7 @@ TEST_CASE( "Dot-product", "[dot]" )
             REQUIRE( dot< REAL >( vector, vector ) == 0.0 );            
         }
                         
-        SECTION( "4-vector")
+        SECTION( "4-vector" )
         {
             Vector4 vector;        
 
@@ -214,7 +214,7 @@ TEST_CASE( "Squared-norm", "[norm]" )
     {
         SECTION( "2-vector" )
         {
-            Vector4 vector;        
+            Vector2 vector;        
 
             vector[ 0 ] = 1.234; 
             vector[ 1 ] = -2.674;  
@@ -226,7 +226,7 @@ TEST_CASE( "Squared-norm", "[norm]" )
 
         SECTION( "3-vector" )
         {
-            Vector4 vector;        
+            Vector3 vector;        
 
             vector[ 0 ] = 1.234; 
             vector[ 1 ] = -2.674;
@@ -295,7 +295,7 @@ TEST_CASE( "Norm", "[norm]" )
     {
         SECTION( "2-vector" )
         {
-            Vector4 vector;        
+            Vector2 vector;        
 
             vector[ 0 ] = 1.234; 
             vector[ 1 ] = -2.674;  
@@ -307,7 +307,7 @@ TEST_CASE( "Norm", "[norm]" )
 
         SECTION( "3-vector" )
         {
-            Vector4 vector;        
+            Vector3 vector;        
 
             vector[ 0 ] = 1.234; 
             vector[ 1 ] = -2.674;
@@ -438,7 +438,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             REAL multiplier = 0.0;
 
-            SECTION( "Multiply vector element-wise by 1 to give same vector")
+            SECTION( "Multiply vector element-wise by 1 to give same vector" )
             {
                 multiplier = 1.0;  
 
@@ -447,7 +447,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply vector element-wise by 0 to give 0-vector")
+            SECTION( "Multiply vector element-wise by 0 to give 0-vector" )
             {
                 multiplier = 0.0;  
 
@@ -457,7 +457,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }            
 
-            SECTION( "Multiply by positive multiplier with magnitude greater than unity")
+            SECTION( "Multiply by positive multiplier with magnitude greater than unity" )
             {
                 multiplier = 6.35;        
 
@@ -477,7 +477,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply by positive multiplier with magnitude less than unity")
+            SECTION( "Multiply by positive multiplier with magnitude less than unity" )
             {
                 multiplier = 0.146;        
 
@@ -487,7 +487,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply by negative multiplier with magnitude less than unity")
+            SECTION( "Multiply by negative multiplier with magnitude less than unity" )
             {
                 multiplier = -0.0488;        
 
@@ -509,7 +509,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             REAL multiplier = 0.0;
 
-            SECTION( "Multiply vector element-wise by 1 to give same vector")
+            SECTION( "Multiply vector element-wise by 1 to give same vector" )
             {
                 multiplier = 1.0;  
 
@@ -518,7 +518,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply vector element-wise by 0 to give 0-vector")
+            SECTION( "Multiply vector element-wise by 0 to give 0-vector" )
             {
                 multiplier = 0.0;  
 
@@ -529,7 +529,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }            
 
-            SECTION( "Multiply by positive multiplier with magnitude greater than unity")
+            SECTION( "Multiply by positive multiplier with magnitude greater than unity" )
             {
                 multiplier = 6.35;        
 
@@ -551,7 +551,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply by positive multiplier with magnitude less than unity")
+            SECTION( "Multiply by positive multiplier with magnitude less than unity" )
             {
                 multiplier = 0.146;        
 
@@ -562,7 +562,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply by negative multiplier with magnitude less than unity")
+            SECTION( "Multiply by negative multiplier with magnitude less than unity" )
             {
                 multiplier = -0.0488;        
 
@@ -576,17 +576,17 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
         SECTION( "4-vector" )
         {
-            Vector3 vector;  
+            Vector4 vector;  
             vector[ 0 ] = 12.3; 
             vector[ 1 ] = -15.4;
             vector[ 2 ] = 0.17;
             vector[ 3 ] = -0.036;
 
-            Vector3 result; 
+            Vector4 result; 
 
             REAL multiplier = 0.0;
 
-            SECTION( "Multiply vector element-wise by 1 to give same vector")
+            SECTION( "Multiply vector element-wise by 1 to give same vector" )
             {
                 multiplier = 1.0;  
 
@@ -595,7 +595,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply vector element-wise by 0 to give 0-vector")
+            SECTION( "Multiply vector element-wise by 0 to give 0-vector" )
             {
                 multiplier = 0.0;  
 
@@ -607,7 +607,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }            
 
-            SECTION( "Multiply by positive multiplier with magnitude greater than unity")
+            SECTION( "Multiply by positive multiplier with magnitude greater than unity" )
             {
                 multiplier = 6.35;        
 
@@ -631,7 +631,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply by positive multiplier with magnitude less than unity")
+            SECTION( "Multiply by positive multiplier with magnitude less than unity" )
             {
                 multiplier = 0.146;        
 
@@ -643,14 +643,14 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }
 
-            SECTION( "Multiply by negative multiplier with magnitude less than unity")
+            SECTION( "Multiply by negative multiplier with magnitude less than unity" )
             {
                 multiplier = -0.0488;        
 
                 result[ 0 ] = -0.6002400000000001; 
                 result[ 1 ] = 0.7515200000000001;
                 result[ 2 ] = -0.008296000000000001;
-                result[ 3 ] = -0.0017568;
+                result[ 3 ] = 0.0017568;
 
                 REQUIRE( multiply( vector, multiplier ) == result ); 
             }         
@@ -669,14 +669,14 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             REAL adder = 0.0;   
 
-            SECTION( "Add 0 to vector element-wise to give same vector")
+            SECTION( "Add 0 to vector element-wise to give same vector" )
             {
                 adder = 0.0; 
 
                 REQUIRE( add( vector, adder ) == vector ); 
             }
 
-            SECTION( "Add positive adder")
+            SECTION( "Add positive adder" )
             {
                 adder = 6.35;        
 
@@ -686,7 +686,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( add( vector, adder ) == result ); 
             }   
 
-            SECTION( "Add negative adder")
+            SECTION( "Add negative adder" )
             {
                 adder = -3.64;        
 
@@ -709,14 +709,14 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             REAL adder = 0.0;   
 
-        SECTION( "Add 0 to vector element-wise to give same vector")
+        SECTION( "Add 0 to vector element-wise to give same vector" )
         {
             adder = 0.0; 
 
             REQUIRE( add( vector, adder ) == vector ); 
         }
 
-            SECTION( "Add positive adder")
+            SECTION( "Add positive adder" )
             {
                 adder = 6.35;        
 
@@ -727,7 +727,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
                 REQUIRE( add( vector, adder ) == result ); 
             }   
 
-            SECTION( "Add negative adder")
+            SECTION( "Add negative adder" )
             {
                 adder = -3.64;        
 
@@ -751,14 +751,14 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             REAL adder = 0.0;   
 
-            SECTION( "Add 0 to vector element-wise to give same vector")
+            SECTION( "Add 0 to vector element-wise to give same vector" )
             {
                 adder = 0.0; 
 
                 REQUIRE( add( vector, adder ) == vector ); 
             }
 
-            SECTION( "Add positive adder")
+            SECTION( "Add positive adder" )
             {
                 adder = 6.35;        
 
