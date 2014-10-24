@@ -3,8 +3,6 @@
  * All rights reserved.
  */
 
-#define REAL double
-
 #include <Eigen/Core>
 
 #include <catch.hpp>
@@ -16,9 +14,10 @@ namespace sml
 namespace tests
 {
 
-typedef Eigen::Matrix< REAL, 2, 1 > Vector2;
-typedef Eigen::Matrix< REAL, 3, 1 > Vector3;
-typedef Eigen::Matrix< REAL, 4, 1 > Vector4;
+typedef double Real;
+typedef Eigen::Matrix< Real, 2, 1 > Vector2;
+typedef Eigen::Matrix< Real, 3, 1 > Vector3;
+typedef Eigen::Matrix< Real, 4, 1 > Vector4;
 
 TEST_CASE( "Cross-product", "[cross]" ) 
 {
@@ -86,7 +85,7 @@ TEST_CASE( "Dot-product", "[dot]" )
             vector[ 0 ] = 0.0;
             vector[ 1 ] = 0.0;
 
-            REQUIRE( dot< REAL >( vector, vector ) == 0.0 );            
+            REQUIRE( dot< Real >( vector, vector ) == 0.0 );            
         }
 
         SECTION( "3-vector" )
@@ -97,7 +96,7 @@ TEST_CASE( "Dot-product", "[dot]" )
             vector[ 1 ] = 0.0;
             vector[ 2 ] = 0.0;
 
-            REQUIRE( dot< REAL >( vector, vector ) == 0.0 );            
+            REQUIRE( dot< Real >( vector, vector ) == 0.0 );            
         }
                         
         SECTION( "4-vector" )
@@ -109,7 +108,7 @@ TEST_CASE( "Dot-product", "[dot]" )
             vector[ 2 ] = 0.0;
             vector[ 3 ] = 0.0;
 
-            REQUIRE( dot< REAL >( vector, vector ) == 0.0 );            
+            REQUIRE( dot< Real >( vector, vector ) == 0.0 );            
         }
     }
 
@@ -126,9 +125,9 @@ TEST_CASE( "Dot-product", "[dot]" )
             vector2[ 0 ] = -4.119;
             vector2[ 1 ] = -3.003;  
 
-            REAL result = 2.9471760000000007;        
+            Real result = 2.9471760000000007;        
 
-            REQUIRE( dot< REAL >( vector1, vector2 ) == result );           
+            REQUIRE( dot< Real >( vector1, vector2 ) == result );           
         }
 
         SECTION( "3-vector" )
@@ -144,9 +143,9 @@ TEST_CASE( "Dot-product", "[dot]" )
             vector2[ 1 ] = -3.003;
             vector2[ 2 ] = -0.048;  
 
-            REAL result = 2.4282000000000008;        
+            Real result = 2.4282000000000008;        
 
-            REQUIRE( dot< REAL >( vector1, vector2 ) == result );           
+            REQUIRE( dot< Real >( vector1, vector2 ) == result );           
         }
                         
         SECTION( "4-vector" )
@@ -164,9 +163,9 @@ TEST_CASE( "Dot-product", "[dot]" )
             vector2[ 2 ] = -0.048;  
             vector2[ 3 ] = 17.367;  
 
-            REAL result = -208.111941;        
+            Real result = -208.111941;        
 
-            REQUIRE( dot< REAL >( vector1, vector2 ) == result );           
+            REQUIRE( dot< Real >( vector1, vector2 ) == result );           
         }
 
     }    
@@ -183,7 +182,7 @@ TEST_CASE( "Squared-norm", "[norm]" )
             vector[ 0 ] = 0.0;
             vector[ 1 ] = 0.0;
             
-            REQUIRE( squaredNorm< REAL >( vector ) == 0.0 );            
+            REQUIRE( squaredNorm< Real >( vector ) == 0.0 );            
         }
 
         SECTION( "3-vector" )
@@ -194,7 +193,7 @@ TEST_CASE( "Squared-norm", "[norm]" )
             vector[ 1 ] = 0.0;
             vector[ 2 ] = 0.0;        
 
-            REQUIRE( squaredNorm< REAL >( vector ) == 0.0 );            
+            REQUIRE( squaredNorm< Real >( vector ) == 0.0 );            
         }
 
         SECTION( "4-vector" )
@@ -206,7 +205,7 @@ TEST_CASE( "Squared-norm", "[norm]" )
             vector[ 2 ] = 0.0;        
             vector[ 3 ] = 0.0;
 
-            REQUIRE( squaredNorm< REAL >( vector ) == 0.0 );            
+            REQUIRE( squaredNorm< Real >( vector ) == 0.0 );            
         }        
     }
 
@@ -219,9 +218,9 @@ TEST_CASE( "Squared-norm", "[norm]" )
             vector[ 0 ] = 1.234; 
             vector[ 1 ] = -2.674;  
 
-            REAL result = 8.673032;            
+            Real result = 8.673032;            
 
-            REQUIRE( squaredNorm< REAL >( vector ) == result );           
+            REQUIRE( squaredNorm< Real >( vector ) == result );           
         }
 
         SECTION( "3-vector" )
@@ -232,9 +231,9 @@ TEST_CASE( "Squared-norm", "[norm]" )
             vector[ 1 ] = -2.674;
             vector[ 2 ] = 10.812;
 
-            REAL result = 125.572375999999991;   
+            Real result = 125.572375999999991;   
 
-            REQUIRE( squaredNorm< REAL >( vector ) == result );           
+            REQUIRE( squaredNorm< Real >( vector ) == result );           
         }
 
         SECTION( "4-vector" )
@@ -246,9 +245,9 @@ TEST_CASE( "Squared-norm", "[norm]" )
             vector[ 2 ] = 10.812;  
             vector[ 3 ] = -12.123;  
 
-            REAL result = 272.53950499999996;            
+            Real result = 272.53950499999996;            
 
-            REQUIRE( squaredNorm< REAL >( vector ) == result );            
+            REQUIRE( squaredNorm< Real >( vector ) == result );            
         }        
     }    
 }
@@ -264,7 +263,7 @@ TEST_CASE( "Norm", "[norm]" )
             vector[ 0 ] = 0.0;
             vector[ 1 ] = 0.0;
             
-            REQUIRE( norm< REAL >( vector ) == 0.0 );            
+            REQUIRE( norm< Real >( vector ) == 0.0 );            
         }
 
         SECTION( "3-vector" )
@@ -275,7 +274,7 @@ TEST_CASE( "Norm", "[norm]" )
             vector[ 1 ] = 0.0;
             vector[ 2 ] = 0.0;        
 
-            REQUIRE( norm< REAL >( vector ) == 0.0 );            
+            REQUIRE( norm< Real >( vector ) == 0.0 );            
         }
 
         SECTION( "4-vector" )
@@ -287,7 +286,7 @@ TEST_CASE( "Norm", "[norm]" )
             vector[ 2 ] = 0.0;        
             vector[ 3 ] = 0.0;
 
-            REQUIRE( norm< REAL >( vector ) == 0.0 );            
+            REQUIRE( norm< Real >( vector ) == 0.0 );            
         }           
     }
 
@@ -300,9 +299,9 @@ TEST_CASE( "Norm", "[norm]" )
             vector[ 0 ] = 1.234; 
             vector[ 1 ] = -2.674;  
 
-            REAL result = 2.9450011884547687;            
+            Real result = 2.9450011884547687;            
 
-            REQUIRE( norm< REAL >( vector ) == result );           
+            REQUIRE( norm< Real >( vector ) == result );           
         }
 
         SECTION( "3-vector" )
@@ -313,9 +312,9 @@ TEST_CASE( "Norm", "[norm]" )
             vector[ 1 ] = -2.674;
             vector[ 2 ] = 10.812;
 
-            REAL result = 11.205908084577528;            
+            Real result = 11.205908084577528;            
 
-            REQUIRE( norm< REAL >( vector ) == result );           
+            REQUIRE( norm< Real >( vector ) == result );           
         }
 
         SECTION( "4-vector" )
@@ -327,9 +326,9 @@ TEST_CASE( "Norm", "[norm]" )
             vector[ 2 ] = 10.812;  
             vector[ 3 ] = -12.123;  
 
-            REAL result = 16.508770547802765;            
+            Real result = 16.508770547802765;            
 
-            REQUIRE( norm< REAL >( vector ) == result );            
+            REQUIRE( norm< Real >( vector ) == result );            
         }      
     }    
 }
@@ -349,7 +348,7 @@ TEST_CASE( "Normalize vector", "[norm]" )
             result[ 0 ] = 0.41901511104227274;
             result[ 1 ] = -0.9079792600705325;          
 
-            REQUIRE( normalize< REAL >( vector ) == result );  
+            REQUIRE( normalize< Real >( vector ) == result );  
         }
 
         SECTION( "3-vector" )
@@ -365,7 +364,7 @@ TEST_CASE( "Normalize vector", "[norm]" )
             result[ 1 ] = -0.23862412397261884;
             result[ 2 ] = 0.9648481781570513;
 
-            REQUIRE( normalize< REAL >( vector ) == result ); 
+            REQUIRE( normalize< Real >( vector ) == result ); 
         }
 
         SECTION( "4-vector" )
@@ -383,7 +382,7 @@ TEST_CASE( "Normalize vector", "[norm]" )
             result[ 2 ] = 0.6549246031794307;
             result[ 3 ] = -0.7343369371387568;            
 
-            REQUIRE( normalize< REAL >( vector ) == result );           
+            REQUIRE( normalize< Real >( vector ) == result );           
         }
     }
 }
@@ -436,7 +435,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             Vector2 result; 
 
-            REAL multiplier = 0.0;
+            Real multiplier = 0.0;
 
             SECTION( "Multiply vector element-wise by 1 to give same vector" )
             {
@@ -507,7 +506,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             Vector3 result; 
 
-            REAL multiplier = 0.0;
+            Real multiplier = 0.0;
 
             SECTION( "Multiply vector element-wise by 1 to give same vector" )
             {
@@ -584,7 +583,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             Vector4 result; 
 
-            REAL multiplier = 0.0;
+            Real multiplier = 0.0;
 
             SECTION( "Multiply vector element-wise by 1 to give same vector" )
             {
@@ -667,7 +666,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             Vector2 result; 
 
-            REAL adder = 0.0;   
+            Real adder = 0.0;   
 
             SECTION( "Add 0 to vector element-wise to give same vector" )
             {
@@ -707,7 +706,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             Vector3 result; 
 
-            REAL adder = 0.0;   
+            Real adder = 0.0;   
 
         SECTION( "Add 0 to vector element-wise to give same vector" )
         {
@@ -749,7 +748,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
             Vector4 result; 
 
-            REAL adder = 0.0;   
+            Real adder = 0.0;   
 
             SECTION( "Add 0 to vector element-wise to give same vector" )
             {

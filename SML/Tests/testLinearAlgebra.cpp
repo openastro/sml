@@ -3,14 +3,14 @@
  * All rights reserved.
  */
 
-#define REAL double
+typedef double Real;
 
 #ifdef BUILD_WITH_EIGEN
  #include <Eigen/Core>
- typedef Eigen::Matrix< REAL, Eigen::Dynamic, 1 > Vector;
+ typedef Eigen::Matrix< Real, Eigen::Dynamic, 1 > Vector;
 #else
  #include <vector>
- typedef std::vector< REAL > Vector;
+ typedef std::vector< Real > Vector;
 #endif // BUILD_WITH_EIGEN
 
 #include <catch.hpp>
@@ -84,7 +84,7 @@ TEST_CASE( "Dot-product", "[dot]" )
         Vector vector1( 4 );
         Vector vector2( 5 );
 
-        REQUIRE_THROWS( dot< REAL >( vector1, vector2 ) );
+        REQUIRE_THROWS( dot< Real >( vector1, vector2 ) );
     }
 
     SECTION( "dot-product of vectors of zeros" )
@@ -95,7 +95,7 @@ TEST_CASE( "Dot-product", "[dot]" )
         vector[ 1 ] = 0.0;
         vector[ 2 ] = 0.0;        
 
-        REQUIRE( dot< REAL >( vector, vector ) == 0.0 );
+        REQUIRE( dot< Real >( vector, vector ) == 0.0 );
     }
 
     SECTION( "dot-product of arbitrary vectors" )
@@ -113,9 +113,9 @@ TEST_CASE( "Dot-product", "[dot]" )
         vector2[ 2 ] = -0.048;  
         vector2[ 3 ] = 17.367;  
 
-        REAL result = -208.111941;        
+        Real result = -208.111941;        
 
-        REQUIRE( dot< REAL >( vector1, vector2 ) == result );
+        REQUIRE( dot< Real >( vector1, vector2 ) == result );
     }    
 }
 
@@ -129,7 +129,7 @@ TEST_CASE( "Squared-norm", "[norm]" )
         vector[ 1 ] = 0.0;
         vector[ 2 ] = 0.0;        
 
-        REQUIRE( squaredNorm< REAL >( vector ) == 0.0 );        
+        REQUIRE( squaredNorm< Real >( vector ) == 0.0 );        
     }
 
     SECTION( "squared-norm of arbitrary vector" )
@@ -141,9 +141,9 @@ TEST_CASE( "Squared-norm", "[norm]" )
         vector[ 2 ] = 10.812;  
         vector[ 3 ] = -12.123;  
 
-        REAL result = 272.53950499999996;            
+        Real result = 272.53950499999996;            
 
-        REQUIRE( squaredNorm< REAL >( vector ) == result );        
+        REQUIRE( squaredNorm< Real >( vector ) == result );        
     }    
 }
 
@@ -157,7 +157,7 @@ TEST_CASE( "Norm", "[norm]" )
         vector[ 1 ] = 0.0;
         vector[ 2 ] = 0.0;        
 
-        REQUIRE( norm< REAL >( vector ) == 0.0 );        
+        REQUIRE( norm< Real >( vector ) == 0.0 );        
     }
 
     SECTION( "norm of arbitrary vector" )
@@ -169,9 +169,9 @@ TEST_CASE( "Norm", "[norm]" )
         vector[ 2 ] = 10.812;  
         vector[ 3 ] = -12.123;  
 
-        REAL result = 16.508770547802765;            
+        Real result = 16.508770547802765;            
 
-        REQUIRE( norm< REAL >( vector ) == result );        
+        REQUIRE( norm< Real >( vector ) == result );        
     }    
 }
 
@@ -192,7 +192,7 @@ TEST_CASE( "Normalize vector", "[norm]" )
         result[ 2 ] = 0.6549246031794307;
         result[ 3 ] = -0.7343369371387568;            
 
-        REQUIRE( normalize< REAL >( vector ) == result ); 
+        REQUIRE( normalize< Real >( vector ) == result ); 
     }
 }
 
@@ -243,7 +243,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
         Vector result( 3 ); 
 
-        REAL multiplier = 0.0;   
+        Real multiplier = 0.0;   
 
         SECTION( "Multiply vector element-wise by 1 to give same vector")
         {
@@ -319,7 +319,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 
         Vector result( 3 ); 
 
-        REAL adder = 0.0;   
+        Real adder = 0.0;   
 
         SECTION( "Add 0 to vector element-wise to give same vector")
         {
