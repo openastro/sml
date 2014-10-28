@@ -1,19 +1,28 @@
-# Copyright (c) 2014, K. Kumar (me@kartikkumar.com)
-# All rights reserved.
+# Copyright (c) 2014 Kartik Kumar (me@kartikkumar.com)
+# Distributed under the MIT License.
+# See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
 
 cmake_minimum_required(VERSION 2.6)
 project(SML)
 
-enable_testing()
+set(PROJECT_PATH                             "${CMAKE_CURRENT_SOURCE_DIR}")
+set(SOURCE_PATH                              "${PROJECT_PATH}/${CMAKE_PROJECT_NAME}")
+set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH}  "${PROJECT_PATH}/cmake/Modules/")
 
-set(PROJECT_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
-set(SOURCE_PATH "${PROJECT_PATH}/${CMAKE_PROJECT_NAME}")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_PATH}/cmake/Modules/")
+OPTION(BUILD_DOCS                            "Build docs" OFF)
+OPTION(BUILD_TESTS                           "Build tests" OFF)
+OPTION(BUILD_WITH_EIGEN                      "Build tests with Eigen" OFF)
 
-OPTION(INSTALL_HEADERS          "Install header files" OFF)
-OPTION(BUILD_DOCS               "Build docs" OFF)
-OPTION(BUILD_TESTS              "Build tests" OFF)
-OPTION(BUILD_WITH_EIGEN         "Build tests with Eigen" OFF)
+# Set CMake build-type. If it not supplied by the user, the default built type is "Release". 
+if((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
+    message(STATUS "WARNING: building release version!")
+    set(CMAKE_BUILD_TYPE Release)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "WARNING: building debug version!")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
+endif()
 
 # Set platform-specific compiler flags.
 if (WIN32)
@@ -31,32 +40,14 @@ if (WIN32)
     endforeach(flag_var)
   else()
     set(CMAKE_CXX_FLAGS 
-        "${CMAKE_CXX_FLAGS} -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
+        "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
   endif()
 else()
   set(CMAKE_CXX_FLAGS 
-      "${CMAKE_CXX_FLAGS} -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-endif()
-
-# Set CMake build-type. If it not supplied by the user, the default built type is "Release". 
-if((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
-    message(STATUS "WARNING: building release version!")
-    set(CMAKE_BUILD_TYPE Release)
-elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "WARNING: building debug version!")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
+      "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif()
 
 include_directories(AFTER "${PROJECT_PATH}")
-
-# Install header files. Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations,
-# unless overridden by user.
-install(DIRECTORY ${SOURCE_PATH} 
-        DESTINATION ${CMAKE_INSTALL_PREFIX}
-        FILES_MATCHING PATTERN "*.hpp"
-                       PATTERN "Tests" EXCLUDE)
 
 if(BUILD_DOCS)
   find_package(Doxygen)
@@ -78,6 +69,8 @@ if(BUILD_DOCS)
 endif(BUILD_DOCS)
 
 if(BUILD_TESTS)
+  enable_testing()
+
   if(NOT TESTS_PATH)
     set(TESTS_PATH "${PROJECT_BINARY_DIR}/tests")
   endif()
@@ -121,3 +114,12 @@ if(BUILD_TESTS)
     add_test(NAME sml_tests_eigen_fixed COMMAND "${TESTS_PATH}/sml_tests_eigen_fixed")
   endif(BUILD_WITH_EIGEN)  
 endif(BUILD_TESTS)
+
+# Install header files. 
+# Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
+# user.
+install(DIRECTORY ${SOURCE_PATH} 
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.hpp"
+                       PATTERN "*.cpp" EXCLUDE
+                       PATTERN "Tests" EXCLUDE)
