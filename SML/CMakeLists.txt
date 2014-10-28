@@ -8,7 +8,7 @@ enable_testing()
 
 set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
 set(PROJECT_ROOT "${SOURCE_ROOT}/..")
-set(CMAKE_MODULE_PATH ${PROJECT_ROOT}/CMakeModules)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_ROOT}/cmake/Modules/")
 
 OPTION(INSTALL_HEADERS          "Install header files" OFF)
 OPTION(BUILD_DOCS               "Build docs" OFF)
@@ -58,7 +58,6 @@ install(DIRECTORY ${PROJECT_ROOT}/SML
         FILES_MATCHING PATTERN "*.hpp"
                        PATTERN "Tests" EXCLUDE)
 
-# If documentation should be built, find Doxygen package and setup config file.
 if(BUILD_DOCS)
   find_package(Doxygen)
 
@@ -78,7 +77,6 @@ if(BUILD_DOCS)
                      SOURCES ${PROJECT_BINARY_DIR}/Doxyfile)
 endif(BUILD_DOCS)
 
-# Add tests for SML.
 if(BUILD_TESTS)
   if(NOT TEST_ROOT)
     set(TEST_ROOT "${PROJECT_BINARY_DIR}/../test")
