@@ -9,12 +9,11 @@ env:
   - BUILD_TYPE=Release
 
 before_install:
- - sudo apt-get install libeigen3-dev
 
 install:
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on ..
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_WITH_EIGEN=on ..
   - make
   - cd ..
 
