@@ -10,7 +10,7 @@
 namespace sml
 {
 
-//! Define Pi to 20 decimal places.
+//! \f$\pi\f$ to 20 decimal places.
 static const double SML_PI = 3.14159265358979323846;
 
 } // namespace sml
