@@ -29,6 +29,7 @@ Run the following commands to download, build, and install this project.
 
     git clone https://www.github.com/kartikkumar/sml
     cd sml
+    git submodule init && git submodule update    
     mkdir build
     cd build
     cmake ..
@@ -83,4 +84,4 @@ TODO
 
  - Extend test suite
  - Figure out how to build tests with standard library and Eigen in the same build tree
- 
+

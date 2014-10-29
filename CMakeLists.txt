@@ -9,6 +9,7 @@ project(SML C CXX)
 set(PROJECT_DESC                             "A simple maths library")
 set(PROJECT_UPPER                            "SML")
 set(PROJECT_EXE                              "sml")
+set(PROJECT_TEST                             "sml")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
@@ -141,7 +142,7 @@ if(BUILD_TESTS)
         eigen
         PREFIX ${EXTERNAL_PATH}/Eigen
         URL http://bitbucket.org/eigen/eigen/get/3.2.2.tar.gz
-        TIMEOUT 10
+        TIMEOUT 30
         CONFIGURE_COMMAND ""
         BUILD_COMMAND ""
         INSTALL_COMMAND ""
@@ -181,9 +182,7 @@ endif(BUILD_TESTS)
 # user.
 install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME} 
         DESTINATION include
-        FILES_MATCHING PATTERN "*.hpp"
-                       PATTERN "*.cpp" EXCLUDE
-                       PATTERN "Tests" EXCLUDE)
+        FILES_MATCHING PATTERN "*.hpp")
 install(FILES signature_${CMAKE_PROJECT_NAME} DESTINATION include/${CMAKE_PROJECT_NAME})
 
 # Set up packager.
