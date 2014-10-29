@@ -47,6 +47,7 @@ You can pass the follow command-line options when running `CMake`:
 
   - `-DBUILD_DOCS=on`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed)
   - `-DBUILD_TESTS=on`: build tests (execute tests from build-directory using `make test`)
+  - `-DBUILD_WITH_EIGEN=on`: build tests using [Eigen](http://eigen.tuxfamily.org/)
   - `-DBUILD_SHARED_LIBS=on`: build shared libraries instead of static
   - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`); if not set, defaults to usual locations.
  
