@@ -134,7 +134,7 @@ if(BUILD_TESTS)
 
   # Build tests using the Eigen library if requested.
   if(BUILD_WITH_EIGEN)
-#    find_package(Eigen3)
+    find_package(Eigen3)
 
     if(NOT EIGEN3_FOUND)
       message(STATUS "Eigen3 will be downloaded when ${CMAKE_PROJECT_NAME} is built")
