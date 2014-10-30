@@ -8,8 +8,8 @@ cmake_minimum_required(VERSION 2.6)
 project(SML C CXX)
 set(MYPROJ_DESC                              "A simple maths library")
 set(MYPROJ_UPPER                             "SML")
-set(MYPROJ_EXE                               "sml_main")
-set(MYPROJ_LIB                               "sml")
+#set(MYPROJ_EXE                               "sml_main")
+#set(MYPROJ_LIB                               "sml")
 set(MYPROJ_TEST                              "test_sml")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
@@ -27,16 +27,17 @@ set(MYSRC_PATH                               "${MYPROJ_PATH}/src")
 set(MYTEST_SRC_PATH                          "${MYPROJ_PATH}/tests")
 set(MYCMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${MYPROJ_PATH}/cmake/Modules")
 
-OPTION(BUILD_MAIN                            "Build main" OFF)
+#OPTION(BUILD_MAIN                            "Build main" OFF)
 OPTION(BUILD_DOCS                            "Build docs" OFF)
 OPTION(BUILD_TESTS                           "Build tests" OFF)
+OPTION(BUILD_TESTS_WITH_EIGEN                "Build tests with Eigen library" OFF)
 OPTION(FIND_DEPEND                           "Find locally-installed dependencies" ON)
 
-set(MYPROJ_SRC
-)
+#set(MYPROJ_SRC
+#)
 
-set(MYPROJ_EXE_SRC
-)
+#set(MYPROJ_EXE_SRC
+#)
 
 set(MYPROJ_TEST_SRC
   "${MYTEST_SRC_PATH}/testSml.cpp"
@@ -84,21 +85,21 @@ include(ExternalProject)
 
 include_directories(AFTER "${MYINC_PATH}")
 
-if(NOT MYLIB_PATH)
-  set(MYLIB_PATH "${PROJECT_BINARY_DIR}/lib")
-endif(NOT MYLIB_PATH)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${MYLIB_PATH})
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${MYLIB_PATH})
+#if(NOT MYLIB_PATH)
+#  set(MYLIB_PATH "${PROJECT_BINARY_DIR}/lib")
+#endif(NOT MYLIB_PATH)
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${MYLIB_PATH})
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${MYLIB_PATH})
 #add_library(${MYPROJ_LIB} ${MYPROJ_SRC})
 
-if(BUILD_MAIN)
-  if(NOT MYBIN_PATH)
-    set(MYBIN_PATH "${PROJECT_BINARY_DIR}/bin")
-  endif(NOT MYBIN_PATH)
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${MYBIN_PATH})
-  add_executable(${MYPROJ_EXE} ${MYPROJ_EXE_SRC})
-  target_link_libraries(${MYPROJ_EXE} ${MYPROJ_LIB})
-endif(BUILD_MAIN)
+#if(BUILD_MAIN)
+#  if(NOT MYBIN_PATH)
+#    set(MYBIN_PATH "${PROJECT_BINARY_DIR}/bin")
+#  endif(NOT MYBIN_PATH)
+#  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${MYBIN_PATH})
+#  add_executable(${MYPROJ_EXE} ${MYPROJ_EXE_SRC})
+#  target_link_libraries(${MYPROJ_EXE} ${MYPROJ_LIB})
+#endif(BUILD_MAIN)
 
 if(BUILD_DOCS)
   find_package(Doxygen)
@@ -151,7 +152,7 @@ if(BUILD_TESTS)
         INSTALL_COMMAND ""
         #--Output logging-------------
         LOG_DOWNLOAD ON
-       )
+      )
 
     ExternalProject_Get_Property(catch source_dir)
     set(CATCH_INCLUDE_DIRS ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
@@ -163,6 +164,53 @@ if(BUILD_TESTS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIRS}\"")
   endif(NOT APPLE)
 
+  if(BUILD_TESTS_WITH_EIGEN)
+    add_definitions(-DBUILD_EIGEN=on)
+
+    if(FIND_DEPEND)
+      find_package(Eigen3)
+    endif(FIND_DEPEND)
+
+    message(STATUS "Eigen will be downloaded when ${CMAKE_PROJECT_NAME} is built")
+    ExternalProject_Add(
+        eigen
+        PREFIX ${MYEXT_PATH}/Eigen
+        #--Download step--------------
+        URL http://bitbucket.org/eigen/eigen/get/3.2.2.tar.gz
+        TIMEOUT 30
+        #--Update/Patch step----------
+        UPDATE_COMMAND ""
+        PATCH_COMMAND ""
+        #--Configure step-------------
+        CONFIGURE_COMMAND ""
+        #--Build step-----------------
+        BUILD_COMMAND ""
+        #--Install step---------------
+        INSTALL_COMMAND ""
+        #--Output logging-------------
+        LOG_DOWNLOAD ON
+      )
+
+    ExternalProject_Get_Property(eigen source_dir)
+    set(EIGEN3_INCLUDE_DIR ${source_dir} CACHE INTERNAL "Path to include folder for Eigen")
+    if(NOT APPLE)
+      include_directories(SYSTEM AFTER "${EIGEN3_INCLUDE_DIR}")
+    else(APPLE)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${EIGEN3_INCLUDE_DIR}\"")
+    endif(NOT APPLE)
+
+    string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${MYPROJ_TEST_SRC}")
+    add_executable(${MYPROJ_TEST}_eigen ${TESTS_SRC_EIGEN})
+    #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
+    add_test(NAME ${MYPROJ_TEST}_eigen COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}_eigen")
+
+    string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${MYPROJ_TEST_SRC}")
+    add_executable(${MYPROJ_TEST}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
+    #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
+    add_test(NAME ${MYPROJ_TEST}_eigen_fixed 
+      COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}_eigen_fixed")     
+  endif(BUILD_TESTS_WITH_EIGEN)
+  add_definitions(-DBUILD_STL=on)
   add_executable(${MYPROJ_TEST} ${MYPROJ_TEST_SRC})
   #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
   add_test(NAME ${MYPROJ_TEST} COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}")

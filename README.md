@@ -91,6 +91,6 @@ TODO
 ------
 
   - Extend test suite
-  - Figure out how to build tests with standard library and `Eigen` in the same build tree
+  - Figure out better way (avoiding code duplication) to build STL-based and Eigen-based tests in the same build tree
   - Add version detection in `CMake` module so that find_package respects minimum version required.
   - Find a way to provide an option to clean installation.

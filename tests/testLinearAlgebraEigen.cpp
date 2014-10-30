@@ -4,9 +4,9 @@
  * See accompanying file LICENSE or copy at http://opensource.org/licenses/MIT
  */
 
-#include <vector>
-
 #include <catch.hpp>
+
+#include <Eigen/Core>
 
 #include <SML/linearAlgebra.hpp>
 
@@ -16,7 +16,7 @@ namespace tests
 {
 
 typedef double Real;
-typedef std::vector< Real > Vector;
+typedef Eigen::Matrix< Real, Eigen::Dynamic, 1 > Vector;
 
 TEST_CASE( "Cross-product", "[cross]" ) 
 {
