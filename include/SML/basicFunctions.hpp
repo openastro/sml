@@ -1,4 +1,4 @@
-/*    
+/*
  * Copyright (c) 2014 K. Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
@@ -9,8 +9,6 @@
 
 #include <cmath>
 
-#include <catch.hpp>
-
 #include <SML/constants.hpp>
 
 namespace sml
@@ -18,14 +16,14 @@ namespace sml
 
 //! Compute modulo.
 /*!
- * Computes the remainder of division of one real number by another. The remainder is in the range 
+ * Computes the remainder of division of one real number by another. The remainder is in the range
  * [ 0, divisor ).
  *
- * The modulo computation is based on the mathematical definition of congruence, which is 
- * different from the implementation of std::fmod() in the cmath standard library. For a 
+ * The modulo computation is based on the mathematical definition of congruence, which is
+ * different from the implementation of std::fmod() in the cmath standard library. For a
  * description of congruence see: http://mathworld.wolfram.com/Congruence.html.
  *
- * @tparam Real Real type 
+ * @tparam Real Real type
  * @param  dividend Number to be divided.
  * @param  divisor Number that divides dividend
  * @return Remainder of division of dividend by divisor
@@ -44,14 +42,14 @@ Real computeModulo( const Real dividend, const Real divisor )
  *      \theta_{deg} = \theta_{rad} * 180
  * \f]
  *
- * @tparam Real Real type 
+ * @tparam Real Real type
  * @param  angleInRadians Angle in radians
  * @return                Angle in degrees
  */
 template < typename Real >
 Real convertRadiansToDegrees( const Real angleInRadians )
-{ 
-    return angleInRadians / SML_PI * 180.0; 
+{
+    return angleInRadians / SML_PI * 180.0;
 }
 
 } // namespace sml
