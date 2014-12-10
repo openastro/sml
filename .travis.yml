@@ -1,19 +1,13 @@
 language: cpp
 
 compiler:
-  - clang
   - gcc
 
 env:
   global:
-   - secure: "V4NUAJrnSGb5lTKksAS+SoVuzN5v8XPs7VQ2PfACuYRM9gUs4DEEDKTeKtCX0nn0CgEtI5KlOcTWXeneVTQTP64qqaIP/s7HZ6LLjAZFSWHM5R8H4ThxUfFq17Ii8guvMKGVjPPlLGI+mrQ/E9dxzbgvKazaVyjxn9vr0Z8Bbas="
-  matrix:
-    include:
-      - env: BUILD_TYPE=Debug   FORCE_BUILD_SWITCH=off TEST_COVERAGE_SWITCH=on
-      - env: BUILD_TYPE=Release FORCE_BUILD_SWITCH=off TEST_COVERAGE_SWITCH=off
-      - env: BUILD_TYPE=Release FORCE_BUILD_SWITCH=on  TEST_COVERAGE_SWITCH=off
+    secure: "V4NUAJrnSGb5lTKksAS+SoVuzN5v8XPs7VQ2PfACuYRM9gUs4DEEDKTeKtCX0nn0CgEtI5KlOcTWXeneVTQTP64qqaIP/s7HZ6LLjAZFSWHM5R8H4ThxUfFq17Ii8guvMKGVjPPlLGI+mrQ/E9dxzbgvKazaVyjxn9vr0Z8Bbas="
 
-before_script:
+install:
   - sudo apt-get install -y lcov
   - gem install coveralls-lcov
 
@@ -22,17 +16,17 @@ addons:
     project:
       name: "kartikkumar/sml"
     notification_email: me@kartikkumar.com
-    build_command_prepend: "mkdir build; cd build; cmake -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on -DFORCE_DEPENDENCIES_BUILD=on .."
+    build_command_prepend: "mkdir build; cd build; cmake -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on .."
     build_command:   "make; ctest -V"
     branch_pattern: coverity_scan
 
 before_script:
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DRUN_TEST_COVERAGE=$TEST_COVERAGE_SWITCH -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on -DFORCE_DEPENDENCIES_BUILD=$FORCE_BUILD_SWITCH ..
+  - cmake -DCMAKE_BUILD_TYPE=Debug -DRUN_TEST_COVERAGE=on -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..
 
 script:
   - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then make; ctest -V; fi
 
 after_success:
-  - if [ ${TEST_COVERAGE_SWITCH} == 'on' ]; then make test_coverage_sml; coveralls-lcov coverage.info; fi
+  - make test_coverage_sml && coveralls-lcov coverage.info
