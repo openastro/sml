@@ -11,7 +11,7 @@ set(MYPROJ_UPPER                             "SML")
 #set(MYPROJ_EXE                               "sml_main")
 #set(MYPROJ_LIB                               "sml")
 set(MYPROJ_TEST                              "test_sml")
-set(MYPROJ_COVERAGE                          "coverage_sml")
+set(MYPROJ_TEST_COVERAGE                     "test_coverage_sml")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
@@ -33,7 +33,7 @@ OPTION(BUILD_DOCS                            "Build docs"                     OF
 OPTION(BUILD_TESTS                           "Build tests"                    OFF)
 OPTION(BUILD_TESTS_WITH_EIGEN                "Build tests with Eigen library" OFF)
 OPTION(FORCE_DEPENDENCIES_BUILD              "Force build of dependencies"    OFF)
-OPTION(RUN_COVERAGE                          "Run code coverage analysis"     OFF)
+OPTION(RUN_TEST_COVERAGE                     "Run test coverage analysis"     OFF)
 
 #set(MYPROJ_SRC
 #)
@@ -79,18 +79,20 @@ else(WIN32)
     "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif(WIN32)
 
-# Set up code coverage.
+# Set up test coverage.
 # N.B.: This only works with gcc and requires both lcov and gcov.
 # Ref: http://stackoverflow.com/questions/13116488/detailed-guide-on-using-gcov-with-cmake-cdash
-if(RUN_COVERAGE)
+if(RUN_TEST_COVERAGE)
   include(CodeCoverage)
 
   set(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
   set(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
   set(CMAKE_EXE_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
 
-  setup_target_for_coverage(${MYPROJ_COVERAGE} ${MYPROJ_TEST} coverage)
-endif(RUN_COVERAGE)
+  #set(COVERAGE_EXCLUDES 'Catch/*')
+
+  setup_target_for_coverage(${MYPROJ_TEST_COVERAGE} ${MYPROJ_TEST} coverage)
+endif(RUN_TEST_COVERAGE)
 
 include_directories(AFTER "${MYINC_PATH}")
 
