@@ -7,16 +7,26 @@ compiler:
 env:
   - BUILD_TYPE=Debug
   - BUILD_TYPE=Release
-
-before_install:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "AgUdoYPfLp2w5KoiG+dVwPPq60VMC8vfPDdEU7WgmsUK40eQedsyDf0Ba93lw23TMwUGnlBFtt5LYzUPESO1dgl6Dh/F9n6OSQfOlwTKI07hFQuWzdLYn6BWawOwhrzoMGH4HiNy+++vDWa/oog8EXkO5Qec8P7w4Ibd1GyXs1c="
 
 install:
   - mkdir build
   - cd build
   - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on -DFORCE_DEPENDENCIES_BUILD=on ..
   - make
-  - cd ..
+
+addons:
+  coverity_scan:
+    project:
+      name: "kartikkumar/sml"
+      description: "Build submitted via Travis CI"
+    notification_email: me@kartikkumar.com
+    build_command_prepend: ""
+    build_command:   "make"
+    branch_pattern: coverity_scan
 
 script:
-  - cd build
-  - ctest -V
+  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then ctest -V ; fi
