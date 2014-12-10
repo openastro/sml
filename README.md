@@ -74,11 +74,6 @@ Once you've made your great commits:
   4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
   5. That's it!
 
-License
-------
-
-`SML` is licensed under the [MIT open-source license]((https://github.com/kartikkumar/sml/blob/master/LICENSE.md)).
-
 Disclaimer
 ------
 
