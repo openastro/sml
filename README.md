@@ -61,7 +61,7 @@ You can pass the follow command-line options when running `CMake`:
   - `-DFORCE_DEPENDENCIES_BUILD=[on|off (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
   - `-DMYLIB_PATH[=build_dir/lib (default]`: set library path
   - `-DMYBIN_PATH[=build_dir/bin (default]`: set binary path
-  - `-DMYTEST_PATH[=build_dir/tests (default]`: set tests path  
+  - `-DMYTEST_PATH[=build_dir/tests (default]`: set tests path
 
 Contributing
 ------------
@@ -77,18 +77,12 @@ Once you've made your great commits:
 License
 ------
 
-See `LICENSE.md`.
+`SML` is licensed under the [MIT open-source license]((https://github.com/kartikkumar/sml/blob/master/LICENSE.md)).
 
 Disclaimer
 ------
 
 The copyright holders are not liable for any damage(s) incurred due to improper use of `SML`.
-
-Contact
-------
-
-Shoot an [email](mailto:me@kartikkumar.com?subject=SML) if you have any questions.
-
 
 TODO
 ------
