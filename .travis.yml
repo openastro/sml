@@ -8,8 +8,19 @@ env:
   global:
    - secure: "V4NUAJrnSGb5lTKksAS+SoVuzN5v8XPs7VQ2PfACuYRM9gUs4DEEDKTeKtCX0nn0CgEtI5KlOcTWXeneVTQTP64qqaIP/s7HZ6LLjAZFSWHM5R8H4ThxUfFq17Ii8guvMKGVjPPlLGI+mrQ/E9dxzbgvKazaVyjxn9vr0Z8Bbas="
   matrix:
-  - BUILD_TYPE=Debug
-  - BUILD_TYPE=Release
+    include:
+      - env: BUILD_TYPE=Debug
+        env: FORCE_BUILD_SWITCH=off
+        env: COVERAGE_SWITCH=on
+      - env: BUILD_TYPE=Release
+        env: FORCE_BUILD_SWITCH=off
+        env: COVERAGE_SWITCH=off
+      - env: BUILD_TYPE=Release
+        env: FORCE_BUILD_SWITCH=on
+        env: COVERAGE_SWITCH=off
+
+before_script:
+  - sudo pip install cpp-coveralls --use-mirrors
 
 addons:
   coverity_scan:
@@ -23,7 +34,10 @@ addons:
 before_script:
   - mkdir build
   - cd build
-  - cmake  -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on -DFORCE_DEPENDENCIES_BUILD=on ..
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DRUN_COVERAGE=$COVERAGE_SWITCH -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on -DFORCE_DEPENDENCIES_BUILD=$FORCE_BUILD_SWITCH ..
 
 script:
-  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then make; ctest -V ; fi
+  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then make; ctest -V; fi
+
+after_success:
+  - if [ ${COVERAGE_SWITCH} == 'on' ]; then coveralls --exclude lib --exclude tests; fi

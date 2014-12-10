@@ -11,6 +11,7 @@ set(MYPROJ_UPPER                             "SML")
 #set(MYPROJ_EXE                               "sml_main")
 #set(MYPROJ_LIB                               "sml")
 set(MYPROJ_TEST                              "test_sml")
+set(MYPROJ_COVERAGE                          "coverage_sml")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
@@ -28,10 +29,11 @@ set(MYTEST_SRC_PATH                          "${MYPROJ_PATH}/tests")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}   "${MYPROJ_PATH}/cmake/Modules")
 
 #OPTION(BUILD_MAIN                            "Build main" OFF)
-OPTION(BUILD_DOCS                            "Build docs" OFF)
-OPTION(BUILD_TESTS                           "Build tests" OFF)
+OPTION(BUILD_DOCS                            "Build docs"                     OFF)
+OPTION(BUILD_TESTS                           "Build tests"                    OFF)
 OPTION(BUILD_TESTS_WITH_EIGEN                "Build tests with Eigen library" OFF)
-OPTION(FORCE_DEPENDENCIES_BUILD              "Force build of dependencies" OFF)
+OPTION(FORCE_DEPENDENCIES_BUILD              "Force build of dependencies"    OFF)
+OPTION(RUN_COVERAGE                          "Run code coverage analysis"     OFF)
 
 #set(MYPROJ_SRC
 #)
@@ -42,26 +44,23 @@ OPTION(FORCE_DEPENDENCIES_BUILD              "Force build of dependencies" OFF)
 set(MYPROJ_TEST_SRC
   "${MYTEST_SRC_PATH}/testSml.cpp"
   "${MYTEST_SRC_PATH}/testBasicFunctions.cpp"
-  "${MYTEST_SRC_PATH}/testConstants.cpp"      
-  "${MYTEST_SRC_PATH}/testLinearAlgebra.cpp"      
+  "${MYTEST_SRC_PATH}/testConstants.cpp"
+  "${MYTEST_SRC_PATH}/testLinearAlgebra.cpp"
 )
 
-# Set CMake build-type. If it not supplied by the user, the default built type is "Release". 
+# Set CMake build-type. If it not supplied by the user, the default built type is "Release".
 if((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
     message(STATUS "WARNING: building release version!")
     set(CMAKE_BUILD_TYPE Release)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "WARNING: building debug version!")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
 endif((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
 
 # Set platform-specific compiler flags.
 if(WIN32)
   if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /Ox /W3 /FC -D_SCL_SECURE_NO_WARNINGS")
-    # We need to force MSVC to use static runtime: 
+    # We need to force MSVC to use static runtime:
     # (from http://www.cmake.org/Wiki/CMake_FAQ#Dynamic_Replace).
     foreach(flag_var
       CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
@@ -72,13 +71,26 @@ if(WIN32)
       endif(${flag_var} MATCHES "/MD")
     endforeach(flag_var)
   else(MSVC)
-    set(CMAKE_CXX_FLAGS 
+    set(CMAKE_CXX_FLAGS
       "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
   endif(MSVC)
 else(WIN32)
-  set(CMAKE_CXX_FLAGS 
+  set(CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif(WIN32)
+
+# Set up code coverage.
+# N.B.: This only works with gcc and requires both lcov and gcov.
+# Ref: http://stackoverflow.com/questions/13116488/detailed-guide-on-using-gcov-with-cmake-cdash
+if(RUN_COVERAGE)
+  include(CodeCoverage)
+
+  set(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+  set(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+  set(CMAKE_EXE_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
+
+  setup_target_for_coverage(${MYPROJ_COVERAGE} ${MYPROJ_TEST} coverage)
+endif(RUN_COVERAGE)
 
 include_directories(AFTER "${MYINC_PATH}")
 
@@ -105,18 +117,18 @@ if(BUILD_DOCS)
   find_package(Doxygen)
 
   if(NOT DOXYGEN_FOUND)
-    message(FATAL_ERROR 
+    message(FATAL_ERROR
             "Doxygen is needed to build the documentation. Please make sure it is installed.")
   endif(NOT DOXYGEN_FOUND)
 
-  configure_file(${MYPROJ_PATH}/Doxyfile.in 
+  configure_file(${MYPROJ_PATH}/Doxyfile.in
                  ${PROJECT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
 
   # Add a custom target to run Doxygen whenever the project is built.
   # If you do NOT want the documentation to be generated EVERY time you build the project
   # then leave out the 'ALL' keyword from the command below.
-  add_custom_target(docs ALL COMMAND ${DOXYGEN_EXECUTABLE} 
-                    ${PROJECT_BINARY_DIR}/Doxyfile 
+  add_custom_target(docs ALL COMMAND ${DOXYGEN_EXECUTABLE}
+                    ${PROJECT_BINARY_DIR}/Doxyfile
                     SOURCES ${PROJECT_BINARY_DIR}/Doxyfile)
 endif(BUILD_DOCS)
 
@@ -136,20 +148,20 @@ if(BUILD_TESTS)
   if(NOT CATCH_FOUND)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
     ExternalProject_Add(catch
-      PREFIX ${MYEXT_PATH}/Catch  
+      PREFIX ${MYEXT_PATH}/Catch
       #--Download step--------------
       URL https://github.com/kartikkumar/Catch/archive/master.zip
       TIMEOUT 30
       #--Update/Patch step----------
       UPDATE_COMMAND ""
       PATCH_COMMAND ""
-      #--Configure step-------------             
+      #--Configure step-------------
       CONFIGURE_COMMAND ""
-      #--Build step-----------------      
+      #--Build step-----------------
       BUILD_COMMAND ""
-      #--Install step---------------      
+      #--Install step---------------
       INSTALL_COMMAND ""
-      #--Output logging-------------      
+      #--Output logging-------------
       LOG_DOWNLOAD ON
     )
     ExternalProject_Get_Property(catch source_dir)
@@ -160,7 +172,7 @@ if(BUILD_TESTS)
     include_directories(SYSTEM AFTER "${CATCH_INCLUDE_DIRS}")
   else(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIRS}\"")
-  endif(NOT APPLE)  
+  endif(NOT APPLE)
 
   if(BUILD_TESTS_WITH_EIGEN)
     if(NOT FORCE_DEPENDENCIES_BUILD)
@@ -185,7 +197,7 @@ if(BUILD_TESTS)
         INSTALL_COMMAND ""
         #--Output logging-------------
         LOG_DOWNLOAD ON
-      )        
+      )
       ExternalProject_Get_Property(eigen-lib source_dir)
       set(EIGEN3_INCLUDE_DIR ${source_dir} CACHE INTERNAL "Path to include folder for Eigen")
     endif(NOT EIGEN3_FOUND)
@@ -198,7 +210,7 @@ if(BUILD_TESTS)
 
     string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${MYPROJ_TEST_SRC}")
     add_executable(${MYPROJ_TEST}_eigen ${TESTS_SRC_EIGEN})
-    #add_dependencies(${MYPROJ_TEST}_eigen)      
+    #add_dependencies(${MYPROJ_TEST}_eigen)
     #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
     add_test(NAME ${MYPROJ_TEST}_eigen COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}_eigen")
 
@@ -206,20 +218,20 @@ if(BUILD_TESTS)
     add_executable(${MYPROJ_TEST}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
     #add_dependencies(${MYPROJ_TEST}_eigen_fixed)
     #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
-    add_test(NAME ${MYPROJ_TEST}_eigen_fixed 
-      COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}_eigen_fixed")     
+    add_test(NAME ${MYPROJ_TEST}_eigen_fixed
+      COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}_eigen_fixed")
   endif(BUILD_TESTS_WITH_EIGEN)
 
   add_executable(${MYPROJ_TEST} ${MYPROJ_TEST_SRC})
-  #add_dependencies(${MYPROJ_TEST})  
+  #add_dependencies(${MYPROJ_TEST})
   #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
   add_test(NAME ${MYPROJ_TEST} COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}")
 endif(BUILD_TESTS)
 
-# Install header files and library. 
+# Install header files and library.
 # Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
 # user.
-install(DIRECTORY ${MYINC_PATH}/${CMAKE_PROJECT_NAME} 
+install(DIRECTORY ${MYINC_PATH}/${CMAKE_PROJECT_NAME}
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp")
 #install(TARGETS ${MYPROJ_LIB} DESTINATION lib)
