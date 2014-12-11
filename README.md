@@ -3,7 +3,7 @@ SML
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666") [![Coverage Status](https://coveralls.io/repos/kartikkumar/sml/badge.png)](https://coveralls.io/r/kartikkumar/sml)
 
-`Simple Maths Library (SML)` is a C++ template library that provides some basic mathematics functionality.
+`Simple Maths Library (SML)` is a C++ template library that provides some basic mathematics functionality. It's intended to be lightweight and simple to use in other projects. A `CMake` module is available from the folllowing repository to make it easy to include `SML` in other `CMake`-based projects: [cmake-modules](https://github.com/kartikkumar/cmake-modules).
 
 Features
 ------
