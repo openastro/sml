@@ -6,16 +6,17 @@ compiler:
 
 env:
   - BUILD_TYPE=Debug
+  - BUILD_TYPE=Release
 
 install:
   - sudo pip install cpp-coveralls --use-mirrors
 
 before_script:
   - mkdir build && cd build
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DRUN_TEST_COVERAGE=on -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..
 
 script:
   - make && ctest -V
 
 after_success:
-  - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*"
+  - if [ "${BUILD_TYPE}" != "Debug" ]; then coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*"; fi

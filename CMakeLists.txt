@@ -6,16 +6,12 @@ cmake_minimum_required(VERSION 2.6)
 
 # Change this section to correspond with your project info.
 project(SML C CXX)
-set(PROJECT_SUMMARY                              "A simple maths library")
-set(PROJECT_UPPERCASE                         "SML")
-#set(PROJECT_EXE                               "sml_main")
-#set(PROJECT_LIB                               "sml")
-set(PROJECT_TEST                             "test_sml")
+set(PROJECT_SUMMARY                          "A simple maths library")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
 set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR      0)
-set(${CMAKE_PROJECT_NAME}_VERSION_MINOR      1)
+set(${CMAKE_PROJECT_NAME}_VERSION_MINOR      2)
 set(${CMAKE_PROJECT_NAME}_VERSION_PATCH      0)
 set(PROJECT_VERSION
   "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
@@ -23,28 +19,20 @@ set(PROJECT_VERSION
 set(PROJECT_PATH                             "${CMAKE_CURRENT_SOURCE_DIR}")
 set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
 set(INCLUDE_PATH                             "${PROJECT_PATH}/include")
-set(SOURCE_PATH                              "${PROJECT_PATH}/src")
-set(TEST_SOURCE_PATH                         "${PROJECT_PATH}/test")
+set(TEST_EXE                                 "test_sml")
+set(TEST_SRC_PATH                            "${PROJECT_PATH}/test")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}   "${PROJECT_PATH}/cmake/Modules")
 
-#OPTION(BUILD_MAIN                            "Build main" OFF)
 OPTION(BUILD_DOCS                            "Build docs"                     OFF)
 OPTION(BUILD_TESTS                           "Build tests"                    OFF)
 OPTION(BUILD_TESTS_WITH_EIGEN                "Build tests with Eigen library" OFF)
 OPTION(FORCE_DEPENDENCIES_BUILD              "Force build of dependencies"    OFF)
-OPTION(RUN_TEST_COVERAGE                     "Run test coverage analysis"     OFF)
 
-#set(PROJECT_SRC
-#)
-
-#set(PROJECT_EXE_SRC
-#)
-
-set(PROJECT_TEST_SRC
-  "${TEST_SOURCE_PATH}/testSml.cpp"
-  "${TEST_SOURCE_PATH}/testBasicFunctions.cpp"
-  "${TEST_SOURCE_PATH}/testConstants.cpp"
-  "${TEST_SOURCE_PATH}/testLinearAlgebra.cpp"
+set(TEST_SRC
+  "${TEST_SRC_PATH}/testSml.cpp"
+  "${TEST_SRC_PATH}/testBasicFunctions.cpp"
+  "${TEST_SRC_PATH}/testConstants.cpp"
+  "${TEST_SRC_PATH}/testLinearAlgebra.cpp"
 )
 
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
@@ -78,36 +66,13 @@ else(WIN32)
     "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
 endif(WIN32)
 
-# Set up test coverage.
-if(RUN_TEST_COVERAGE)
-  if(CMAKE_COMPILER_IS_GNUCXX)
-      set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
-      set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-  #   set(CMAKE_CXX_LINK_FLAGS "-fprofile-arcs -ftest-coverage")
-  endif(CMAKE_COMPILER_IS_GNUCXX)
-endif(RUN_TEST_COVERAGE)
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
+    set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+    set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 include_directories(AFTER "${INCLUDE_PATH}")
-
-# Include script to build external library with CMake.
-include(ExternalProject)
-
-#if(NOT LIB_PATH)
-#  set(LIB_PATH "${PROJECT_BINARY_DIR}/lib")
-#endif(NOT LIB_PATH)
-#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIB_PATH})
-#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_PATH})
-#add_library(${PROJECT_LIB} ${PROJECT_SRC})
-
-#if(BUILD_MAIN)
-#  if(NOT BIN_PATH)
-#    set(BIN_PATH "${PROJECT_BINARY_DIR}/bin")
-#  endif(NOT BIN_PATH)
-#  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_PATH})
-#  add_executable(${PROJECT_EXE} ${PROJECT_EXE_SRC})
-#  target_link_libraries(${PROJECT_EXE} ${PROJECT_LIB})
-#endif(BUILD_MAIN)
 
 if(BUILD_DOCS)
   find_package(Doxygen)
@@ -131,11 +96,11 @@ endif(BUILD_DOCS)
 if(BUILD_TESTS)
   enable_testing()
 
-  if(NOT TEST_PATH)
-    set(TEST_PATH "${PROJECT_BINARY_DIR}/tests")
-  endif(NOT TEST_PATH)
+  if(NOT TEST_DIR)
+    set(TEST_DIR "${PROJECT_BINARY_DIR}/tests")
+  endif(NOT TEST_DIR)
 
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_PATH})
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_DIR})
 
   if(NOT FORCE_DEPENDENCIES_BUILD)
     find_package(CATCH)
@@ -204,24 +169,17 @@ if(BUILD_TESTS)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${EIGEN3_INCLUDE_DIR}\"")
     endif(NOT APPLE)
 
-    string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${PROJECT_TEST_SRC}")
-    add_executable(${PROJECT_TEST}_eigen ${TESTS_SRC_EIGEN})
-    #add_dependencies(${PROJECT_TEST}_eigen)
-    #target_link_libraries(${PROJECT_TEST} ${PROJECT_LIB})
-    add_test(NAME ${PROJECT_TEST}_eigen COMMAND "${TEST_PATH}/${PROJECT_TEST}_eigen")
+    string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${TEST_SRC}")
+    add_executable(${TEST_EXE}_eigen ${TESTS_SRC_EIGEN})
+    add_test(NAME ${TEST_EXE}_eigen COMMAND "${TEST_DIR}/${TEST_EXE}_eigen")
 
-    string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${PROJECT_TEST_SRC}")
-    add_executable(${PROJECT_TEST}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
-    #add_dependencies(${PROJECT_TEST}_eigen_fixed)
-    #target_link_libraries(${PROJECT_TEST} ${PROJECT_LIB})
-    add_test(NAME ${PROJECT_TEST}_eigen_fixed
-      COMMAND "${TEST_PATH}/${PROJECT_TEST}_eigen_fixed")
+    string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${TEST_SRC}")
+    add_executable(${TEST_EXE}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
+    add_test(NAME ${TEST_EXE}_eigen_fixed COMMAND "${TEST_DIR}/${TEST_EXE}_eigen_fixed")
   endif(BUILD_TESTS_WITH_EIGEN)
 
-  add_executable(${PROJECT_TEST} ${PROJECT_TEST_SRC})
-  #add_dependencies(${PROJECT_TEST})
-  #target_link_libraries(${PROJECT_TEST} ${PROJECT_LIB})
-  add_test(NAME ${PROJECT_TEST} COMMAND "${TEST_PATH}/${PROJECT_TEST}")
+  add_executable(${TEST_EXE} ${TEST_SRC})
+  add_test(NAME ${TEST_EXE} COMMAND "${TEST_DIR}/${TEST_EXE}")
 endif(BUILD_TESTS)
 
 # Install header files and library.
@@ -234,18 +192,18 @@ install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME}
 
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
-set(CPACK_PACKAGE_VENDOR "${CMAKE_PROJECT_NAME}_VENDOR_NAME")
-set(CPACK_PACKAGE_DESCRIPTION_FILE "${PROJECT_PATH}/README.md")
-set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_PATH}/LICENSE.md")
-set(CPACK_PACKAGE_VERSION_MAJOR "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${${CMAKE_PROJECT_NAME}_VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_PATCH "${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "${CMAKE_PROJECT_NAME}")
+set(CPACK_PACKAGE_VENDOR              "${CMAKE_PROJECT_NAME}_VENDOR_NAME")
+set(CPACK_PACKAGE_DESCRIPTION_FILE    "${PROJECT_PATH}/README.md")
+set(CPACK_RESOURCE_FILE_LICENSE       "${PROJECT_PATH}/LICENSE.md")
+set(CPACK_PACKAGE_VERSION_MAJOR       "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR       "${${CMAKE_PROJECT_NAME}_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH       "${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY   "${CMAKE_PROJECT_NAME}")
 if(WIN32 AND NOT UNIX)
   # There is a bug in NSI that does not handle full unix paths properly. Make
   # sure there is at least one set of four (4) backlasshes.
-  set(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY}")
-  set(CPACK_NSIS_CONTACT "${CMAKE_PROJECT_NAME}_VENDOR_CONTACT")
+  set(CPACK_NSIS_DISPLAY_NAME         "${CPACK_PACKAGE_INSTALL_DIRECTORY}")
+  set(CPACK_NSIS_CONTACT              "${CMAKE_PROJECT_NAME}_VENDOR_CONTACT")
   set(CPACK_NSIS_MODIFY_PATH ON)
 else(WIN32 AND NOT UNIX)
 endif(WIN32 AND NOT UNIX)

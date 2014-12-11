@@ -3,7 +3,7 @@ SML
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666") [![Coverage Status](https://coveralls.io/repos/kartikkumar/sml/badge.png)](https://coveralls.io/r/kartikkumar/sml)
 
-`Simple Maths Library (SML)` is a C++ template library that provides some basic mathematics functionality. It's intended to be lightweight and simple to use in other projects. A `CMake` module is available from the folllowing repository to make it easy to include `SML` in other `CMake`-based projects: [cmake-modules](https://github.com/kartikkumar/cmake-modules).
+SML (Simple Maths Library) is a C++ template library that provides some basic mathematics functionality. It's intended to be lightweight and simple to use in other projects. A CMake module is available from the folllowing repository to make it easy to include SML in other CMake-based projects: [cmake-modules](https://github.com/kartikkumar/cmake-modules).
 
 Features
 ------
@@ -23,7 +23,7 @@ To install this project, please ensure that you have installed the following (in
   - [CMake](http://www.cmake.org)
   - [Doxygen](http://www.doxygen.org "Doxygen homepage") (optional)
 
-In addition, `SML` depends on the following libraries:
+In addition, SML depends on the following libraries:
 
   - [CATCH](https://www.github.com/philsquared/Catch)
   - [Eigen](http://eigen.tuxfamily.org/) (optional)
@@ -51,25 +51,21 @@ Note that dependencies are installed by fetching them online, in case they canno
 Build options
 -------------
 
-You can pass the follow command-line options when running `CMake`:
+You can pass the follow command-line options when running CMake:
 
   - `-DBUILD_DOCS=[on|off (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
   - `-DBUILD_TESTS`=[on|off (default)]: build tests (execute tests from build-directory using `ctest -V`)
-  - `-DBUILD_WITH_EIGEN=[on|off (default)]`: build tests using [Eigen](http://eigen.tuxfamily.org/) (execute tests from build-directory using `ctest -V`)
-  - `-DRUN_TEST_COVERAGE=[on|off (default)]`: run test coverage analysis using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (execute test coverage analysis from build-directory using `make ${PROJECT_TEST_COVERAGE}`, where the variable `PROJECT_TEST_COVERAGE` should be passed to CMake)
-  - `-DBUILD_SHARED_LIBS=[on|off (default)]`: build shared libraries instead of static
+  - `-DBUILD_TESTS_WITH_EIGEN=[on|off (default)]`: build tests using [Eigen](http://eigen.tuxfamily.org/) (execute tests from build-directory using `ctest -V`)
   - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`); if not set, defaults to usual locations
   - `-DFORCE_DEPENDENCIES_BUILD=[on|off (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
-  - `-DLIB_PATH[=build_dir/lib (default]`: set library path
-  - `-DBIN_PATH[=build_dir/bin (default]`: set binary path
-  - `-DTEST_PATH[=build_dir/tests (default]`: set tests path
+  - `-DTEST_DIR[=build_dir/tests (default]`: set directory where test executables are placed
 
 Contributing
 ------------
 
 Once you've made your great commits:
 
-  1. [Fork](https://github.com/kartikkumar/sml/fork) `SML`
+  1. [Fork](https://github.com/kartikkumar/sml/fork) SML
   2. Create a topic branch - `git checkout -b my_branch`
   3. Push to your branch - `git push origin my_branch`
   4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
@@ -78,12 +74,12 @@ Once you've made your great commits:
 Disclaimer
 ------
 
-The copyright holders are not liable for any damage(s) incurred due to improper use of `SML`.
+The copyright holders are not liable for any damage(s) incurred due to improper use of SML.
 
 TODO
 ------
 
   - Extend test suite
-  - Figure out better way (avoiding code duplication) to build `STL`-based and `Eigen`-based tests in the same build tree
-  - Add version detection in `CMake` module so that find_package respects minimum version required.
+  - Figure out better way (avoiding code duplication) to build STL-based and Eigen-based tests in the same build tree
+  - Add version detection in CMake module so that find_package respects minimum version required.
   - Find a way to provide an option to clean installation.
