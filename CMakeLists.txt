@@ -79,22 +79,13 @@ else(WIN32)
 endif(WIN32)
 
 # Set up test coverage.
-# N.B.: This only works with gcc and requires both lcov and gcov.
-# Ref: http://stackoverflow.com/questions/13116488/detailed-guide-on-using-gcov-with-cmake-cdash
 if(RUN_TEST_COVERAGE)
-  include(CodeCoverage)
-
-  set(COVERAGE_EXTRACT
-    '${MYPROJ_PATH}/include/*'
-    '${MYPROJ_PATH}/src/*'
-    '${MYPROJ_PATH}/tests/*'
-  )
-
-  set(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
-  set(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
-  set(CMAKE_EXE_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
-
-  setup_target_for_coverage(coverage ${MYPROJ_TEST} coverage)
+  if(CMAKE_COMPILER_IS_GNUCXX)
+      set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
+      set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+  #   set(CMAKE_CXX_LINK_FLAGS "-fprofile-arcs -ftest-coverage")
+  endif(CMAKE_COMPILER_IS_GNUCXX)
 endif(RUN_TEST_COVERAGE)
 
 include_directories(AFTER "${MYINC_PATH}")
