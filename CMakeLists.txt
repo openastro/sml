@@ -85,11 +85,15 @@ endif(WIN32)
 if(RUN_TEST_COVERAGE)
   include(CodeCoverage)
 
+  set(COVERAGE_EXTRACT
+    '${MYPROJ_PATH}/include/*'
+    '${MYPROJ_PATH}/src/*'
+    '${MYPROJ_PATH}/tests/*'
+  )
+
   set(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
   set(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
   set(CMAKE_EXE_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
-
-  set(COVERAGE_EXTRACT '${MYPROJ_PATH}/include' '${MYPROJ_PATH}/src' '${MYPROJ_PATH}/tests')
 
   setup_target_for_coverage(${MYPROJ_TEST_COVERAGE} ${MYPROJ_TEST} coverage)
 endif(RUN_TEST_COVERAGE)
