@@ -31,4 +31,4 @@ script:
   - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then make; ctest -V; fi
 
 after_success:
-  - make test_coverage_sml && lcoveralls
+  - if [ "$CXX" = "g++" ]; then make test_coverage_sml && lcoveralls --retry-count 5; fi
