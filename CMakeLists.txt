@@ -11,7 +11,7 @@ set(MYPROJ_UPPER                             "SML")
 #set(MYPROJ_EXE                               "sml_main")
 #set(MYPROJ_LIB                               "sml")
 set(MYPROJ_TEST                              "test_sml")
-set(MYPROJ_TEST_COVERAGE                     "test_coverage_sml")
+set(MYPROJ_TEST_COVERAGE                     "test_coverage")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
