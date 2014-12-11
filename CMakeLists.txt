@@ -6,26 +6,26 @@ cmake_minimum_required(VERSION 2.6)
 
 # Change this section to correspond with your project info.
 project(SML C CXX)
-set(MYPROJ_DESC                              "A simple maths library")
-set(MYPROJ_UPPER                             "SML")
-#set(MYPROJ_EXE                               "sml_main")
-#set(MYPROJ_LIB                               "sml")
-set(MYPROJ_TEST                              "test_sml")
+set(PROJECT_SUMMARY                              "A simple maths library")
+set(PROJECT_UPPERCASE                         "SML")
+#set(PROJECT_EXE                               "sml_main")
+#set(PROJECT_LIB                               "sml")
+set(PROJECT_TEST                             "test_sml")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
 set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR      0)
 set(${CMAKE_PROJECT_NAME}_VERSION_MINOR      1)
 set(${CMAKE_PROJECT_NAME}_VERSION_PATCH      0)
-set(MYPROJ_VERSION
+set(PROJECT_VERSION
   "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
 
-set(MYPROJ_PATH                              "${CMAKE_CURRENT_SOURCE_DIR}")
-set(MYEXT_PATH                               "${MYPROJ_PATH}/external")
-set(MYINC_PATH                               "${MYPROJ_PATH}/include")
-set(MYSRC_PATH                               "${MYPROJ_PATH}/src")
-set(MYTEST_SRC_PATH                          "${MYPROJ_PATH}/tests")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}   "${MYPROJ_PATH}/cmake/Modules")
+set(PROJECT_PATH                             "${CMAKE_CURRENT_SOURCE_DIR}")
+set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
+set(INCLUDE_PATH                             "${PROJECT_PATH}/include")
+set(SOURCE_PATH                              "${PROJECT_PATH}/src")
+set(TEST_SOURCE_PATH                         "${PROJECT_PATH}/test")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}   "${PROJECT_PATH}/cmake/Modules")
 
 #OPTION(BUILD_MAIN                            "Build main" OFF)
 OPTION(BUILD_DOCS                            "Build docs"                     OFF)
@@ -34,17 +34,17 @@ OPTION(BUILD_TESTS_WITH_EIGEN                "Build tests with Eigen library" OF
 OPTION(FORCE_DEPENDENCIES_BUILD              "Force build of dependencies"    OFF)
 OPTION(RUN_TEST_COVERAGE                     "Run test coverage analysis"     OFF)
 
-#set(MYPROJ_SRC
+#set(PROJECT_SRC
 #)
 
-#set(MYPROJ_EXE_SRC
+#set(PROJECT_EXE_SRC
 #)
 
-set(MYPROJ_TEST_SRC
-  "${MYTEST_SRC_PATH}/testSml.cpp"
-  "${MYTEST_SRC_PATH}/testBasicFunctions.cpp"
-  "${MYTEST_SRC_PATH}/testConstants.cpp"
-  "${MYTEST_SRC_PATH}/testLinearAlgebra.cpp"
+set(PROJECT_TEST_SRC
+  "${TEST_SOURCE_PATH}/testSml.cpp"
+  "${TEST_SOURCE_PATH}/testBasicFunctions.cpp"
+  "${TEST_SOURCE_PATH}/testConstants.cpp"
+  "${TEST_SOURCE_PATH}/testLinearAlgebra.cpp"
 )
 
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
@@ -88,25 +88,25 @@ if(RUN_TEST_COVERAGE)
   endif(CMAKE_COMPILER_IS_GNUCXX)
 endif(RUN_TEST_COVERAGE)
 
-include_directories(AFTER "${MYINC_PATH}")
+include_directories(AFTER "${INCLUDE_PATH}")
 
 # Include script to build external library with CMake.
 include(ExternalProject)
 
-#if(NOT MYLIB_PATH)
-#  set(MYLIB_PATH "${PROJECT_BINARY_DIR}/lib")
-#endif(NOT MYLIB_PATH)
-#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${MYLIB_PATH})
-#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${MYLIB_PATH})
-#add_library(${MYPROJ_LIB} ${MYPROJ_SRC})
+#if(NOT LIB_PATH)
+#  set(LIB_PATH "${PROJECT_BINARY_DIR}/lib")
+#endif(NOT LIB_PATH)
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIB_PATH})
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_PATH})
+#add_library(${PROJECT_LIB} ${PROJECT_SRC})
 
 #if(BUILD_MAIN)
-#  if(NOT MYBIN_PATH)
-#    set(MYBIN_PATH "${PROJECT_BINARY_DIR}/bin")
-#  endif(NOT MYBIN_PATH)
-#  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${MYBIN_PATH})
-#  add_executable(${MYPROJ_EXE} ${MYPROJ_EXE_SRC})
-#  target_link_libraries(${MYPROJ_EXE} ${MYPROJ_LIB})
+#  if(NOT BIN_PATH)
+#    set(BIN_PATH "${PROJECT_BINARY_DIR}/bin")
+#  endif(NOT BIN_PATH)
+#  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_PATH})
+#  add_executable(${PROJECT_EXE} ${PROJECT_EXE_SRC})
+#  target_link_libraries(${PROJECT_EXE} ${PROJECT_LIB})
 #endif(BUILD_MAIN)
 
 if(BUILD_DOCS)
@@ -117,7 +117,7 @@ if(BUILD_DOCS)
             "Doxygen is needed to build the documentation. Please make sure it is installed.")
   endif(NOT DOXYGEN_FOUND)
 
-  configure_file(${MYPROJ_PATH}/Doxyfile.in
+  configure_file(${PROJECT_PATH}/Doxyfile.in
                  ${PROJECT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
 
   # Add a custom target to run Doxygen whenever the project is built.
@@ -131,11 +131,11 @@ endif(BUILD_DOCS)
 if(BUILD_TESTS)
   enable_testing()
 
-  if(NOT MYTESTS_PATH)
-    set(MYTESTS_PATH "${PROJECT_BINARY_DIR}/tests")
-  endif(NOT MYTESTS_PATH)
+  if(NOT TEST_PATH)
+    set(TEST_PATH "${PROJECT_BINARY_DIR}/tests")
+  endif(NOT TEST_PATH)
 
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${MYTESTS_PATH})
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_PATH})
 
   if(NOT FORCE_DEPENDENCIES_BUILD)
     find_package(CATCH)
@@ -144,7 +144,7 @@ if(BUILD_TESTS)
   if(NOT CATCH_FOUND)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
     ExternalProject_Add(catch
-      PREFIX ${MYEXT_PATH}/Catch
+      PREFIX ${EXTERNAL_PATH}/Catch
       #--Download step--------------
       URL https://github.com/kartikkumar/Catch/archive/master.zip
       TIMEOUT 30
@@ -178,7 +178,7 @@ if(BUILD_TESTS)
     if(NOT EIGEN3_FOUND)
       message(STATUS "Eigen will be downloaded when ${CMAKE_PROJECT_NAME} is built")
       ExternalProject_Add(eigen-lib
-        PREFIX ${MYEXT_PATH}/Eigen
+        PREFIX ${EXTERNAL_PATH}/Eigen
         #--Download step--------------
         URL http://bitbucket.org/eigen/eigen/get/3.2.2.tar.gz
         TIMEOUT 30
@@ -204,39 +204,39 @@ if(BUILD_TESTS)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${EIGEN3_INCLUDE_DIR}\"")
     endif(NOT APPLE)
 
-    string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${MYPROJ_TEST_SRC}")
-    add_executable(${MYPROJ_TEST}_eigen ${TESTS_SRC_EIGEN})
-    #add_dependencies(${MYPROJ_TEST}_eigen)
-    #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
-    add_test(NAME ${MYPROJ_TEST}_eigen COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}_eigen")
+    string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${PROJECT_TEST_SRC}")
+    add_executable(${PROJECT_TEST}_eigen ${TESTS_SRC_EIGEN})
+    #add_dependencies(${PROJECT_TEST}_eigen)
+    #target_link_libraries(${PROJECT_TEST} ${PROJECT_LIB})
+    add_test(NAME ${PROJECT_TEST}_eigen COMMAND "${TEST_PATH}/${PROJECT_TEST}_eigen")
 
-    string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${MYPROJ_TEST_SRC}")
-    add_executable(${MYPROJ_TEST}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
-    #add_dependencies(${MYPROJ_TEST}_eigen_fixed)
-    #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
-    add_test(NAME ${MYPROJ_TEST}_eigen_fixed
-      COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}_eigen_fixed")
+    string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${PROJECT_TEST_SRC}")
+    add_executable(${PROJECT_TEST}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
+    #add_dependencies(${PROJECT_TEST}_eigen_fixed)
+    #target_link_libraries(${PROJECT_TEST} ${PROJECT_LIB})
+    add_test(NAME ${PROJECT_TEST}_eigen_fixed
+      COMMAND "${TEST_PATH}/${PROJECT_TEST}_eigen_fixed")
   endif(BUILD_TESTS_WITH_EIGEN)
 
-  add_executable(${MYPROJ_TEST} ${MYPROJ_TEST_SRC})
-  #add_dependencies(${MYPROJ_TEST})
-  #target_link_libraries(${MYPROJ_TEST} ${MYPROJ_LIB})
-  add_test(NAME ${MYPROJ_TEST} COMMAND "${MYTESTS_PATH}/${MYPROJ_TEST}")
+  add_executable(${PROJECT_TEST} ${PROJECT_TEST_SRC})
+  #add_dependencies(${PROJECT_TEST})
+  #target_link_libraries(${PROJECT_TEST} ${PROJECT_LIB})
+  add_test(NAME ${PROJECT_TEST} COMMAND "${TEST_PATH}/${PROJECT_TEST}")
 endif(BUILD_TESTS)
 
 # Install header files and library.
 # Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
 # user.
-install(DIRECTORY ${MYINC_PATH}/${CMAKE_PROJECT_NAME}
+install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME}
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp")
-#install(TARGETS ${MYPROJ_LIB} DESTINATION lib)
+#install(TARGETS ${PROJECT_LIB} DESTINATION lib)
 
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
 set(CPACK_PACKAGE_VENDOR "${CMAKE_PROJECT_NAME}_VENDOR_NAME")
-set(CPACK_PACKAGE_DESCRIPTION_FILE "${MYPROJ_PATH}/README.md")
-set(CPACK_RESOURCE_FILE_LICENSE "${MYPROJ_PATH}/LICENSE.md")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${PROJECT_PATH}/README.md")
+set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_PATH}/LICENSE.md")
 set(CPACK_PACKAGE_VERSION_MAJOR "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${${CMAKE_PROJECT_NAME}_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")

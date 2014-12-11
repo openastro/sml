@@ -56,13 +56,13 @@ You can pass the follow command-line options when running `CMake`:
   - `-DBUILD_DOCS=[on|off (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
   - `-DBUILD_TESTS`=[on|off (default)]: build tests (execute tests from build-directory using `ctest -V`)
   - `-DBUILD_WITH_EIGEN=[on|off (default)]`: build tests using [Eigen](http://eigen.tuxfamily.org/) (execute tests from build-directory using `ctest -V`)
-  - `-DRUN_TEST_COVERAGE=[on|off (default)]`: run test coverage analysis using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (execute test coverage analysis from build-directory using `make ${MYPROJ_TEST_COVERAGE}`, where the variable `MYPROJ_TEST_COVERAGE` should be passed to CMake)
+  - `-DRUN_TEST_COVERAGE=[on|off (default)]`: run test coverage analysis using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (execute test coverage analysis from build-directory using `make ${PROJECT_TEST_COVERAGE}`, where the variable `PROJECT_TEST_COVERAGE` should be passed to CMake)
   - `-DBUILD_SHARED_LIBS=[on|off (default)]`: build shared libraries instead of static
   - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`); if not set, defaults to usual locations
   - `-DFORCE_DEPENDENCIES_BUILD=[on|off (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
-  - `-DMYLIB_PATH[=build_dir/lib (default]`: set library path
-  - `-DMYBIN_PATH[=build_dir/bin (default]`: set binary path
-  - `-DMYTEST_PATH[=build_dir/tests (default]`: set tests path
+  - `-DLIB_PATH[=build_dir/lib (default]`: set library path
+  - `-DBIN_PATH[=build_dir/bin (default]`: set binary path
+  - `-DTEST_PATH[=build_dir/tests (default]`: set tests path
 
 Contributing
 ------------
