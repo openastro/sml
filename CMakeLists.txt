@@ -11,7 +11,6 @@ set(MYPROJ_UPPER                             "SML")
 #set(MYPROJ_EXE                               "sml_main")
 #set(MYPROJ_LIB                               "sml")
 set(MYPROJ_TEST                              "test_sml")
-set(MYPROJ_TEST_COVERAGE                     "test_coverage")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
 
@@ -95,7 +94,7 @@ if(RUN_TEST_COVERAGE)
   set(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
   set(CMAKE_EXE_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
 
-  setup_target_for_coverage(${MYPROJ_TEST_COVERAGE} ${MYPROJ_TEST} coverage)
+  setup_target_for_coverage(coverage ${MYPROJ_TEST} coverage)
 endif(RUN_TEST_COVERAGE)
 
 include_directories(AFTER "${MYINC_PATH}")

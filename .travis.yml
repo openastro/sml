@@ -2,14 +2,23 @@ language: cpp
 
 compiler:
   - gcc
+  - clang
 
 env:
   global:
-    secure: "V4NUAJrnSGb5lTKksAS+SoVuzN5v8XPs7VQ2PfACuYRM9gUs4DEEDKTeKtCX0nn0CgEtI5KlOcTWXeneVTQTP64qqaIP/s7HZ6LLjAZFSWHM5R8H4ThxUfFq17Ii8guvMKGVjPPlLGI+mrQ/E9dxzbgvKazaVyjxn9vr0Z8Bbas="
+    - secure: "V4NUAJrnSGb5lTKksAS+SoVuzN5v8XPs7VQ2PfACuYRM9gUs4DEEDKTeKtCX0nn0CgEtI5KlOcTWXeneVTQTP64qqaIP/s7HZ6LLjAZFSWHM5R8H4ThxUfFq17Ii8guvMKGVjPPlLGI+mrQ/E9dxzbgvKazaVyjxn9vr0Z8Bbas="
+
+matrix:
+  include:
+    - compiler: gcc
+      env: BUILD_TYPE=Debug
+    - compiler: gcc
+      env: BUILD_TYPE=Release
+    - compiler: clang
+      env: BUILD_TYPE=Release
 
 install:
-  - sudo apt-get install lcov rubygems
-  - gem install lcoveralls
+  - sudo pip install cpp-coveralls --use-mirrors
 
 addons:
   coverity_scan:
@@ -23,10 +32,10 @@ addons:
 before_script:
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Debug -DRUN_TEST_COVERAGE=on -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..
+  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DRUN_TEST_COVERAGE=on -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..
 
 script:
-  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then make; ctest -V; fi
+  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then make; ctest -V; make coverage; fi
 
 after_success:
-  - make test_coverage && lcoveralls --retry-count 5
+  - coveralls --verbose
