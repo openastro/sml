@@ -28,7 +28,7 @@ In addition, SML depends on the following libraries:
   - [CATCH](https://www.github.com/philsquared/Catch)
   - [Eigen](http://eigen.tuxfamily.org/) (optional)
 
-These dependencies will be downloaded and configured automatically if they are not already present locally (requires an internet connection).
+These dependencies will be downloaded and configured automagically if not already present locally (requires an internet connection).
 
 Installation
 ------
@@ -39,10 +39,9 @@ Run the following commands to download, build, and install this project.
     cd sml
     git submodule init && git submodule update
     mkdir build && cd build
-    cmake ..
-    cmake --build .
+    cmake .. && cmake --build .
 
-To install the header files and libraries, run the following from within the `build` directory:
+To install the header files, run the following from within the `build` directory:
 
     make install
 
@@ -51,14 +50,20 @@ Note that dependencies are installed by fetching them online, in case they canno
 Build options
 -------------
 
-You can pass the follow command-line options when running CMake:
+You can pass the following, general command-line options when running CMake:
 
-  - `-DBUILD_DOCS=[on|off (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
-  - `-DBUILD_TESTS`=[on|off (default)]: build tests (execute tests from build-directory using `ctest -V`)
-  - `-DBUILD_TESTS_WITH_EIGEN=[on|off (default)]`: build tests using [Eigen](http://eigen.tuxfamily.org/) (execute tests from build-directory using `ctest -V`)
-  - `-DCMAKE_INSTALL_PREFIX`: set path prefix for install script (`make install`); if not set, defaults to usual locations
-  - `-DFORCE_DEPENDENCIES_BUILD=[on|off (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
-  - `-DTEST_DIR[=build_dir/tests (default]`: set directory where test executables are placed
+  - `-DCMAKE_INSTALL_PREFIX[=$install_dir]`: set path prefix for install script (`make install`); if not set, defaults to usual locations
+  - `-DTEST_DIR[=$build_dir/tests (default)]`: set directory where test executables are placed
+  - `-DBUILD_DOCS[=ON|OFF (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
+  - `-DBUILD_TESTS[=ON|OFF (default)]`: build tests (execute tests from build-directory using `ctest -V`)
+  - `-DBUILD_DEPENDENCIES[=ON|OFF (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
+
+The following commands are conditional and can only be set if `BUILD_TESTS = ON`:
+
+ - `-DBUILD_TESTS_WITH_EIGEN[=ON|OFF (default)]`: build tests using [Eigen](http://eigen.tuxfamily.org/) (execute tests from build-directory using `ctest -V`)
+ - `-DBUILD_COVERAGE[=ON|OFF (default)]`: build code coverage using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (execute coverage analysis from build-directory using `make coverage`)
+
+Pass these options either directly to the `cmake ..` build command or run `ccmake ..` instead to bring up the interface that can be used to toggle options.
 
 Contributing
 ------------

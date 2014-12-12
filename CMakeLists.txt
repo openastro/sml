@@ -6,27 +6,31 @@ cmake_minimum_required(VERSION 2.6)
 
 # Change this section to correspond with your project info.
 project(SML C CXX)
-set(PROJECT_SUMMARY                          "A simple maths library")
-set(${CMAKE_PROJECT_NAME}_VENDOR_NAME        "Kartik Kumar")
-set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT     "me@kartikkumar.com")
-
-set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR      0)
-set(${CMAKE_PROJECT_NAME}_VERSION_MINOR      2)
-set(${CMAKE_PROJECT_NAME}_VERSION_PATCH      0)
+set(PROJECT_SUMMARY                            "A simple maths library")
+set(${CMAKE_PROJECT_NAME}_VENDOR_NAME          "Kartik Kumar")
+set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT       "me@kartikkumar.com")
+set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR        0)
+set(${CMAKE_PROJECT_NAME}_VERSION_MINOR        1)
+set(${CMAKE_PROJECT_NAME}_VERSION_PATCH        0)
 set(PROJECT_VERSION
   "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
 
-set(PROJECT_PATH                             "${CMAKE_CURRENT_SOURCE_DIR}")
-set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
-set(INCLUDE_PATH                             "${PROJECT_PATH}/include")
-set(TEST_EXE                                 "test_sml")
-set(TEST_SRC_PATH                            "${PROJECT_PATH}/test")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}   "${PROJECT_PATH}/cmake/Modules")
+set(PROJECT_PATH                               "${CMAKE_CURRENT_SOURCE_DIR}")
+set(EXTERNAL_PATH                              "${PROJECT_PATH}/external")
+set(INCLUDE_PATH                               "${PROJECT_PATH}/include")
+set(TEST_EXE                                   "test_sml")
+set(TEST_SRC_PATH                              "${PROJECT_PATH}/test")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}     "${PROJECT_PATH}/cmake/Modules")
 
-OPTION(BUILD_DOCS                            "Build docs"                     OFF)
-OPTION(BUILD_TESTS                           "Build tests"                    OFF)
-OPTION(BUILD_TESTS_WITH_EIGEN                "Build tests with Eigen library" OFF)
-OPTION(FORCE_DEPENDENCIES_BUILD              "Force build of dependencies"    OFF)
+OPTION(BUILD_DOCS                              "Build docs"                     OFF)
+OPTION(BUILD_TESTS                             "Build tests"                    OFF)
+OPTION(BUILD_DEPENDENCIES                      "Force build of dependencies"    OFF)
+
+include(CMakeDependentOption)
+CMAKE_DEPENDENT_OPTION(BUILD_TESTS_WITH_EIGEN  "Build tests with Eigen library" OFF
+                                               "BUILD_TESTS"                    OFF)
+CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"   OFF
+                                               "BUILD_TESTS"                    OFF)
 
 set(TEST_SRC
   "${TEST_SRC_PATH}/testSml.cpp"
@@ -36,12 +40,12 @@ set(TEST_SRC
 )
 
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
-if((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
+if(((NOT CMAKE_BUILD_TYPE) AND (NOT BUILD_COVERAGE_ANALYSIS)) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
     message(STATUS "WARNING: building release version!")
     set(CMAKE_BUILD_TYPE Release)
-elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+elseif((CMAKE_BUILD_TYPE STREQUAL "Debug") OR (BUILD_COVERAGE_ANALYSIS))
     message(STATUS "WARNING: building debug version!")
-endif((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
+endif(((NOT CMAKE_BUILD_TYPE) AND (NOT BUILD_COVERAGE_ANALYSIS)) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
 
 # Set platform-specific compiler flags.
 if(WIN32)
@@ -104,9 +108,9 @@ if(BUILD_TESTS)
 
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_DIR})
 
-  if(NOT FORCE_DEPENDENCIES_BUILD)
+  if(NOT BUILD_DEPENDENCIES)
     find_package(CATCH)
-  endif(NOT FORCE_DEPENDENCIES_BUILD)
+  endif(NOT BUILD_DEPENDENCIES)
 
   if(NOT CATCH_FOUND)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
@@ -138,9 +142,9 @@ if(BUILD_TESTS)
   endif(NOT APPLE)
 
   if(BUILD_TESTS_WITH_EIGEN)
-    if(NOT FORCE_DEPENDENCIES_BUILD)
+    if(NOT BUILD_DEPENDENCIES)
       find_package(Eigen3)
-    endif(NOT FORCE_DEPENDENCIES_BUILD)
+    endif(NOT BUILD_DEPENDENCIES)
 
     if(NOT EIGEN3_FOUND)
       message(STATUS "Eigen will be downloaded when ${CMAKE_PROJECT_NAME} is built")
@@ -182,6 +186,12 @@ if(BUILD_TESTS)
 
   add_executable(${TEST_EXE} ${TEST_SRC})
   add_test(NAME ${TEST_EXE} COMMAND "${TEST_DIR}/${TEST_EXE}")
+
+  if(BUILD_COVERAGE_ANALYSIS)
+    include(CodeCoverage)
+    set(COVERAGE_EXTRACT '${PROJECT_PATH}/include/*' '${PROJECT_PATH}/src/*')
+    setup_target_for_coverage(coverage "${TEST_EXE}" coverage)
+  endif(BUILD_COVERAGE_ANALYSIS)
 endif(BUILD_TESTS)
 
 # Install header files and library.
