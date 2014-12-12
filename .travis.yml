@@ -21,7 +21,7 @@ addons:
     branch_pattern: coverity_scan
 
 install:
-  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; sudo pip install cpp-coveralls --use-mirrors; fi
+  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then sudo pip install cpp-coveralls --use-mirrors; fi
 
 before_script:
   - mkdir build && cd build
