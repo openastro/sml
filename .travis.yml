@@ -5,11 +5,23 @@ compiler:
   - clang
 
 env:
-  - BUILD_TYPE=Debug
-  - BUILD_TYPE=Release
+  global:
+    - secure: "Vv3X7OaYzNe+GaxAwsUoEf44W8bC52fszgNPl725HHgFCWlpalqrFRufly8ol/q7uZ2lMnGeiCeKFFfTjfMBY9P0SDFltQD5/ATuquRVKEXjKNqPQGTXHqlfaA9tg2aztjwYHvJmetRRWYir86I15hmAdh320Mj8Ul0iK44b6Bw="
+  matrix:
+    - BUILD_TYPE=Debug
+    - BUILD_TYPE=Release
+
+addons:
+  coverity_scan:
+    project:
+      name: "kartikkumar/sml"
+    notification_email: me@kartikkumar.com
+    build_command_prepend: "mkdir build && cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on .."
+    build_command:   "make"
+    branch_pattern: coverity_scan
 
 install:
-  - sudo pip install cpp-coveralls --use-mirrors
+  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; sudo pip install cpp-coveralls --use-mirrors; fi
 
 before_script:
   - mkdir build && cd build
