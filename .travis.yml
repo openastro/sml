@@ -21,14 +21,10 @@ addons:
     branch_pattern: coverity_scan
 
 install:
-  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then sudo pip install cpp-coveralls --use-mirrors; fi
-
-before_script:
-  - mkdir build && cd build
-  - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..
+  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ] && [ ${COVERITY_SCAN_BRANCH} != 1 ]; then sudo pip install cpp-coveralls --use-mirrors; fi
 
 script:
-  - make && ctest -V
+  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..; make; ctest -V; fi
 
 after_success:
-  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"; fi
+  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ] && [ ${COVERITY_SCAN_BRANCH} != 1 ]; then coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"; fi
