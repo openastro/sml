@@ -14,9 +14,7 @@ env:
 matrix:
   exclude:
     - compiler: clang
-    - env: COVERITY_SCAN_BRANCH=1
-    - compiler: gcc
-    - env: BUILD_TYPE=Release COVERITY_SCAN_BRANCH=1
+      env: COVERITY_SCAN_BRANCH=1
 
 addons:
   coverity_scan:
