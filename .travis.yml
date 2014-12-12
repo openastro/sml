@@ -11,20 +11,37 @@ env:
     - BUILD_TYPE=Debug
     - BUILD_TYPE=Release
 
+matrix:
+  exclude:
+    - compiler: clang
+    - env: COVERITY_SCAN_BRANCH=1
+    - compiler: gcc
+    - env: BUILD_TYPE=Release COVERITY_SCAN_BRANCH=1
+
 addons:
   coverity_scan:
     project:
       name: "kartikkumar/sml"
     notification_email: me@kartikkumar.com
     build_command_prepend: "mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on .."
-    build_command:   "make"
+    build_command: "make"
     branch_pattern: coverity_scan
 
 install:
-  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ] &&  if [ "${COVERITY_SCAN_BRANCH}" != "1" ]; then sudo pip install cpp-coveralls; fi
+  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ] &&  [ "${COVERITY_SCAN_BRANCH}" != "1" ]; then
+      sudo pip install cpp-coveralls;
+    fi
 
 script:
-  -  if [ "${COVERITY_SCAN_BRANCH}" != "1" ]; then mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..; make; ctest -V; fi
+  -  if [ "${COVERITY_SCAN_BRANCH}" != "1" ]; then
+       mkdir build;
+       cd build;
+       cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..;
+       make;
+       ctest -V;
+     fi
 
 after_success:
-  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ] && [ "${COVERITY_SCAN_BRANCH}" != "1" ]; then coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"; fi
+  - if [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ] && [ "${COVERITY_SCAN_BRANCH}" != "1" ]; then
+      coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*";
+    fi
