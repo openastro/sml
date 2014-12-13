@@ -88,7 +88,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 
 include_directories(AFTER "${INCLUDE_PATH}")
 
-include(ExternalProjects.cmake)
+include(Dependencies.cmake)
 
 if(BUILD_DOCS)
   find_package(Doxygen)
