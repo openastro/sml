@@ -16,12 +16,17 @@ set(PROJECT_VERSION
   "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
 
 set(PROJECT_PATH                               "${CMAKE_CURRENT_SOURCE_DIR}")
-set(EXTERNAL_PATH                              "${PROJECT_PATH}/external")
-set(DOCS_PATH                                  "${PROJECT_PATH}/docs")
-set(INCLUDE_PATH                               "${PROJECT_PATH}/include")
-set(TEST_EXE                                   "test_sml")
-set(TEST_SRC_PATH                              "${PROJECT_PATH}/test")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}     "${PROJECT_PATH}/cmake/Modules")
+set(INCLUDE_PATH                               "${PROJECT_PATH}/include")
+set(TEST_SRC_PATH                              "${PROJECT_PATH}/test")
+if(NOT EXTERNAL_PATH)
+  set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
+endif(NOT EXTERNAL_PATH)
+if(NOT DOCS_PATH)
+  set(DOCS_PATH                                "${PROJECT_PATH}/docs")
+endif(NOT DOCS_PATH)
+set(TEST_PATH                                  "${PROJECT_BINARY_DIR}/tests")
+set(TEST_EXE                                   "test_sml")
 
 OPTION(BUILD_DOCS                              "Build docs"                     OFF)
 OPTION(BUILD_TESTS                             "Build tests"                    OFF)
@@ -41,12 +46,16 @@ set(TEST_SRC
 )
 
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
-if(((NOT CMAKE_BUILD_TYPE) AND (NOT BUILD_COVERAGE_ANALYSIS)) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
+if(((NOT CMAKE_BUILD_TYPE)
+  AND (NOT BUILD_COVERAGE_ANALYSIS))
+  OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
     message(STATUS "WARNING: building release version!")
     set(CMAKE_BUILD_TYPE Release)
 elseif((CMAKE_BUILD_TYPE STREQUAL "Debug") OR (BUILD_COVERAGE_ANALYSIS))
     message(STATUS "WARNING: building debug version!")
-endif(((NOT CMAKE_BUILD_TYPE) AND (NOT BUILD_COVERAGE_ANALYSIS)) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
+endif(((NOT CMAKE_BUILD_TYPE)
+  AND (NOT BUILD_COVERAGE_ANALYSIS))
+  OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
 
 # Set platform-specific compiler flags.
 if(WIN32)
@@ -79,7 +88,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 
 include_directories(AFTER "${INCLUDE_PATH}")
 
-include(ExternalProject)
+include(ExternalProjects.cmake)
 
 if(BUILD_DOCS)
   find_package(Doxygen)
@@ -102,91 +111,20 @@ endif(BUILD_DOCS)
 
 if(BUILD_TESTS)
   enable_testing()
-
-  if(NOT TEST_DIR)
-    set(TEST_DIR "${PROJECT_BINARY_DIR}/tests")
-  endif(NOT TEST_DIR)
-
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_DIR})
-
-  if(NOT BUILD_DEPENDENCIES)
-    find_package(CATCH)
-  endif(NOT BUILD_DEPENDENCIES)
-
-  if(NOT CATCH_FOUND)
-    message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
-    ExternalProject_Add(catch
-      PREFIX ${EXTERNAL_PATH}/Catch
-      #--Download step--------------
-      URL https://github.com/kartikkumar/Catch/archive/master.zip
-      TIMEOUT 30
-      #--Update/Patch step----------
-      UPDATE_COMMAND ""
-      PATCH_COMMAND ""
-      #--Configure step-------------
-      CONFIGURE_COMMAND ""
-      #--Build step-----------------
-      BUILD_COMMAND ""
-      #--Install step---------------
-      INSTALL_COMMAND ""
-      #--Output logging-------------
-      LOG_DOWNLOAD ON
-    )
-    ExternalProject_Get_Property(catch source_dir)
-    set(CATCH_INCLUDE_DIRS ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
-  endif(NOT CATCH_FOUND)
-
-  if(NOT APPLE)
-    include_directories(SYSTEM AFTER "${CATCH_INCLUDE_DIRS}")
-  else(APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIRS}\"")
-  endif(NOT APPLE)
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_PATH})
 
   if(BUILD_TESTS_WITH_EIGEN)
-    if(NOT BUILD_DEPENDENCIES)
-      find_package(Eigen3)
-    endif(NOT BUILD_DEPENDENCIES)
-
-    if(NOT EIGEN3_FOUND)
-      message(STATUS "Eigen will be downloaded when ${CMAKE_PROJECT_NAME} is built")
-      ExternalProject_Add(eigen-lib
-        PREFIX ${EXTERNAL_PATH}/Eigen
-        #--Download step--------------
-        URL http://bitbucket.org/eigen/eigen/get/3.2.2.tar.gz
-        TIMEOUT 30
-        #--Update/Patch step----------
-        UPDATE_COMMAND ""
-        PATCH_COMMAND ""
-        #--Configure step-------------
-        CONFIGURE_COMMAND ""
-        #--Build step-----------------
-        BUILD_COMMAND ""
-        #--Install step---------------
-        INSTALL_COMMAND ""
-        #--Output logging-------------
-        LOG_DOWNLOAD ON
-      )
-      ExternalProject_Get_Property(eigen-lib source_dir)
-      set(EIGEN3_INCLUDE_DIR ${source_dir} CACHE INTERNAL "Path to include folder for Eigen")
-    endif(NOT EIGEN3_FOUND)
-
-    if(NOT APPLE)
-      include_directories(SYSTEM AFTER "${EIGEN3_INCLUDE_DIR}")
-    else(APPLE)
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${EIGEN3_INCLUDE_DIR}\"")
-    endif(NOT APPLE)
-
     string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${TEST_SRC}")
     add_executable(${TEST_EXE}_eigen ${TESTS_SRC_EIGEN})
-    add_test(NAME ${TEST_EXE}_eigen COMMAND "${TEST_DIR}/${TEST_EXE}_eigen")
+    add_test(NAME ${TEST_EXE}_eigen COMMAND "${TEST_PATH}/${TEST_EXE}_eigen")
 
     string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${TEST_SRC}")
     add_executable(${TEST_EXE}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
-    add_test(NAME ${TEST_EXE}_eigen_fixed COMMAND "${TEST_DIR}/${TEST_EXE}_eigen_fixed")
+    add_test(NAME ${TEST_EXE}_eigen_fixed COMMAND "${TEST_PATH}/${TEST_EXE}_eigen_fixed")
   endif(BUILD_TESTS_WITH_EIGEN)
 
   add_executable(${TEST_EXE} ${TEST_SRC})
-  add_test(NAME ${TEST_EXE} COMMAND "${TEST_DIR}/${TEST_EXE}")
+  add_test(NAME ${TEST_EXE} COMMAND "${TEST_PATH}/${TEST_EXE}")
 
   if(BUILD_COVERAGE_ANALYSIS)
     include(CodeCoverage)
