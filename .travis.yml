@@ -33,13 +33,13 @@ install:
     fi
 
 script:
-  -  if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
-       mkdir build;
-       cd build;
-       cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..;
-       make;
-       ctest -V;
-     fi
+  - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
+      mkdir build;
+      cd build;
+      cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on ..;
+      make;
+      ctest -V;
+    fi
 
 after_success:
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then

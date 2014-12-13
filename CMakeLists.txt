@@ -17,6 +17,7 @@ set(PROJECT_VERSION
 
 set(PROJECT_PATH                               "${CMAKE_CURRENT_SOURCE_DIR}")
 set(EXTERNAL_PATH                              "${PROJECT_PATH}/external")
+set(DOCS_PATH                                  "${PROJECT_PATH}/docs")
 set(INCLUDE_PATH                               "${PROJECT_PATH}/include")
 set(TEST_EXE                                   "test_sml")
 set(TEST_SRC_PATH                              "${PROJECT_PATH}/test")
@@ -94,7 +95,7 @@ if(BUILD_DOCS)
   # Add a custom target to run Doxygen whenever the project is built.
   # If you do NOT want the documentation to be generated EVERY time you build the project
   # then leave out the 'ALL' keyword from the command below.
-  add_custom_target(doc ALL COMMAND ${DOXYGEN_EXECUTABLE}
+  add_custom_target(docs ALL COMMAND ${DOXYGEN_EXECUTABLE}
                     ${PROJECT_BINARY_DIR}/Doxyfile
                     SOURCES ${PROJECT_BINARY_DIR}/Doxyfile)
 endif(BUILD_DOCS)
