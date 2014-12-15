@@ -3,7 +3,7 @@ SML
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666) [![Coverage Status](https://coveralls.io/repos/kartikkumar/sml/badge.png)](https://coveralls.io/r/kartikkumar/sml)
 
-SML (Simple Maths Library) is a C++ template library that provides some basic mathematics functionality. It's intended to be lightweight and simple to use in other projects. A CMake module is available from the folllowing repository to make it easy to include SML in other CMake-based projects: [cmake-modules](https://github.com/kartikkumar/cmake-modules).
+SML (Simple Maths Library) is a C++ template library that provides some basic mathematics functionality. It's intended to be lightweight and simple to use in other projects. A CMake module is available to make it easy to include SML in other CMake-based projects: [FindSML.cmake](https://github.com/kartikkumar/cmake-modules/Modules/FindSML.cmake).
 
 Features
 ------
@@ -62,7 +62,7 @@ You can pass the following, general command-line options when running CMake:
 The following commands are conditional and can only be set if `BUILD_TESTS = ON`:
 
  - `-DBUILD_TESTS_WITH_EIGEN[=ON|OFF (default)]`: build tests using [Eigen](http://eigen.tuxfamily.org/) (execute tests from build-directory using `ctest -V`)
- - `-DBUILD_COVERAGE[=ON|OFF (default)]`: build code coverage using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (both must be installed; execute coverage analysis from build-directory using `make coverage`)
+ - `-DBUILD_COVERAGE[=ON|OFF (default)]`: build code coverage using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (both must be installed; requires [GCC](https://gcc.gnu.org/) compiler; execute coverage analysis from build-directory using `make coverage`)
 
 Pass these options either directly to the `cmake ..` build command or run `ccmake ..` instead to bring up the interface that can be used to toggle options.
 
