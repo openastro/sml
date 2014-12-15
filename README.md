@@ -1,7 +1,7 @@
 SML
 ===
 
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666") [![Coverage Status](https://coveralls.io/repos/kartikkumar/sml/badge.png)](https://coveralls.io/r/kartikkumar/sml)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666) [![Coverage Status](https://coveralls.io/repos/kartikkumar/sml/badge.png)](https://coveralls.io/r/kartikkumar/sml)
 
 SML (Simple Maths Library) is a C++ template library that provides some basic mathematics functionality. It's intended to be lightweight and simple to use in other projects. A CMake module is available from the folllowing repository to make it easy to include SML in other CMake-based projects: [cmake-modules](https://github.com/kartikkumar/cmake-modules).
 
@@ -22,6 +22,8 @@ To install this project, please ensure that you have installed the following (in
   - A C++ compiler, e.g., [GCC](https://gcc.gnu.org/), [clang](http://clang.llvm.org/), [MinGW](http://www.mingw.org/)
   - [CMake](http://www.cmake.org)
   - [Doxygen](http://www.doxygen.org "Doxygen homepage") (optional)
+  - [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) (optional)
+  - [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (optional)
 
 SML does not depend on any libraries. The following libraries are optional (see `Build options`):
 
@@ -53,7 +55,6 @@ Build options
 You can pass the following, general command-line options when running CMake:
 
   - `-DCMAKE_INSTALL_PREFIX[=$install_dir]`: set path prefix for install script (`make install`); if not set, defaults to usual locations
-  - `-DTEST_DIR[=$build_dir/tests (default)]`: set directory where test executables are placed
   - `-DBUILD_DOCS[=ON|OFF (default)]`: build the [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation ([LaTeX](http://www.latex-project.org/) must be installed with `amsmath` package)
   - `-DBUILD_TESTS[=ON|OFF (default)]`: build tests (execute tests from build-directory using `ctest -V`)
   - `-DBUILD_DEPENDENCIES[=ON|OFF (default)]`: force local build of dependencies, instead of first searching system-wide using `find_package()`
