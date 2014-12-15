@@ -115,16 +115,16 @@ if(BUILD_TESTS)
 
   if(BUILD_TESTS_WITH_EIGEN)
     string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${TEST_SRC}")
-    add_executable(${TEST_NAME} eigen ${TESTS_SRC_EIGEN})
-    add_test(NAME ${TEST_NAME} eigen COMMAND "${TEST_PATH}/${TEST_NAME} eigen")
+    add_executable(${TEST_NAME}_eigen ${TESTS_SRC_EIGEN})
+    add_test(NAME ${TEST_NAME}_eigen COMMAND "${TEST_PATH}/${TEST_NAME}_eigen")
 
     string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${TEST_SRC}")
-    add_executable(${TEST_NAME} eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
-    add_test(NAME ${TEST_NAME} eigen_fixed COMMAND "${TEST_PATH}/${TEST_NAME} eigen_fixed")
+    add_executable(${TEST_NAME}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
+    add_test(NAME ${TEST_NAME}_eigen_fixed COMMAND "${TEST_PATH}/${TEST_NAME}_eigen_fixed")
   endif(BUILD_TESTS_WITH_EIGEN)
 
   add_executable(${TEST_NAME} ${TEST_SRC})
-  add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME})
+  add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
 
   if(BUILD_COVERAGE_ANALYSIS)
     include(CodeCoverage)
