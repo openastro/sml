@@ -1,12 +1,13 @@
-/*    
+/*
  * Copyright (c) 2014 K. Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
- 
+
 #ifndef SML_LINEAR_ALGEBRA_HPP
 #define SML_LINEAR_ALGEBRA_HPP
 
+#include <algorithm>
 #include <cmath>
 #include <stdexcept>
 
@@ -16,12 +17,12 @@ namespace sml
 //! Compute cross-product of two 3-vectors.
 /*!
  * Computes the cross-product of two 3-vectors. Throws an exception if either of the vectors do not
- * have dimension 3. The cross-product \f$\bar{R} = \bar{X} \times \bar{Y}\f$ is computed as 
+ * have dimension 3. The cross-product \f$\bar{R} = \bar{X} \times \bar{Y}\f$ is computed as
  * follows:
- * 
+ *
  * \f{eqnarray*}{
- *      R_{1} &=& X_{2} * Y_{3} - X_{3} * Y{2} \\ 
- *      R_{2} &=& X_{3} * Y_{1} - X_{1} * Y{3} \\ 
+ *      R_{1} &=& X_{2} * Y_{3} - X_{3} * Y{2} \\
+ *      R_{2} &=& X_{3} * Y_{1} - X_{1} * Y{3} \\
  *      R_{3} &=& X_{1} * Y_{2} - X_{2} * Y{1}
  * \f}
  *
@@ -39,7 +40,7 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
         throw std::runtime_error( "ERROR: Cross product can only be computed for 3-vectors!" );
     }
 
-    Vector3 result( 3 );
+    Vector3 result = vector1;
 
     // Compute components of resulting 3-vector.
     result[ 0 ] = vector1[ 1 ] * vector2[ 2 ] - vector1[ 2 ] * vector2[ 1 ];
@@ -52,9 +53,9 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
 //! Compute dot-product of two equal-length vectors.
 /*!
  * Computes the dot-product (inner-product) of two vectors of length N. Throws an exception if the
- * vectors are unequal in length. The dot-product \f$r = \bar{X} \cdot \bar{Y}\f$ is computed as 
+ * vectors are unequal in length. The dot-product \f$r = \bar{X} \cdot \bar{Y}\f$ is computed as
  * follows:
- * 
+ *
  * \f[
  *      r = \sum_{i=1}^{N} X_{i} * Y_{i}
  * \f]
@@ -71,7 +72,7 @@ Real dot( const Vector& vector1, const Vector& vector2 )
     // Check if vectors are of different length. If so, throw an exception.
     if ( vector1.size( ) != vector2.size( ) )
     {
-        throw std::runtime_error( 
+        throw std::runtime_error(
             "ERROR: Dot product can only be computed for vectors of equal length!" );
     }
 
@@ -91,11 +92,11 @@ Real dot( const Vector& vector1, const Vector& vector2 )
  * Computes the square of the Euclidean norm of a vector of length N. This is computed as the dot-
  * product of the vector with itself. The squared-norm \f$r\f$ of vector \f$X\f$ is computed as
  * follows:
- * 
+ *
  * \f[
  *      r = \sum_{i=1}^{N} X_{i}^{2}
  * \f]
- * 
+ *
  * @sa dot
  * @tparam Real   Real type
  * @tparam Vector Vector type
@@ -110,14 +111,14 @@ Real squaredNorm( const Vector& vector )
 
 //! Compute norm of vector.
 /*!
- * Computes the Euclidean norm of a vector of length N. This is computed as the square-root of the 
+ * Computes the Euclidean norm of a vector of length N. This is computed as the square-root of the
  * dot-product of the vector with itself. The norm \f$r\f$ of vector \f$X\f$ is computed as
  * follows:
- * 
+ *
  * \f[
  *      r = \sqrt{\sum_{i=1}^{N} X_{i}^{2}}
  * \f]
- * 
+ *
  * @sa squaredNorm, dot
  * @tparam Real   Real type
  * @tparam Vector Vector type
@@ -138,7 +139,7 @@ Real norm( const Vector& vector )
  * \f[
  *      \hat{\bar{X}} = \frac{\bar{X}}{|\bar{X}|}
  * \f]
- * 
+ *
  * @sa norm, dot
  * @tparam Real   Real type
  * @tparam Vector Vector type
@@ -149,7 +150,7 @@ template< typename Real, typename Vector >
 Vector normalize( const Vector& vector )
 {
     // Declare normalized vector.
-    Vector normalizedVector( vector.size( ) );
+    Vector normalizedVector = vector;
 
     // Compute the norm of the vector.
     Real vectorNorm = norm< Real, Vector >( vector );
@@ -158,7 +159,7 @@ Vector normalize( const Vector& vector )
     for ( unsigned int i = 0; i < vector.size( ); i++ )
     {
         normalizedVector[ i ] = vector[ i ] / vectorNorm;
-    }   
+    }
 
     // Return normalized vector.
     return normalizedVector;
@@ -237,7 +238,7 @@ Vector3 getZUnitVector( )
 template< typename Real, typename Vector >
 Vector multiply( const Vector& vector, const Real multiplier )
 {
-    Vector result( vector.size( ) );
+    Vector result = vector;
 
     // Loop through vector and multiply each element by the multiplier.
     for ( unsigned int i = 0; i < vector.size( ); i++ )
@@ -261,7 +262,7 @@ Vector multiply( const Vector& vector, const Real multiplier )
 template< typename Real, typename Vector >
 Vector add( const Vector& vector, const Real adder )
 {
-    Vector result( vector.size( ) );
+    Vector result = vector;
 
     // Loop through vector and add adder to each element.
     for ( unsigned int i = 0; i < vector.size( ); i++ )
@@ -278,7 +279,7 @@ Vector add( const Vector& vector, const Real adder )
  *
  * @tparam Vector  Vector type
  * @param  vector1 A vector to add to element-wise
- * @param  vector2 A vector to add to element-wise 
+ * @param  vector2 A vector to add to element-wise
  * @return Vector resulting from element-wise addition of two vectors
  */
 template< typename Vector >
@@ -287,11 +288,11 @@ Vector add( const Vector& vector1, const Vector& vector2 )
     // Check if vectors are of different length. If so, throw an exception.
     if ( vector1.size( ) != vector2.size( ) )
     {
-        throw std::runtime_error( 
+        throw std::runtime_error(
             "ERROR: Element-wise sum can only be computed for vectors of equal length!" );
     }
 
-    Vector result( vector1.size( ) );
+    Vector result = vector1;
 
     // Loop through vectors and add element-wise.
     for ( unsigned int i = 0; i < vector1.size( ); i++ )
