@@ -1,5 +1,5 @@
-/*    
- * Copyright (c) 2014 K. Kumar (me@kartikkumar.com)
+/*
+ * Copyright (c) 2014-2015 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
@@ -9,7 +9,7 @@
 #include <catch.hpp>
 
 #include <SML/basicFunctions.hpp>
-#include <SML/constants.hpp> 
+#include <SML/constants.hpp>
 
 namespace sml
 {
@@ -36,7 +36,7 @@ TEST_CASE( "Test modulo function", "[modulo]" )
         Real remainder = 0.5;
 
         REQUIRE( computeModulo( dividend, divisor ) == remainder );
-    }    
+    }
 }
 
 TEST_CASE( "Test radian-to-degree conversion function", "[radians-to-degrees]")
@@ -54,14 +54,14 @@ TEST_CASE( "Test radian-to-degree conversion function", "[radians-to-degrees]")
     SECTION( "PI radians to degrees" )
     {
         REQUIRE( convertRadiansToDegrees( SML_PI ) == 180.0 );
-    }    
+    }
 
     SECTION( "Arbitrary radians to degrees" )
     {
-        REQUIRE( convertRadiansToDegrees( 2.573 ) 
-                 == Approx( 147.4220406871608 ).epsilon( 
+        REQUIRE( convertRadiansToDegrees( 2.573 )
+                 == Approx( 147.4220406871608 ).epsilon(
                         std::numeric_limits< Real >::epsilon( ) ) );
-    }        
+    }
 }
 
 } // namespace tests

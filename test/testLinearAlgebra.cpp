@@ -1,5 +1,5 @@
-/*    
- * Copyright (c) 2014 K. Kumar (me@kartikkumar.com)
+/*
+ * Copyright (c) 2014-2015 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
@@ -18,7 +18,7 @@ namespace tests
 typedef double Real;
 typedef std::vector< Real > Vector;
 
-TEST_CASE( "Cross-product", "[cross]" ) 
+TEST_CASE( "Cross-product", "[cross]" )
 {
     SECTION( "cross-product of non-3-vectors")
     {
@@ -44,11 +44,11 @@ TEST_CASE( "Cross-product", "[cross]" )
 
         unitZ[ 0 ] = 0.0;
         unitZ[ 1 ] = 0.0;
-        unitZ[ 2 ] = 1.0;        
+        unitZ[ 2 ] = 1.0;
 
         REQUIRE( cross( unitX, unitY ) == unitZ );
         REQUIRE( cross( unitY, unitZ ) == unitX );
-        REQUIRE( cross( unitZ, unitX ) == unitY );        
+        REQUIRE( cross( unitZ, unitX ) == unitY );
     }
 
     SECTION( "cross-product of arbitrary vectors" )
@@ -67,13 +67,13 @@ TEST_CASE( "Cross-product", "[cross]" )
 
         result[ 0 ] = -88.153605;
         result[ 1 ] = 12.652878000000001;
-        result[ 2 ] = 13.501926000000001; 
+        result[ 2 ] = 13.501926000000001;
 
-        REQUIRE( cross( vector1, vector2 ) == result );        
+        REQUIRE( cross( vector1, vector2 ) == result );
     }
 }
 
-TEST_CASE( "Dot-product", "[dot]" ) 
+TEST_CASE( "Dot-product", "[dot]" )
 {
     SECTION( "dot-product of non-equal-length vectors")
     {
@@ -85,110 +85,110 @@ TEST_CASE( "Dot-product", "[dot]" )
 
     SECTION( "dot-product of vectors of zeros" )
     {
-        Vector vector( 3 );        
+        Vector vector( 3 );
 
         vector[ 0 ] = 0.0;
         vector[ 1 ] = 0.0;
-        vector[ 2 ] = 0.0;        
+        vector[ 2 ] = 0.0;
 
         REQUIRE( dot< Real >( vector, vector ) == 0.0 );
     }
 
     SECTION( "dot-product of arbitrary vectors" )
     {
-        Vector vector1( 4 );        
-        Vector vector2( 4 );        
+        Vector vector1( 4 );
+        Vector vector2( 4 );
 
-        vector1[ 0 ] = 1.234; 
+        vector1[ 0 ] = 1.234;
         vector1[ 1 ] = -2.674;
-        vector1[ 2 ] = 10.812;  
-        vector1[ 3 ] = -12.123;         
+        vector1[ 2 ] = 10.812;
+        vector1[ 3 ] = -12.123;
 
         vector2[ 0 ] = -4.119;
         vector2[ 1 ] = -3.003;
-        vector2[ 2 ] = -0.048;  
-        vector2[ 3 ] = 17.367;  
+        vector2[ 2 ] = -0.048;
+        vector2[ 3 ] = 17.367;
 
-        Real result = -208.111941;        
+        Real result = -208.111941;
 
         REQUIRE( dot< Real >( vector1, vector2 ) == result );
-    }    
+    }
 }
 
 TEST_CASE( "Squared-norm", "[norm]" )
 {
     SECTION( "squared-norm of vector of zeros" )
     {
-        Vector vector( 3 );        
+        Vector vector( 3 );
 
         vector[ 0 ] = 0.0;
         vector[ 1 ] = 0.0;
-        vector[ 2 ] = 0.0;        
+        vector[ 2 ] = 0.0;
 
-        REQUIRE( squaredNorm< Real >( vector ) == 0.0 );        
+        REQUIRE( squaredNorm< Real >( vector ) == 0.0 );
     }
 
     SECTION( "squared-norm of arbitrary vector" )
     {
-        Vector vector( 4 );        
+        Vector vector( 4 );
 
-        vector[ 0 ] = 1.234; 
+        vector[ 0 ] = 1.234;
         vector[ 1 ] = -2.674;
-        vector[ 2 ] = 10.812;  
-        vector[ 3 ] = -12.123;  
+        vector[ 2 ] = 10.812;
+        vector[ 3 ] = -12.123;
 
-        Real result = 272.53950499999996;            
+        Real result = 272.53950499999996;
 
-        REQUIRE( squaredNorm< Real >( vector ) == result );        
-    }    
+        REQUIRE( squaredNorm< Real >( vector ) == result );
+    }
 }
 
 TEST_CASE( "Norm", "[norm]" )
 {
     SECTION( "norm of vector of zeros" )
     {
-        Vector vector( 3 );        
+        Vector vector( 3 );
 
         vector[ 0 ] = 0.0;
         vector[ 1 ] = 0.0;
-        vector[ 2 ] = 0.0;        
+        vector[ 2 ] = 0.0;
 
-        REQUIRE( norm< Real >( vector ) == 0.0 );        
+        REQUIRE( norm< Real >( vector ) == 0.0 );
     }
 
     SECTION( "norm of arbitrary vector" )
     {
-        Vector vector( 4 );        
+        Vector vector( 4 );
 
-        vector[ 0 ] = 1.234; 
+        vector[ 0 ] = 1.234;
         vector[ 1 ] = -2.674;
-        vector[ 2 ] = 10.812;  
-        vector[ 3 ] = -12.123;  
+        vector[ 2 ] = 10.812;
+        vector[ 3 ] = -12.123;
 
-        Real result = 16.508770547802765;            
+        Real result = 16.508770547802765;
 
-        REQUIRE( norm< Real >( vector ) == result );        
-    }    
+        REQUIRE( norm< Real >( vector ) == result );
+    }
 }
 
 TEST_CASE( "Normalize vector", "[norm]" )
 {
     SECTION( "Normalize arbitrary vector" )
     {
-        Vector vector( 4 );        
+        Vector vector( 4 );
 
-        vector[ 0 ] = 1.234; 
+        vector[ 0 ] = 1.234;
         vector[ 1 ] = -2.674;
-        vector[ 2 ] = 10.812;  
-        vector[ 3 ] = -12.123;  
+        vector[ 2 ] = 10.812;
+        vector[ 3 ] = -12.123;
 
         Vector result( 4 );
         result[ 0 ] = 0.07474814653379741;
         result[ 1 ] = -0.1619745087774508;
         result[ 2 ] = 0.6549246031794307;
-        result[ 3 ] = -0.7343369371387568;            
+        result[ 3 ] = -0.7343369371387568;
 
-        REQUIRE( normalize< Real >( vector ) == result ); 
+        REQUIRE( normalize< Real >( vector ) == result );
     }
 }
 
@@ -196,35 +196,35 @@ TEST_CASE( "Return unit-vectors", "[unit-vector]" )
 {
     SECTION( "Return unit-vector in x-direction" )
     {
-        Vector xUnitVector( 3 );        
+        Vector xUnitVector( 3 );
 
-        xUnitVector[ 0 ] = 1.0; 
+        xUnitVector[ 0 ] = 1.0;
         xUnitVector[ 1 ] = 0.0;
-        xUnitVector[ 2 ] = 0.0;           
+        xUnitVector[ 2 ] = 0.0;
 
-        REQUIRE( getXUnitVector< Vector >( ) == xUnitVector ); 
+        REQUIRE( getXUnitVector< Vector >( ) == xUnitVector );
     }
 
     SECTION( "Return unit-vector in y-direction" )
     {
-        Vector yUnitVector( 3 );        
+        Vector yUnitVector( 3 );
 
-        yUnitVector[ 0 ] = 0.0; 
+        yUnitVector[ 0 ] = 0.0;
         yUnitVector[ 1 ] = 1.0;
-        yUnitVector[ 2 ] = 0.0;           
+        yUnitVector[ 2 ] = 0.0;
 
-        REQUIRE( getYUnitVector< Vector >( ) == yUnitVector ); 
+        REQUIRE( getYUnitVector< Vector >( ) == yUnitVector );
     }
-            
+
     SECTION( "Return unit-vector in z-direction" )
     {
-        Vector zUnitVector( 3 );        
+        Vector zUnitVector( 3 );
 
-        zUnitVector[ 0 ] = 0.0; 
+        zUnitVector[ 0 ] = 0.0;
         zUnitVector[ 1 ] = 0.0;
-        zUnitVector[ 2 ] = 1.0;           
+        zUnitVector[ 2 ] = 1.0;
 
-        REQUIRE( getZUnitVector< Vector >( ) == zUnitVector ); 
+        REQUIRE( getZUnitVector< Vector >( ) == zUnitVector );
     }
 }
 
@@ -232,120 +232,120 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
 {
     SECTION( "Multiply arbitrary vector element-wise" )
     {
-        Vector vector( 3 );  
-        vector[ 0 ] = 12.3; 
+        Vector vector( 3 );
+        vector[ 0 ] = 12.3;
         vector[ 1 ] = -15.4;
-        vector[ 2 ] = 0.17;  
+        vector[ 2 ] = 0.17;
 
-        Vector result( 3 ); 
+        Vector result( 3 );
 
-        Real multiplier = 0.0;   
+        Real multiplier = 0.0;
 
         SECTION( "Multiply vector element-wise by 1 to give same vector")
         {
-            multiplier = 1.0;  
+            multiplier = 1.0;
 
-            result = vector;      
+            result = vector;
 
-            REQUIRE( multiply( vector, multiplier ) == result ); 
+            REQUIRE( multiply( vector, multiplier ) == result );
         }
 
         SECTION( "Multiply vector element-wise by 0 to give 0-vector")
         {
-            multiplier = 0.0;  
+            multiplier = 0.0;
 
-            result[ 0 ] = 0.0; 
+            result[ 0 ] = 0.0;
             result[ 1 ] = 0.0;
-            result[ 2 ] = 0.0; 
+            result[ 2 ] = 0.0;
 
-            REQUIRE( multiply( vector, multiplier ) == result ); 
+            REQUIRE( multiply( vector, multiplier ) == result );
         }
 
         SECTION( "Multiply by positive multiplier with magnitude greater than unity")
         {
-            multiplier = 6.35;        
+            multiplier = 6.35;
 
-            result[ 0 ] = 78.105; 
+            result[ 0 ] = 78.105;
             result[ 1 ] = -97.78999999999999;
-            result[ 2 ] = 1.0795000000000001; 
+            result[ 2 ] = 1.0795000000000001;
 
-            REQUIRE( multiply( vector, multiplier ) == result ); 
-        }   
+            REQUIRE( multiply( vector, multiplier ) == result );
+        }
 
         SECTION( "Multiply by negative multiplier with magnitude greater than unity")
         {
-            multiplier = -4.65;        
+            multiplier = -4.65;
 
-            result[ 0 ] = -57.19500000000001; 
+            result[ 0 ] = -57.19500000000001;
             result[ 1 ] = 71.61000000000001;
-            result[ 2 ] = -0.7905000000000001; 
+            result[ 2 ] = -0.7905000000000001;
 
-            REQUIRE( multiply( vector, multiplier ) == result ); 
-        }  
+            REQUIRE( multiply( vector, multiplier ) == result );
+        }
 
         SECTION( "Multiply by positive multiplier with magnitude less than unity")
         {
-            multiplier = 0.146;        
+            multiplier = 0.146;
 
-            result[ 0 ] = 1.7958;  
+            result[ 0 ] = 1.7958;
             result[ 1 ] = -2.2483999999999997;
             result[ 2 ] = 0.024820000000000002;
 
-            REQUIRE( multiply( vector, multiplier ) == result ); 
-        }   
+            REQUIRE( multiply( vector, multiplier ) == result );
+        }
 
         SECTION( "Multiply by negative multiplier with magnitude less than unity")
         {
-            multiplier = -0.0488;        
+            multiplier = -0.0488;
 
-            result[ 0 ] = -0.6002400000000001; 
+            result[ 0 ] = -0.6002400000000001;
             result[ 1 ] = 0.7515200000000001;
-            result[ 2 ] = -0.008296000000000001; 
+            result[ 2 ] = -0.008296000000000001;
 
-            REQUIRE( multiply( vector, multiplier ) == result ); 
-        }                        
+            REQUIRE( multiply( vector, multiplier ) == result );
+        }
     }
 
     SECTION( "Add to arbitrary vector element-wise" )
     {
-        Vector vector( 3 );  
-        vector[ 0 ] = 12.3; 
+        Vector vector( 3 );
+        vector[ 0 ] = 12.3;
         vector[ 1 ] = -15.4;
-        vector[ 2 ] = 0.17;  
+        vector[ 2 ] = 0.17;
 
-        Vector result( 3 ); 
+        Vector result( 3 );
 
-        Real adder = 0.0;   
+        Real adder = 0.0;
 
         SECTION( "Add 0 to vector element-wise to give same vector")
         {
-            adder = 0.0; 
+            adder = 0.0;
 
-            REQUIRE( add( vector, adder ) == vector ); 
+            REQUIRE( add( vector, adder ) == vector );
         }
 
         SECTION( "Add positive adder")
         {
-            adder = 6.35;        
+            adder = 6.35;
 
-            result[ 0 ] = 18.65; 
+            result[ 0 ] = 18.65;
             result[ 1 ] = -9.05;
-            result[ 2 ] = 6.52;  
+            result[ 2 ] = 6.52;
 
-            REQUIRE( add( vector, adder ) == result ); 
-        }   
+            REQUIRE( add( vector, adder ) == result );
+        }
 
         SECTION( "Add negative adder")
         {
-            adder = -3.64;        
+            adder = -3.64;
 
-            result[ 0 ] = 8.66; 
+            result[ 0 ] = 8.66;
             result[ 1 ] = -19.04;
-            result[ 2 ] = -3.47;  
+            result[ 2 ] = -3.47;
 
-            REQUIRE( add( vector, adder ) == result ); 
+            REQUIRE( add( vector, adder ) == result );
         }
-    }  
+    }
 
     SECTION( "Add two vectors of equal length element-wise" )
     {
@@ -379,7 +379,7 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
             result[ 1 ] = -18.8;
 
             REQUIRE( add( vector, vector ) == result );
-        }        
+        }
 
         SECTION( "Add two arbitrary unequal-vectors" )
         {
@@ -397,8 +397,8 @@ TEST_CASE( "Perform element-wise operations", "[element-wise]" )
             result[ 1 ] = 2.9000000000000004;
 
             REQUIRE( add( vector1, vector2 ) == result );
-        }                
-    }  
+        }
+    }
 }
 
 } // namespace tests
