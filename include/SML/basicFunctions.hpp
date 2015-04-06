@@ -39,7 +39,7 @@ Real computeModulo( const Real dividend, const Real divisor )
  * Converts angle given in radians to degrees using the following equation:
  *
  * \f[
- *      \theta_{deg} = \theta_{rad} * 180
+ *      \theta_{deg} = \theta_{rad} * \frac{180}{\pi}
  * \f]
  *
  * @tparam Real Real type
@@ -50,6 +50,24 @@ template < typename Real >
 Real convertRadiansToDegrees( const Real angleInRadians )
 {
     return angleInRadians / SML_PI * 180.0;
+}
+
+//! Convert angle in degrees to radians.
+/*!
+ * Converts angle given in degrees to radians using the following equation:
+ *
+ * \f[
+ *      \theta_{rad} = \theta_{deg} * \frac{\pi}{180}
+ * \f]
+ *
+ * @tparam Real Real type
+ * @param  angleInDegrees Angle in degrees
+ * @return                Angle in radians
+ */
+template < typename Real >
+Real convertDegreesToRadians( const Real angleInDegrees )
+{
+    return angleInDegrees * SML_PI / 180.0;
 }
 
 } // namespace sml

@@ -64,5 +64,30 @@ TEST_CASE( "Test radian-to-degree conversion function", "[radians-to-degrees]")
     }
 }
 
+TEST_CASE( "Test degree-to-radians conversion function", "[degrees-to-radians]")
+{
+    SECTION( "90 degrees to radians" )
+    {
+        REQUIRE( convertDegreesToRadians( 90.0 ) == SML_PI / 2.0 );
+    }
+
+    SECTION( "0 degrees to radians" )
+    {
+        REQUIRE( convertDegreesToRadians( 0.0 ) == 0.0 );
+    }
+
+    SECTION( "180 degrees to radians" )
+    {
+        REQUIRE( convertDegreesToRadians( 180.0 ) == SML_PI );
+    }
+
+    SECTION( "Arbitrary degrees to radians" )
+    {
+        REQUIRE( convertDegreesToRadians( 147.422 )
+                 == Approx( 2.572999289875080 ).epsilon(
+                        std::numeric_limits< Real >::epsilon( ) ) );
+    }
+}
+
 } // namespace tests
 } // namespace sml
