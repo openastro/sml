@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.6)
 
 # Change this section to correspond with your project info.
 project(SML C CXX)
-set(PROJECT_SUMMARY                            "A simple maths library")
+set(PROJECT_SUMMARY                            "A simple mathematics library")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME          "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT       "me@kartikkumar.com")
 set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR        0)
