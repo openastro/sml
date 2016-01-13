@@ -1,9 +1,9 @@
 SML
 ===
 
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666) [![Coverage Status](https://coveralls.io/repos/kartikkumar/sml/badge.png)](https://coveralls.io/r/kartikkumar/sml)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/astropnp/sml.svg?branch=master)](https://travis-ci.org/astropnp/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666) [![Coverage Status](https://coveralls.io/repos/astropnp/sml/badge.png)](https://coveralls.io/r/astropnp/sml)
 
-SML (Simple Mathematics Library) is a C++ (template) library that provides basic mathematics functionality. It's intended to be lightweight and simple to use in other projects. A CMake module is available to make it easy to include SML in other CMake-based projects: [FindSML.cmake](https://github.com/kartikkumar/cmake-modules/Modules/FindSML.cmake).
+SML (Simple Mathematics Library) is a C++ (template) library that provides basic mathematics functionality. It's intended to be lightweight and simple to use in other projects. A CMake module is available to make it easy to include SML in other CMake-based projects: [FindSML.cmake](https://github.com/astropnp/cmake-modules/Modules/FindSML.cmake).
 
 Features
 ------
@@ -37,7 +37,7 @@ Installation
 
 Run the following commands to download, build, and install this project.
 
-    git clone https://www.github.com/kartikkumar/sml
+    git clone https://www.github.com/astropnp/sml
     cd sml
     git submodule init && git submodule update
     mkdir build && cd build
@@ -71,7 +71,7 @@ Contributing
 
 Once you've made your great commits:
 
-  1. [Fork](https://github.com/kartikkumar/sml/fork) SML
+  1. [Fork](https://github.com/astropnp/sml/fork) SML
   2. Create a topic branch - `git checkout -b my_branch`
   3. Push to your branch - `git push origin my_branch`
   4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
