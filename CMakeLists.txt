@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.6)
 
 # Change this section to correspond with your project info.
 project(SML C CXX)
-set(PROJECT_SUMMARY                            "A simple mathematics library")
+set(${CMAKE_PROJECT_NAME}_SUMMARY              "A simple mathematics library")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME          "Kartik Kumar")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT       "me@kartikkumar.com")
 set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR        0)
@@ -23,15 +23,15 @@ if(NOT EXTERNAL_PATH)
   set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
 endif(NOT EXTERNAL_PATH)
 if(NOT DOXYGEN_PATH)
-  set(DOXYGEN_PATH                             "${PROJECT_PATH}/doxygen-docs")
+  set(DOXYGEN_PATH                             "${PROJECT_PATH}/doxydocs")
 endif(NOT DOXYGEN_PATH)
 if(NOT DOCS_PATH)
   set(DOCS_PATH                                "${PROJECT_PATH}/docs")
 endif(NOT DOCS_PATH)
 set(TEST_PATH                                  "${PROJECT_BINARY_DIR}/test")
-set(TEST_NAME                                  "test_sml")
+set(TEST_NAME                                  "test_${CMAKE_PROJECT_NAME}")
 
-OPTION(BUILD_DOXYGEN_DOCS                      "Build Doxygen docs"             OFF)
+OPTION(BUILD_DOXYGEN_DOCS                      "Build docs"                     OFF)
 OPTION(BUILD_TESTS                             "Build tests"                    OFF)
 OPTION(BUILD_DEPENDENCIES                      "Force build of dependencies"    OFF)
 
@@ -41,12 +41,7 @@ CMAKE_DEPENDENT_OPTION(BUILD_TESTS_WITH_EIGEN  "Build tests with Eigen library" 
 CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"   OFF
                                                "BUILD_TESTS"                    OFF)
 
-set(TEST_SRC
-  "${TEST_SRC_PATH}/testSml.cpp"
-  "${TEST_SRC_PATH}/testBasicFunctions.cpp"
-  "${TEST_SRC_PATH}/testConstants.cpp"
-  "${TEST_SRC_PATH}/testLinearAlgebra.cpp"
-)
+include(ProjectFiles.cmake)
 
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
 if(((NOT CMAKE_BUILD_TYPE)
