@@ -38,6 +38,11 @@ addons:
     packages:
       - texlive
 
+addons:
+  apt:
+    packages:
+      - texlive
+
 before_install:
   - bash scripts/install_cmake.sh
   - bash scripts/install_doxygen.sh
