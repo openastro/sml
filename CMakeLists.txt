@@ -31,15 +31,15 @@ endif(NOT DOCS_PATH)
 set(TEST_PATH                                  "${PROJECT_BINARY_DIR}/test")
 set(TEST_NAME                                  "test_${CMAKE_PROJECT_NAME}")
 
-OPTION(BUILD_DOXYGEN_DOCS                      "Build docs"                     OFF)
-OPTION(BUILD_TESTS                             "Build tests"                    OFF)
-OPTION(BUILD_DEPENDENCIES                      "Force build of dependencies"    OFF)
+OPTION(BUILD_DOXYGEN_DOCS                      "Build Doxygen docs"                 OFF)
+OPTION(BUILD_TESTS                             "Build tests"                        OFF)
+OPTION(BUILD_DEPENDENCIES                      "Force local build of dependencies"  OFF)
 
 include(CMakeDependentOption)
-CMAKE_DEPENDENT_OPTION(BUILD_TESTS_WITH_EIGEN  "Build tests with Eigen library" OFF
-                                               "BUILD_TESTS"                    OFF)
-CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"   OFF
-                                               "BUILD_TESTS"                    OFF)
+CMAKE_DEPENDENT_OPTION(BUILD_TESTS_WITH_EIGEN  "Build tests with Eigen library"     OFF
+                                               "BUILD_TESTS"                        OFF)
+CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"       OFF
+                                               "BUILD_TESTS"                        OFF)
 
 include(ProjectFiles.cmake)
 
@@ -131,13 +131,12 @@ if(BUILD_TESTS)
   endif(BUILD_COVERAGE_ANALYSIS)
 endif(BUILD_TESTS)
 
-# Install header files and library.
+# Install files.
 # Destination is set by CMAKE_INSTALL_PREFIX and defaults to usual locations, unless overridden by
 # user.
 install(DIRECTORY ${INCLUDE_PATH}/${CMAKE_PROJECT_NAME}
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp")
-#install(TARGETS ${PROJECT_LIB} DESTINATION lib)
 
 # Set up packager.
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_NAME}")
