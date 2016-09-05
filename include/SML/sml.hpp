@@ -7,8 +7,8 @@
 #ifndef SML_HPP
 #define SML_HPP
 
-#include "SML/basicFunctions.hpp"
-#include "SML/constants.hpp"
-#include "SML/linearAlgebra.hpp"
+#include "sml/basicFunctions.hpp"
+#include "sml/constants.hpp"
+#include "sml/linearAlgebra.hpp"
 
 #endif // SML_HPP

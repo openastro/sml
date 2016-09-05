@@ -3,7 +3,7 @@ SML
 
 \cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/openastro/sml.svg?branch=master)](https://travis-ci.org/openastro/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666) [![Coverage Status](https://coveralls.io/repos/openastro/sml/badge.png)](https://coveralls.io/r/openastro/sml) \endcond
 
-SML (Simple Mathematics Library) is a C++ (template) library that provides basic mathematics functionality. The library intended to be lightweight and simple to use in other projects. A CMake module is available to make it easy to include SML in other CMake-based projects: [FindSML.cmake](https://github.com/openastro/cmake-modules/Modules/FindSML.cmake).
+SML (Simple Mathematics Library) is a C++ (template) library that provides basic mathematics functionality. The library is intended to be lightweight and simple to use in other projects. A CMake module is available to make it easy to include SML in other CMake-based projects: [FindSML.cmake](https://github.com/openastro/cmake-modules/Modules/FindSML.cmake).
 
 Features
 ------

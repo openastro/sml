@@ -5,6 +5,11 @@
 # Include script to build external library with CMake.
 include(ExternalProject)
 
+# -------------------------------
+
+# Catch: https://github.com/philsquared/Catch
+# Eigen: http://eigen.tuxfamily.org
+
 if(BUILD_TESTS)
   if(NOT BUILD_DEPENDENCIES)
     find_package(CATCH)
