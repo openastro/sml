@@ -55,7 +55,7 @@ if(BUILD_TESTS)
         PREFIX ${EXTERNAL_PATH}/Eigen
         #--Download step--------------
         URL https://bitbucket.org/eigen/eigen/get/3.2.9.zip
-        TIMEOUT 30
+        TIMEOUT 60
         #--Update/Patch step----------
         UPDATE_COMMAND ""
         PATCH_COMMAND ""
