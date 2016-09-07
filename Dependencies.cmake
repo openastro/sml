@@ -54,7 +54,7 @@ if(BUILD_TESTS)
       ExternalProject_Add(eigen-lib
         PREFIX ${EXTERNAL_PATH}/Eigen
         #--Download step--------------
-        URL http://bitbucket.org/eigen/eigen/get/3.2.2.tar.gz
+        URL https://bitbucket.org/eigen/eigen/get/3.2.9.zip
         TIMEOUT 30
         #--Update/Patch step----------
         UPDATE_COMMAND ""

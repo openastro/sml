@@ -41,8 +41,6 @@ CMAKE_DEPENDENT_OPTION(BUILD_TESTS_WITH_EIGEN  "Build tests with Eigen library" 
 CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"       OFF
                                                "BUILD_TESTS"                        OFF)
 
-include(ProjectFiles.cmake)
-
 # Set CMake build-type. If it not supplied by the user, the default built type is "Release".
 if(((NOT CMAKE_BUILD_TYPE)
   AND (NOT BUILD_COVERAGE_ANALYSIS))
@@ -84,9 +82,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-include_directories(AFTER "${INCLUDE_PATH}")
-
 include(Dependencies.cmake)
+include(ProjectFiles.cmake)
+include_directories(AFTER "${INCLUDE_PATH}")
 
 if(BUILD_DOXYGEN_DOCS)
   find_package(Doxygen)
@@ -111,18 +109,21 @@ if(BUILD_TESTS)
   enable_testing()
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_PATH})
 
+  add_executable(${TEST_NAME} ${TEST_SRC})
+  add_dependencies(${TEST_NAME} catch)
+  add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
+
   if(BUILD_TESTS_WITH_EIGEN)
     string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${TEST_SRC}")
     add_executable(${TEST_NAME}_eigen ${TESTS_SRC_EIGEN})
+    add_dependencies(${TEST_NAME}_eigen eigen-lib)
     add_test(NAME ${TEST_NAME}_eigen COMMAND "${TEST_PATH}/${TEST_NAME}_eigen")
 
     string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${TEST_SRC}")
     add_executable(${TEST_NAME}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
+    add_dependencies(${TEST_NAME}_eigen_fixed eigen-lib)
     add_test(NAME ${TEST_NAME}_eigen_fixed COMMAND "${TEST_PATH}/${TEST_NAME}_eigen_fixed")
   endif(BUILD_TESTS_WITH_EIGEN)
-
-  add_executable(${TEST_NAME} ${TEST_SRC})
-  add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
 
   if(BUILD_COVERAGE_ANALYSIS)
     include(CodeCoverage)
