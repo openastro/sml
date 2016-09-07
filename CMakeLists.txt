@@ -111,7 +111,7 @@ if(BUILD_TESTS)
 
   add_executable(${TEST_NAME} ${TEST_SRC})
   if(NOT CATCH_FOUND)
-    add_dependencies(${TEST_NAME} catch)
+    add_dependencies(${TEST_NAME} catch-lib)
   endif(NOT CATCH_FOUND)
   add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
 

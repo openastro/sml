@@ -17,7 +17,7 @@ if(BUILD_TESTS)
 
   if(NOT CATCH_FOUND)
     message(STATUS "Catch will be downloaded when ${CMAKE_PROJECT_NAME} is built")
-    ExternalProject_Add(catch
+    ExternalProject_Add(catch-lib
       PREFIX ${EXTERNAL_PATH}/Catch
       #--Download step--------------
       URL https://github.com/philsquared/Catch/archive/master.zip
@@ -34,7 +34,7 @@ if(BUILD_TESTS)
       #--Output logging-------------
       LOG_DOWNLOAD ON
     )
-    ExternalProject_Get_Property(catch source_dir)
+    ExternalProject_Get_Property(catch-lib source_dir)
     set(CATCH_INCLUDE_DIRS ${source_dir}/include CACHE INTERNAL "Path to include folder for Catch")
   endif(NOT CATCH_FOUND)
 
@@ -79,3 +79,6 @@ if(BUILD_TESTS)
     endif(NOT APPLE)
   endif(BUILD_TESTS_WITH_EIGEN)
 endif(BUILD_TESTS)
+
+# -------------------------------
+
