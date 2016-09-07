@@ -8,8 +8,8 @@
 
 #include <catch.hpp>
 
-#include <SML/basicFunctions.hpp>
-#include <SML/constants.hpp>
+#include "sml/basicFunctions.hpp"
+#include "sml/constants.hpp"
 
 namespace sml
 {

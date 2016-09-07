@@ -8,7 +8,7 @@
 
 #include <Eigen/Core>
 
-#include <SML/linearAlgebra.hpp>
+#include "sml/linearAlgebra.hpp"
 
 namespace sml
 {

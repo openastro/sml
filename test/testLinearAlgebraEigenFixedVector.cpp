@@ -8,7 +8,7 @@
 
 #include <catch.hpp>
 
-#include <SML/linearAlgebra.hpp>
+#include "sml/linearAlgebra.hpp"
 
 namespace sml
 {

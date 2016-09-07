@@ -6,7 +6,7 @@
 
 #include <catch.hpp>
 
-#include <SML/constants.hpp>
+#include "sml/constants.hpp"
 
 namespace sml
 {

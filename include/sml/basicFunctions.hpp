@@ -9,7 +9,7 @@
 
 #include <cmath>
 
-#include <sml/constants.hpp>
+#include "sml/constants.hpp"
 
 namespace sml
 {
