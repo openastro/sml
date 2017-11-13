@@ -29,6 +29,7 @@ addons:
     packages:
       - texlive
       - graphviz
+      - ghostscript
   coverity_scan:
     project:
       name: "kartikkumar/sml"
