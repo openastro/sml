@@ -30,8 +30,6 @@ addons:
       - texlive
       - graphviz
       - ghostscript
-      - libgs-dev
-      - gs-esp
       - mscgen
   coverity_scan:
     project:
