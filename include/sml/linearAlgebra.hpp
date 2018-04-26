@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2016 Kartik Kumar, Dinamica Srl (me@kartikkumar.com)
+ * Copyright (c) 2014-2017 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
@@ -16,8 +16,8 @@ namespace sml
 
 //! Compute cross-product of two 3-vectors.
 /*!
- * Computes the cross-product of two 3-vectors. Throws an exception if either of the vectors do not
- * have dimension 3. The cross-product \f$\bar{R} = \bar{X} \times \bar{Y}\f$ is computed as
+ * Computes the cross-product of two 3-vectors. Throws a runtime exception if either of the vectors
+ * do not have dimension 3. The cross-product \f$\bar{R} = \bar{X} \times \bar{Y}\f$ is computed as
  * follows:
  *
  * \f{eqnarray*}{
@@ -25,6 +25,11 @@ namespace sml
  *      R_{2} &=& X_{3} * Y_{1} - X_{1} * Y{3} \\
  *      R_{3} &=& X_{1} * Y_{2} - X_{2} * Y{1}
  * \f}
+ *
+ * Note that the Vector3 type must support the following operation/functions:
+ * - [ ] (element access operator, returning floating-point number)
+ * - = (equals operator)
+ * - .size( ) (vector length function)
  *
  * @tparam Vector3 3-Vector type
  * @param  vector1 A 3-vector
@@ -52,13 +57,17 @@ Vector3 cross( const Vector3& vector1, const Vector3& vector2 )
 
 //! Compute dot-product of two equal-length vectors.
 /*!
- * Computes the dot-product (inner-product) of two vectors of length N. Throws an exception if the
- * vectors are unequal in length. The dot-product \f$r = \bar{X} \cdot \bar{Y}\f$ is computed as
- * follows:
+ * Computes the dot-product (inner-product) of two vectors of length N. Throws a runtime exception
+ * if the vectors are unequal in length. The dot-product \f$r = \bar{X} \cdot \bar{Y}\f$ is computed
+ * as follows:
  *
  * \f[
  *      r = \sum_{i=1}^{N} X_{i} * Y_{i}
  * \f]
+ *
+ * Note that the Vector type must support the following operation/functions:
+ * - [ ] (element access operator, returning floating-point number)
+ * - .size( ) (vector length function)
  *
  * @tparam Real    Real type
  * @tparam Vector  Vector type

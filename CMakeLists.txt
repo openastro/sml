@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2016 Kartik Kumar, Dinamica Srl (me@kartikkumar.com)
+# Copyright (c) 2014-2017 Kartik Kumar (me@kartikkumar.com)
 # Distributed under the MIT License.
 # See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
 
@@ -10,8 +10,8 @@ project(sml C CXX)
 set(${CMAKE_PROJECT_NAME}_SUMMARY              "A simple mathematics library")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME          "openastro")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT       "me@kartikkumar.com")
-set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR        0)
-set(${CMAKE_PROJECT_NAME}_VERSION_MINOR        1)
+set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR        1)
+set(${CMAKE_PROJECT_NAME}_VERSION_MINOR        0)
 set(${CMAKE_PROJECT_NAME}_VERSION_PATCH        0)
 set(PROJECT_VERSION
   "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
