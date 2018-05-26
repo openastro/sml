@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2017 Kartik Kumar (me@kartikkumar.com)
+ * Copyright (c) 2014-2018 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
@@ -20,8 +20,9 @@ namespace sml
  * [ 0, divisor ).
  *
  * The modulo computation is based on the mathematical definition of congruence, which is
- * different from the implementation of std::fmod() in the cmath standard library. For a
- * description of congruence see: http://mathworld.wolfram.com/Congruence.html.
+ * different from the implementation of std::fmod() in the cmath standard library.
+ *
+ * For a description of congruence see: http://mathworld.wolfram.com/Congruence.html.
  *
  * @tparam Real Real type
  * @param  dividend Number to be divided.

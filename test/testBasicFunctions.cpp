@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2014-2017 Kartik Kumar (me@kartikkumar.com)
+ * Copyright (c) 2014-2018 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
 
-#include <limits>
-
 #include <catch.hpp>
 
+#include <limits>
+
 #include "sml/basicFunctions.hpp"
-#include "sml/constants.hpp"
 
 namespace sml
 {
@@ -43,7 +42,7 @@ TEST_CASE( "Test radian-to-degree conversion function", "[radians-to-degrees]")
 {
     SECTION( "PI/2 radians to degrees" )
     {
-        REQUIRE( convertRadiansToDegrees( SML_PI / 2.0 ) == 90.0 );
+        REQUIRE( convertRadiansToDegrees( 3.14159265358979323846 / 2.0 ) == 90.0 );
     }
 
     SECTION( "0 radians to degrees" )
@@ -53,7 +52,7 @@ TEST_CASE( "Test radian-to-degree conversion function", "[radians-to-degrees]")
 
     SECTION( "PI radians to degrees" )
     {
-        REQUIRE( convertRadiansToDegrees( SML_PI ) == 180.0 );
+        REQUIRE( convertRadiansToDegrees( 3.14159265358979323846 ) == 180.0 );
     }
 
     SECTION( "Arbitrary radians to degrees" )
@@ -68,7 +67,7 @@ TEST_CASE( "Test degree-to-radians conversion function", "[degrees-to-radians]")
 {
     SECTION( "90 degrees to radians" )
     {
-        REQUIRE( convertDegreesToRadians( 90.0 ) == SML_PI / 2.0 );
+        REQUIRE( convertDegreesToRadians( 90.0 ) == 3.14159265358979323846 / 2.0 );
     }
 
     SECTION( "0 degrees to radians" )
@@ -78,7 +77,7 @@ TEST_CASE( "Test degree-to-radians conversion function", "[degrees-to-radians]")
 
     SECTION( "180 degrees to radians" )
     {
-        REQUIRE( convertDegreesToRadians( 180.0 ) == SML_PI );
+        REQUIRE( convertDegreesToRadians( 180.0 ) == 3.14159265358979323846 );
     }
 
     SECTION( "Arbitrary degrees to radians" )

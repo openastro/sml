@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2017 Kartik Kumar (me@kartikkumar.com)
+ * Copyright (c) 2014-2018 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
@@ -106,6 +106,10 @@ Real dot( const Vector& vector1, const Vector& vector2 )
  *      r = \sum_{i=1}^{N} X_{i}^{2}
  * \f]
  *
+ * Note that the Vector type must support the following operation/functions:
+ * - [ ] (element access operator, returning floating-point number)
+ * - .size( ) (vector length function)
+ *
  * @sa dot
  * @tparam Real   Real type
  * @tparam Vector Vector type
@@ -128,6 +132,10 @@ Real squaredNorm( const Vector& vector )
  *      r = \sqrt{\sum_{i=1}^{N} X_{i}^{2}}
  * \f]
  *
+ * Note that the Vector type must support the following operation/functions:
+ * - [ ] (element access operator, returning floating-point number)
+ * - .size( ) (vector length function)
+ *
  * @sa squaredNorm, dot
  * @tparam Real   Real type
  * @tparam Vector Vector type
@@ -148,6 +156,10 @@ Real norm( const Vector& vector )
  * \f[
  *      \hat{\bar{X}} = \frac{\bar{X}}{|\bar{X}|}
  * \f]
+ *
+ * Note that the Vector type must support the following operation/functions:
+ * - [ ] (element access operator, returning floating-point number)
+ * - .size( ) (vector length function)
  *
  * @sa norm, dot
  * @tparam Real   Real type
@@ -178,6 +190,10 @@ Vector normalize( const Vector& vector )
 /*!
  * Returns unit-vector in the x-direction as column vector.
  *
+ * Note that the Vector type must support the following operation/functions:
+ * - constructor to create object with array of specified length
+ * - [ ] (element access operator, returning floating-point number)
+ *
  * @tparam Vector3 Type for 3-vector
  * @return Unit-vector in x-direction
  */
@@ -197,6 +213,10 @@ Vector3 getXUnitVector( )
 //! Get unit-vector in y-direction.
 /*!
  * Returns unit-vector in the y-direction as column vector.
+ *
+ * Note that the Vector type must support the following operation/functions:
+ * - constructor to create object with array of specified length
+ * - [ ] (element access operator, returning floating-point number)
  *
  * @tparam Vector3 Type for 3-vector
  * @return Unit-vector in y-direction
@@ -218,6 +238,10 @@ Vector3 getYUnitVector( )
 /*!
  * Returns unit-vector in the z-direction as column vector.
  *
+ * Note that the Vector type must support the following operation/functions:
+ * - constructor to create object with array of specified length
+ * - [ ] (element access operator, returning floating-point number)
+ *
  * @tparam Vector3 Type for 3-vector
  * @return Unit-vector in z-direction
  */
@@ -234,9 +258,13 @@ Vector3 getZUnitVector( )
     return zUnitVector;
 }
 
-//! Multiply element-wise.
+//! Multiply by scalar element-wise.
 /*!
  * Multiply each element of a vector of length N by a scalar.
+ *
+ * - copy constructor
+ * - [ ] (element access operator, returning floating-point number)
+ * - .size( ) (vector length function)
  *
  * @tparam Real       Real type
  * @tparam Vector     Vector type
@@ -258,9 +286,13 @@ Vector multiply( const Vector& vector, const Real multiplier )
     return result;
 }
 
-//! Add element-wise.
+//! Add scalar element-wise.
 /*!
  * Add a scalar to each element of a vector of length N.
+ *
+ * - copy constructor
+ * - [ ] (element access operator, returning floating-point number)
+ * - .size( ) (vector length function)
  *
  * @tparam Real   Real type
  * @tparam Vector Vector type
@@ -282,9 +314,13 @@ Vector add( const Vector& vector, const Real adder )
     return result;
 }
 
-//! Add element-wise.
+//! Add two vectors element-wise.
 /*!
  * Add two vectors of length N element-wise.
+ *
+ * - copy constructor
+ * - [ ] (element access operator, returning floating-point number)
+ * - .size( ) (vector length function)
  *
  * @tparam Vector  Vector type
  * @param  vector1 A vector to add to element-wise
