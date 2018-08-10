@@ -2,7 +2,7 @@
 # Distributed under the MIT License.
 # See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
 
-# Include script to build external library with CMake.
+# Include script to build external libraries with CMake.
 include(ExternalProject)
 
 # -------------------------------

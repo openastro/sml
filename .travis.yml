@@ -12,7 +12,7 @@ compiler:
 
 env:
   global:
-    - secure: "vVFDOVrQBCgE/afuNVSFh0+EZ1YTlx9B0RurcQWaByGu2lwYuOwv0pnpYXPgWX7W+6tRZqx578h9MdLagEBmmC3DUvON1Lmolv/gSg11Mh7R3ji3WQcccC29Hb6BhwR9NFOcLDD77cpg/ixO7Ew7UltssDmEhWCpWLR54Rcsap5GWoWe8mhj5ZPn5G1KoYfzXyB3Udf84teH/2H/et0zV5rmsxf6+L0pjO5B3Hz0WF70GVN70XkivLeDen13puDjHKhcWjrT9i0XtJkSv3DXfjeZsBoQSlf5FDoFUiWrxkWVDRnA4O5R7jKNPHiy9DKfRBsfwYsaXbJMLDyfF/Eoky/4BbnWkAYxHCJ6ixXcL+XDAXG8c7wCpX/mNKjjr7tnlE3E7LjISfEXtbCcSdWotPvuW7PonzhFlr9Um/wXclaYySjd2vJk2MTsHpX0fvbK/HElyNO5OVACq2o9iBh1lq4pm0bTWsVsLGqoPRsq+0vWcBQL1TvwhI6SJaaPKmwZpJtot09ELenLMYWVxQVW1Ntw2oWQMSPdfiiMsv9ikffGC+NcbK1GWr7EtfimjTwq98YmMbWDe7v4L7qM1NJL6hH0RO+jGnMNP2X5euab1obtEI6ot/EkBjUPTOWLyUrOy+DUfwRKqbZElPfDMjXrhedW52M+QgJkIsZIimWalJ4="
+    - secure: "eeBu368vkMIHpUdVrgcF6/r04u34hDZz+KqKtaAvABNB55gwBn0elAeOY7yR8NGRcfojTZymxFlB0hqQpwx8FaVXsUX1DukCN3Cp5R9pOoKlf7+L7/60kM0Lg40E6q1O1GwGvgFZ1KSLcYMiXGuF7sEkAfBF4pEvyoY4SFcmN7fXhZ684Tt2NbGkPjh2fV4Rww/74PnOTK6Q2NLpwRlKPgwK5XxDMzx4AHXbMy5C65pFbrq2Mo4kSIfVHx5lRJwFu+3VZS2e7MNk9/D9ftj2MankEqE2daNamRh2t6lMaKLw0k3BbvIaZtKs9rzMNwjjxzjxzJQ7uufuYHLBCJJeRhqpxirvZuc/yb+B7MNKWyYXawKp6ODWhct9Jp5aUDoi7sG1S8mC0VLq1HLiJH3BWFwtuwvwJkTN+tit8rkCZQKY0srVu7kqPd30jhprede6V1nSSFJv1vrCbkKdbYO6aRpH8bnG89WI4eyIDnAIh7xlubHE8KMatcezYSlpGS4MFljikPSwZPFV1aqqa6Z9G6xe2fOXs5Kp3UbSyWtYjjz3NqdxgRZiPk4JuhBJHmMNXaPHj1ld1imrQEh4FQCFy7R741VklcScUew8lI4xdzX1EBOKLCDP6KaHhYIKoDzj1qMSEw28R+emNETCBZiRw7xknajjboSYUoEmOZj5bAA="
   matrix:
     - BUILD_TYPE=Debug
     - BUILD_TYPE=Release
@@ -34,6 +34,7 @@ addons:
   coverity_scan:
     project:
       name: "kartikkumar/sml"
+      description: "Build submitted via Travis CI"
     notification_email: me@kartikkumar.com
     build_command_prepend: "mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DBUILD_TESTS_WITH_EIGEN=on .."
     build_command: "make"
