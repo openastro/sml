@@ -51,10 +51,6 @@ before_install:
       pip install --user cpp-coveralls;
     fi
 
-before_script::
-  - ls -R $HOME/cmake
-  - ls -R $HOME/doxygen
-
 script:
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
       mkdir build;
