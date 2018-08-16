@@ -10,8 +10,8 @@ project(sml C CXX)
 set(${CMAKE_PROJECT_NAME}_SUMMARY              "A simple mathematics library")
 set(${CMAKE_PROJECT_NAME}_VENDOR_NAME          "openastro")
 set(${CMAKE_PROJECT_NAME}_VENDOR_CONTACT       "me@kartikkumar.com")
-set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR        0)
-set(${CMAKE_PROJECT_NAME}_VERSION_MINOR        2)
+set(${CMAKE_PROJECT_NAME}_VERSION_MAJOR        1)
+set(${CMAKE_PROJECT_NAME}_VERSION_MINOR        0)
 set(${CMAKE_PROJECT_NAME}_VERSION_PATCH        0)
 set(PROJECT_VERSION
   "${${CMAKE_PROJECT_NAME}_VERSION_MAJOR}.${${CMAKE_PROJECT_NAME}_VERSION_MINOR}.${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
@@ -157,7 +157,7 @@ set(CPACK_PACKAGE_VERSION_PATCH       "${${CMAKE_PROJECT_NAME}_VERSION_PATCH}")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY   "${CMAKE_PROJECT_NAME}")
 if(WIN32 AND NOT UNIX)
   # There is a bug in NSI that does not handle full unix paths properly. Make
-  # sure there is at least one set of four (4) backlasshes.
+  # sure there is at least one set of four (4) backslashes.
   set(CPACK_NSIS_DISPLAY_NAME         "${CPACK_PACKAGE_INSTALL_DIRECTORY}")
   set(CPACK_NSIS_CONTACT              "${CMAKE_PROJECT_NAME}_VENDOR_CONTACT")
   set(CPACK_NSIS_MODIFY_PATH ON)
