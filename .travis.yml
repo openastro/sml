@@ -20,17 +20,6 @@ env:
     - BUILD_TYPE=Release
 
 matrix:
-  include:
-    # works on Precise and Trusty
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
   exclude:
     - compiler: clang
       env: COVERITY_SCAN_BRANCH_PATTERN=coverity_scan
@@ -54,12 +43,11 @@ addons:
     branch_pattern: coverity_scan
 
 before_install:
-  - eval "${MATRIX_EVAL}"
   - bash scripts/install_cmake.sh
   - bash scripts/install_doxygen.sh
   - chmod ugo+x scripts/check_doxygen.sh
   - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
-      echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+      echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-;
       pip install --user cpp-coveralls;
     fi
 
