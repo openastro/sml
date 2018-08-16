@@ -28,7 +28,6 @@ To install this project, please ensure that you have installed the following (in
 The following dependencies are optional (see `Build options`):
 
   - [CATCH](https://www.github.com/philsquared/Catch) (unit testing library necessary for `BUILD_TESTS` build option)
-  - [Eigen](http://eigen.tuxfamily.org/) (linear algebra library necessary for `BUILD_TESTS_WITH_EIGEN` option)
 
 These dependencies will be downloaded and configured automagically if not already present locally (requires an internet connection).
 
@@ -61,7 +60,6 @@ You can pass the following, general command-line options when running CMake:
 
 The following commands are conditional and can only be set if `BUILD_TESTS = ON`:
 
- - `-DBUILD_TESTS_WITH_EIGEN[=ON|OFF (default)]`: build tests using [Eigen](http://eigen.tuxfamily.org/) (execute tests from build-directory using `ctest -V`)
  - `-DBUILD_COVERAGE_ANALYSIS[=ON|OFF (default)]`: build code coverage using [Gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) and [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) (both must be installed; requires [GCC](https://gcc.gnu.org/) compiler; execute coverage analysis from build-directory using `make coverage`)
 
 Pass these options either directly to the `cmake ..` command, e.g., to build the tests:

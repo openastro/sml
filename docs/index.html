@@ -111,7 +111,6 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>The following dependencies are optional (see <code>Build options</code>):</p>
 <ul>
 <li><a href="https://www.github.com/philsquared/Catch">CATCH</a> (unit testing library necessary for <code>BUILD_TESTS</code> build option)</li>
-<li><a href="http://eigen.tuxfamily.org/">Eigen</a> (linear algebra library necessary for <code>BUILD_TESTS_WITH_EIGEN</code> option)</li>
 </ul>
 <p>These dependencies will be downloaded and configured automagically if not already present locally (requires an internet connection).</p>
 <h2>Installation </h2>
@@ -132,7 +131,6 @@ cmake .. &amp;&amp; cmake --build .
 </ul>
 <p>The following commands are conditional and can only be set if <code>BUILD_TESTS = ON</code>:</p>
 <ul>
-<li><code>-DBUILD_TESTS_WITH_EIGEN[=ON|OFF (default)]</code>: build tests using <a href="http://eigen.tuxfamily.org/">Eigen</a> (execute tests from build-directory using <code>ctest -V</code>)</li>
 <li><code>-DBUILD_COVERAGE_ANALYSIS[=ON|OFF (default)]</code>: build code coverage using <a href="https://gcc.gnu.org/onlinedocs/gcc/Gcov.html">Gcov</a> and <a href="http://ltp.sourceforge.net/coverage/lcov.php">LCOV</a> (both must be installed; requires <a href="https://gcc.gnu.org/">GCC</a> compiler; execute coverage analysis from build-directory using <code>make coverage</code>)</li>
 </ul>
 <p>Pass these options either directly to the <code>cmake ..</code> command, e.g., to build the tests: </p><pre class="fragment">cmake -DBUILD_TESTS=on ..
@@ -170,7 +168,7 @@ cmake .. &amp;&amp; cmake --build .
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Aug 16 2018 11:24:37 for sml by
+    <li class="footer">Generated on Thu Aug 16 2018 14:20:16 for sml by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
   </ul>

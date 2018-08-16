@@ -8,7 +8,6 @@ include(ExternalProject)
 # -------------------------------
 
 # Catch: https://github.com/philsquared/Catch
-# Eigen: http://eigen.tuxfamily.org
 
 if(BUILD_TESTS)
   if(NOT BUILD_DEPENDENCIES)
@@ -43,41 +42,6 @@ if(BUILD_TESTS)
   else(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${CATCH_INCLUDE_DIRS}\"")
   endif(NOT APPLE)
-
-  if(BUILD_TESTS_WITH_EIGEN)
-    if(NOT BUILD_DEPENDENCIES)
-      find_package(Eigen3)
-    endif(NOT BUILD_DEPENDENCIES)
-
-    if(NOT EIGEN3_FOUND)
-      message(STATUS "Eigen will be downloaded when ${CMAKE_PROJECT_NAME} is built")
-      ExternalProject_Add(eigen-lib
-        PREFIX ${EXTERNAL_PATH}/Eigen
-        #--Download step--------------
-        URL https://bitbucket.org/eigen/eigen/get/3.2.9.zip
-        TIMEOUT 60
-        #--Update/Patch step----------
-        UPDATE_COMMAND ""
-        PATCH_COMMAND ""
-        #--Configure step-------------
-        CONFIGURE_COMMAND ""
-        #--Build step-----------------
-        BUILD_COMMAND ""
-        #--Install step---------------
-        INSTALL_COMMAND ""
-        #--Output logging-------------
-        LOG_DOWNLOAD ON
-      )
-      ExternalProject_Get_Property(eigen-lib source_dir)
-      set(EIGEN3_INCLUDE_DIR ${source_dir} CACHE INTERNAL "Path to include folder for Eigen")
-    endif(NOT EIGEN3_FOUND)
-
-    if(NOT APPLE)
-      include_directories(SYSTEM AFTER "${EIGEN3_INCLUDE_DIR}")
-    else(APPLE)
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${EIGEN3_INCLUDE_DIR}\"")
-    endif(NOT APPLE)
-  endif(BUILD_TESTS_WITH_EIGEN)
 endif(BUILD_TESTS)
 
 # -------------------------------

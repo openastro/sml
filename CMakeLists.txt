@@ -37,8 +37,6 @@ OPTION(BUILD_TESTS                             "Build tests"                    
 OPTION(BUILD_DEPENDENCIES                      "Force local build of dependencies"  OFF)
 
 include(CMakeDependentOption)
-CMAKE_DEPENDENT_OPTION(BUILD_TESTS_WITH_EIGEN  "Build tests with Eigen library"     OFF
-                                               "BUILD_TESTS"                        OFF)
 CMAKE_DEPENDENT_OPTION(BUILD_COVERAGE_ANALYSIS "Build code coverage analysis"       OFF
                                                "BUILD_TESTS"                        OFF)
 
@@ -115,22 +113,6 @@ if(BUILD_TESTS)
     add_dependencies(${TEST_NAME} catch-lib)
   endif(NOT CATCH_FOUND)
   add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
-
-  if(BUILD_TESTS_WITH_EIGEN)
-    string(REPLACE "Algebra" "AlgebraEigen" TESTS_SRC_EIGEN "${TEST_SRC}")
-    add_executable(${TEST_NAME}_eigen ${TESTS_SRC_EIGEN})
-    if(NOT EIGEN3_FOUND)
-      add_dependencies(${TEST_NAME}_eigen eigen-lib)
-    endif(NOT EIGEN3_FOUND)
-    add_test(NAME ${TEST_NAME}_eigen COMMAND "${TEST_PATH}/${TEST_NAME}_eigen")
-
-    string(REPLACE "Algebra" "AlgebraEigenFixedVector" TESTS_SRC_EIGEN_FIXED "${TEST_SRC}")
-    add_executable(${TEST_NAME}_eigen_fixed ${TESTS_SRC_EIGEN_FIXED})
-    if(NOT EIGEN3_FOUND)
-      add_dependencies(${TEST_NAME}_eigen_fixed eigen-lib)
-    endif(NOT EIGEN3_FOUND)
-    add_test(NAME ${TEST_NAME}_eigen_fixed COMMAND "${TEST_PATH}/${TEST_NAME}_eigen_fixed")
-  endif(BUILD_TESTS_WITH_EIGEN)
 
   if(BUILD_COVERAGE_ANALYSIS)
     include(CodeCoverage)
