@@ -99,9 +99,9 @@ if(BUILD_DOXYGEN_DOCS)
                  ${PROJECT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
 
   # Add a custom target to run Doxygen whenever the project is built.
-  # If you do NOT want the documentation to be generated EVERY time you build the project
-  # then leave out the 'ALL' keyword from the command below.
-  add_custom_target(doxygen_docs ALL COMMAND ${DOXYGEN_EXECUTABLE}
+  # If you want the documentation to be generated EVERY time you build the project
+  # then add the 'ALL' keyword before 'COMMAND' below.
+  add_custom_target(doxygen_docs COMMAND ${DOXYGEN_EXECUTABLE}
                     ${PROJECT_BINARY_DIR}/Doxyfile
                     SOURCES ${PROJECT_BINARY_DIR}/Doxyfile)
 endif(BUILD_DOXYGEN_DOCS)
