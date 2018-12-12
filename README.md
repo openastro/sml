@@ -1,7 +1,7 @@
 sml
 ===
 
-\cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/3666/badge.svg)](https://scan.coverity.com/projects/3666) [![Coverage Status](https://coveralls.io/repos/github/kartikkumar/sml/badge.svg?branch=master)](https://coveralls.io/github/kartikkumar/sml?branch=master) \endcond
+\cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/kartikkumar-sml/badge.svg)](https://scan.coverity.com/projects/kartikkumar-sml) [![Coverage Status](https://coveralls.io/repos/github/kartikkumar/sml/badge.svg?branch=master)](https://coveralls.io/github/kartikkumar/sml?branch=master) \endcond
 
 sml (simple mathematics library) is a C++ (template) library that provides basic mathematics functionality. The library is intended to be lightweight and simple to use in other projects. A CMake module is available to make it easy to include sml in other CMake-based projects: [Findsml.cmake](https://github.com/openastro/cmake-modules/blob/master/Modules/Findsml.cmake).
 
@@ -82,7 +82,7 @@ This project has been set up with a specific file/folder structure in mind. The 
   - `CMakeLists.txt`: main `CMakelists.txt` file for project (should not need to be modified for basic build)
   - `Dependencies.cmake`: list of dependencies and automated build, triggered if dependency cannot be found locally
   - `Doxyfile.in`: [Doxygen](http://www.doxygen.org "Doxygen homepage") configuration file, adapted for generic use within project build (should not need to be modified)
-  - `LICENSE.md`: license file for project (copyright statement needs to be edited)
+  - `LICENSE.md`: license file for project
   - `ProjectFiles.cmake`: list of project source files to build
   - `README.md`: project readme file, parsed as main page for [Doxygen](http://www.doxygen.org "Doxygen homepage") documentation
 
