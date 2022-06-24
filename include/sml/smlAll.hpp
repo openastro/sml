@@ -6,10 +6,7 @@
 
 #pragma once
 
-namespace sml
-{
+#include "sml/basicFunctions.hpp"
+#include "sml/constants.hpp"
+#include "sml/linearAlgebra.hpp"
 
-//! \f$\pi\f$ to 20 decimal places.
-static const double SML_PI = 3.14159265358979323846;
-
-} // namespace sml

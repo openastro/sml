@@ -1,11 +1,10 @@
 /*
- * Copyright (c) 2014-2018 Kartik Kumar (me@kartikkumar.com)
+ * Copyright (c) 2014-2022 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
 
-#ifndef SML_LINEAR_ALGEBRA_HPP
-#define SML_LINEAR_ALGEBRA_HPP
+#pragma once
 
 #include <algorithm>
 #include <cmath>
@@ -350,4 +349,3 @@ Vector add( const Vector& vector1, const Vector& vector2 )
 
 } // namespace sml
 
-#endif // SML_LINEAR_ALGEBRA_HPP

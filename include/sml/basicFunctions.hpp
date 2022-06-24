@@ -1,11 +1,10 @@
 /*
- * Copyright (c) 2014-2018 Kartik Kumar (me@kartikkumar.com)
+ * Copyright (c) 2014-2022 Kartik Kumar (me@kartikkumar.com)
  * Distributed under the MIT License.
  * See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
  */
 
-#ifndef SML_BASIC_FUNCTIONS_HPP
-#define SML_BASIC_FUNCTIONS_HPP
+#pragma once
 
 #include <cmath>
 
@@ -72,5 +71,3 @@ Real convertDegreesToRadians( const Real angleInDegrees )
 }
 
 } // namespace sml
-
-#endif // SML_BASIC_FUNCTIONS_HPP

@@ -1,0 +1,28 @@
+\_form#0=93x26:\[
+     \theta_{deg} = \theta_{rad} * \frac{180}{\pi}
+\]
+\_form#1=93x24:\[
+     \theta_{rad} = \theta_{deg} * \frac{\pi}{180}
+\]
+\_form#2=9x6:$\pi$
+\_form#3=63x11:$\bar{R} = \bar{X} \times \bar{Y}$
+\_form#4=149x50:\begin{eqnarray*}
+     R_{1} &=& X_{2} * Y_{3} - X_{3} * Y{2} \\
+     R_{2} &=& X_{3} * Y_{1} - X_{1} * Y{3} \\
+     R_{3} &=& X_{1} * Y_{2} - X_{2} * Y{1}
+\end{eqnarray*}
+\_form#5=54x11:$r = \bar{X} \cdot \bar{Y}$
+\_form#6=80x38:\[
+     r = \sum_{i=1}^{N} X_{i} * Y_{i}
+\]
+\_form#7=8x6:$r$
+\_form#8=13x10:$X$
+\_form#9=60x38:\[
+     r = \sum_{i=1}^{N} X_{i}^{2}
+\]
+\_form#10=74x45:\[
+     r = \sqrt{\sum_{i=1}^{N} X_{i}^{2}}
+\]
+\_form#11=49x33:\[
+     \hat{\bar{X}} = \frac{\bar{X}}{|\bar{X}|}
+\]
