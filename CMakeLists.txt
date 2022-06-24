@@ -46,9 +46,6 @@ configure_file (
 # Subdirs contain CMakeLists.txt files with commands to setup build
 add_subdirectory(include)
 
-# Include package that allows for dependent user options
-include(CMakeDependentOption)
-
 # Enable testing
 if(BUILD_TESTING)
     include(CTest)
