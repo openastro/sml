@@ -18,7 +18,7 @@ namespace tests
 typedef double Real;
 typedef std::vector<Real> Vector;
 
-TEST_CASE("Test cross product function", "[cross-product]")
+TEST_CASE("Test cross product function", "[linear-algebra, cross-product]")
 {
     SECTION("Test computation of cross product of unit 3-vectors")
     {
@@ -68,7 +68,7 @@ TEST_CASE("Test cross product function", "[cross-product]")
 
 }
 
-TEST_CASE("Test dot product function", "[dot-product]")
+TEST_CASE("Test dot product function", "[linear-algebra, dot-product]")
 {
     SECTION("Test computation of dot product of equal-length zero vectors")
     {
@@ -102,9 +102,10 @@ TEST_CASE("Test dot product function", "[dot-product]")
     }
 
     // @TODO: find a way to test assert statement in dot()
+
 }
 
-TEST_CASE("Test squared-norm function", "[norm]")
+TEST_CASE("Test squared-norm function", "[linear-algebra, norm]")
 {
     SECTION("Test computation of squared-norm of vector of zeros")
     {
@@ -132,7 +133,7 @@ TEST_CASE("Test squared-norm function", "[norm]")
     }
 }
 
-TEST_CASE("Test norm function", "[norm]")
+TEST_CASE("Test norm function", "[linear-algebra, norm]")
 {
     SECTION("Test computation of norm of vector of zeros")
     {
@@ -160,7 +161,7 @@ TEST_CASE("Test norm function", "[norm]")
     }
 }
 
-TEST_CASE("Test normalize vector function", "[norm]")
+TEST_CASE("Test normalize vector function", "[linear-algebra, norm]")
 {
     SECTION("Test normalization arbitrary vector")
     {
@@ -181,7 +182,7 @@ TEST_CASE("Test normalize vector function", "[norm]")
     }
 }
 
-TEST_CASE("Test function that returns unit-vectors", "[unit-vector]")
+TEST_CASE("Test function that returns unit-vectors", "[linear-algebra, unit-vector]")
 {
     SECTION("Test return of unit-vector in x-direction")
     {
@@ -217,7 +218,7 @@ TEST_CASE("Test function that returns unit-vectors", "[unit-vector]")
     }
 }
 
-TEST_CASE("Test element-wise operations", "[element-wise]")
+TEST_CASE("Test element-wise operations", "[linear-algebra, element-wise]")
 {
     SECTION("Multiply arbitrary vector element-wise")
     {
@@ -381,6 +382,7 @@ TEST_CASE("Test element-wise operations", "[element-wise]")
         }
 
         // @TODO: find a way to test assert statement in add() for two vectors
+
     }
 
 }

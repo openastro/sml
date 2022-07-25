@@ -17,7 +17,7 @@ endif()
 # Set up project details
 project(
     sml
-    VERSION 2.0
+    VERSION     2.0
     DESCRIPTION "A simple mathematics library"
     LANGUAGES   CXX
     )

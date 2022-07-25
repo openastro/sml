@@ -15,20 +15,20 @@ namespace sml
 
 //! Compute modulo.
 /*!
- * Computes the remainder of division of one real number by another. The remainder is in the range
- * [0, divisor).
+ * Computes the remainder of division of one real number by another.
+ * The remainder is in the range [0, divisor).
  *
  * The modulo computation is based on the mathematical definition of congruence, which is
  * different from the implementation of std::fmod() in the cmath standard library.
  *
  * For a description of congruence see: http://mathworld.wolfram.com/Congruence.html.
  *
- * @tparam Real     Real type
- * @param  dividend Number to be divided.
- * @param  divisor  Number that divides dividend
- * @return Remainder of division of dividend by divisor
+ * @tparam Real      Real type
+ * @param  dividend  Number to be divided.
+ * @param  divisor   Number that divides dividend
+ * @return           Remainder of division of dividend by divisor
  */
-template<typename Real>
+template <typename Real>
 Real computeModulo(const Real dividend, const Real divisor)
 {
     return dividend - divisor * std::floor(dividend / divisor);
@@ -42,9 +42,9 @@ Real computeModulo(const Real dividend, const Real divisor)
  *      \theta_{deg} = \theta_{rad} * \frac{180}{\pi}
  * \f]
  *
- * @tparam Real             Real type
- * @param  angleInRadians   Angle in radians
- * @return                  Angle in degrees
+ * @tparam Real            Real type
+ * @param  angleInRadians  Angle in radians
+ * @return                 Angle in degrees
  */
 template <typename Real>
 Real convertRadiansToDegrees(const Real angleInRadians)
@@ -60,9 +60,9 @@ Real convertRadiansToDegrees(const Real angleInRadians)
  *      \theta_{rad} = \theta_{deg} * \frac{\pi}{180}
  * \f]
  *
- * @tparam Real             Real type
- * @param  angleInDegrees   Angle in degrees
- * @return                  Angle in radians
+ * @tparam Real            Real type
+ * @param  angleInDegrees  Angle in degrees
+ * @return                 Angle in radians
  */
 template <typename Real>
 Real convertDegreesToRadians(const Real angleInDegrees)

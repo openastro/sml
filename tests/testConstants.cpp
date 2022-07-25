@@ -13,7 +13,7 @@ namespace sml
 namespace tests
 {
 
-TEST_CASE("Test definition of constants", "[constant]")
+TEST_CASE("Test definition of constants", "[constants]")
 {
     SECTION("Test that pi is defined correctly")
     {

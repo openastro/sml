@@ -9,7 +9,6 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
-#include <stdexcept>
 
 namespace sml
 {
@@ -31,12 +30,12 @@ namespace sml
  * - = (equals operator)
  * - .size() (vector length function)
  *
- * @tparam Vector3 3-Vector type
- * @param  vector1 A 3-vector
- * @param  vector2 A 3-vector
- * @return Vector resulting from cross-product
+ * @tparam Vector3  3-Vector type
+ * @param  vector1  A 3-vector
+ * @param  vector2  A 3-vector
+ * @return          Vector resulting from cross-product
  */
-template<typename Vector3>
+template <typename Vector3>
 Vector3 cross(const Vector3& vector1, const Vector3& vector2)
 {
     assert(vector1.size() == 3 && vector2.size() == 3);
@@ -60,13 +59,13 @@ Vector3 cross(const Vector3& vector1, const Vector3& vector2)
  * - [] (element access operator, returning floating-point number)
  * - .size() (vector length function)
  *
- * @tparam Real    Real type
- * @tparam Vector  Vector type
- * @param  vector1 A vector of length N
- * @param  vector2 A vector of length N
- * @return Scalar resulting from dot-product
+ * @tparam Real     Real type
+ * @tparam Vector   Vector type
+ * @param  vector1  A vector of length N
+ * @param  vector2  A vector of length N
+ * @return          Scalar resulting from dot-product
  */
-template<typename Real, typename Vector>
+template <typename Real, typename Vector>
 Real dot(const Vector& vector1, const Vector& vector2)
 {
     assert(vector1.size() == vector2.size());
@@ -93,12 +92,12 @@ Real dot(const Vector& vector1, const Vector& vector2)
  * - .size() (vector length function)
  *
  * @sa dot
- * @tparam Real   Real type
- * @tparam Vector Vector type
- * @param  vector A vector of length N
- * @return Scalar squared-norm of vector
+ * @tparam Real    Real type
+ * @tparam Vector  Vector type
+ * @param  vector  A vector of length N
+ * @return         Scalar squared-norm of vector
  */
-template<typename Real, typename Vector>
+template <typename Real, typename Vector>
 Real squaredNorm(const Vector& vector)
 {
     return dot<Real, Vector>(vector, vector);
@@ -119,12 +118,12 @@ Real squaredNorm(const Vector& vector)
  * - .size() (vector length function)
  *
  * @sa squaredNorm, dot
- * @tparam Real   Real type
- * @tparam Vector Vector type
- * @param  vector A vector of length N
- * @return Scalar norm of vector
+ * @tparam Real    Real type
+ * @tparam Vector  Vector type
+ * @param  vector  A vector of length N
+ * @return         Scalar norm of vector
  */
-template<typename Real, typename Vector>
+template <typename Real, typename Vector>
 Real norm(const Vector& vector)
 {
     return std::sqrt(squaredNorm<Real, Vector>(vector));
@@ -146,12 +145,12 @@ Real norm(const Vector& vector)
  * - .size() (vector length function)
  *
  * @sa norm, dot
- * @tparam Real   Real type
- * @tparam Vector Vector type
- * @param  vector A vector of length N
- * @return Normalized vector
+ * @tparam Real    Real type
+ * @tparam Vector  Vector type
+ * @param  vector  A vector of length N
+ * @return         Normalized vector
  */
-template<typename Real, typename Vector>
+template <typename Real, typename Vector>
 Vector normalize(const Vector& vector)
 {
     Vector normalizedVector = vector;
@@ -171,10 +170,10 @@ Vector normalize(const Vector& vector)
  * - constructor to create object with array of specified length
  * - [] (element access operator, returning floating-point number)
  *
- * @tparam Vector3 Type for 3-vector
- * @return Unit-vector in x-direction
+ * @tparam Vector3  Type for 3-vector
+ * @return          Unit-vector in x-direction
  */
-template<typename Vector3>
+template <typename Vector3>
 Vector3 getXUnitVector()
 {
     Vector3 xUnitVector(3);
@@ -192,10 +191,10 @@ Vector3 getXUnitVector()
  * - constructor to create object with array of specified length
  * - [] (element access operator, returning floating-point number)
  *
- * @tparam Vector3 Type for 3-vector
- * @return Unit-vector in y-direction
+ * @tparam Vector3  Type for 3-vector
+ * @return          Unit-vector in y-direction
  */
-template<typename Vector3>
+template <typename Vector3>
 Vector3 getYUnitVector()
 {
     Vector3 yUnitVector(3);
@@ -213,10 +212,10 @@ Vector3 getYUnitVector()
  * - constructor to create object with array of specified length
  * - [] (element access operator, returning floating-point number)
  *
- * @tparam Vector3 Type for 3-vector
- * @return Unit-vector in z-direction
+ * @tparam Vector3  Type for 3-vector
+ * @return          Unit-vector in z-direction
  */
-template<typename Vector3>
+template <typename Vector3>
 Vector3 getZUnitVector()
 {
     Vector3 zUnitVector(3);
@@ -235,13 +234,13 @@ Vector3 getZUnitVector()
  * - [] (element access operator, returning floating-point number)
  * - .size() (vector length function)
  *
- * @tparam Real       Real type
- * @tparam Vector     Vector type
- * @param  vector     Vector to multiply element-wise
- * @param  multiplier Multiplier to multiply vector element-wise
- * @return Vector multiplied element-wise
+ * @tparam Real        Real type
+ * @tparam Vector      Vector type
+ * @param  vector      Vector to multiply element-wise
+ * @param  multiplier  Multiplier to multiply vector element-wise
+ * @return             Vector multiplied element-wise
  */
-template<typename Real, typename Vector>
+template <typename Real, typename Vector>
 Vector multiply(const Vector& vector, const Real multiplier)
 {
     Vector result = vector;
@@ -261,13 +260,13 @@ Vector multiply(const Vector& vector, const Real multiplier)
  * - [] (element access operator, returning floating-point number)
  * - .size() (vector length function)
  *
- * @tparam Real   Real type
- * @tparam Vector Vector type
- * @param  vector Vector to add to element-wise
- * @param  adder  Added to multiply vector element-wise
- * @return Vector added to element-wise
+ * @tparam Real    Real type
+ * @tparam Vector  Vector type
+ * @param  vector  Vector to add to element-wise
+ * @param  adder   Added to multiply vector element-wise
+ * @return         Vector added to element-wise
  */
-template<typename Real, typename Vector>
+template <typename Real, typename Vector>
 Vector add(const Vector& vector, const Real adder)
 {
     Vector result = vector;
@@ -287,12 +286,12 @@ Vector add(const Vector& vector, const Real adder)
  * - [] (element access operator, returning floating-point number)
  * - .size() (vector length function)
  *
- * @tparam Vector  Vector type
- * @param  vector1 A vector to add to element-wise
- * @param  vector2 A vector to add to element-wise
- * @return Vector resulting from element-wise addition of two vectors
+ * @tparam Vector   Vector type
+ * @param  vector1  A vector to add to element-wise
+ * @param  vector2  A vector to add to element-wise
+ * @return          Vector resulting from element-wise addition of two vectors
  */
-template<typename Vector>
+template <typename Vector>
 Vector add(const Vector& vector1, const Vector& vector2)
 {
     assert(vector1.size() == vector2.size());

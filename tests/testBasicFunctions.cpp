@@ -43,7 +43,7 @@ TEST_CASE("Test radian-to-degree conversion function", "[radians-to-degrees]")
 {
     SECTION("Test PI/2 radians to degrees")
     {
-        REQUIRE(convertRadiansToDegrees(3.14159265358979323846/2.0) == 90.0);
+        REQUIRE(convertRadiansToDegrees(3.14159265358979323846 / 2.0) == 90.0);
     }
 
     SECTION("Test 0 radians to degrees")
