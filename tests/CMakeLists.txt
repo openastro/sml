@@ -9,6 +9,18 @@
 # @TODO: add find_package call to use Catch2 that is already present and only fetch otherwise
 # @TODO: consider only using the Catch2 single header to avoid building the whole library (slow)
 
+# -----------------------------------------------
+
+# List all files that should be included in the library here
+set(
+  TESTS_SOURCE_LIST
+	testBasicFunctions.cpp
+	testConstants.cpp
+	testLinearAlgebra.cpp
+  )
+
+# -----------------------------------------------
+
 # Fetch Catch2 testing library
 FetchContent_Declare(
   Catch2
@@ -18,12 +30,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 # Add test executables and linked libraries
-add_executable(
-	sml_tests
-	testBasicFunctions.cpp
-	testConstants.cpp
-	testLinearAlgebra.cpp
-	)
+add_executable(sml_tests ${TESTS_SOURCE_LIST})
+target_compile_features(sml_tests PRIVATE cxx_std_11)
 target_link_libraries(sml_tests PRIVATE sml_lib Catch2::Catch2WithMain)
 
 # Register tests in CTest

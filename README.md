@@ -3,7 +3,7 @@ sml
 
 \cond [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/kartikkumar/sml.svg?branch=master)](https://travis-ci.org/kartikkumar/sml) [![Coverity Scan Build Status](https://scan.coverity.com/projects/kartikkumar-sml/badge.svg)](https://scan.coverity.com/projects/kartikkumar-sml) [![Coverage Status](https://coveralls.io/repos/github/kartikkumar/sml/badge.svg?branch=master)](https://coveralls.io/github/kartikkumar/sml?branch=master) \endcond
 
-sml (simple mathematics library) is a C++ (template) library that provides basic mathematics functionality. The library is intended to be lightweight and simple to use in other projects. A CMake module is available to make it easy to include sml in other CMake-based projects: [Findsml.cmake](https://github.com/openastro/cmake-modules/blob/master/Modules/Findsml.cmake).
+sml (simple mathematics library) is a C++ library that provides basic mathematics functionality. The library is intended to be lightweight and simple to use in other projects. A CMake module is available to make it easy to include sml in other CMake-based projects: [Findsml.cmake](https://github.com/openastro/cmake-modules/blob/master/Modules/Findsml.cmake).
 
 Features
 ------

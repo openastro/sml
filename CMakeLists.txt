@@ -44,7 +44,12 @@ configure_file (
 
 # Add subdirs for headers, sources, and executables
 # Subdirs contain CMakeLists.txt files with commands to setup build
+# Comment the following line if the library is header-only
+#add_subdirectory(src)
+# Uncomment the following line if the library is header-only
 add_subdirectory(include)
+# Comment the following line if there are no applications in this project
+#add_subdirectory(apps)
 
 # Enable testing
 if(BUILD_TESTING)

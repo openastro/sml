@@ -18,74 +18,74 @@ namespace tests
 
 typedef double Real;
 
-TEST_CASE( "Test modulo function", "[modulo]" )
+TEST_CASE("Test modulo function", "[modulo]")
 {
-    SECTION( "Test 1.0 mod 1.0" )
+    SECTION("Test 1.0 mod 1.0")
     {
         Real dividend = 1.0;
         Real divisor = 1.0;
         Real remainder = 0.0;
 
-        REQUIRE( computeModulo( dividend, divisor ) == remainder );
+        REQUIRE(computeModulo(dividend, divisor) == remainder);
     }
 
-    SECTION( "Test 3.0 mod 2.5" )
+    SECTION("Test 3.0 mod 2.5")
     {
         Real dividend = 3.0;
         Real divisor = 2.5;
         Real remainder = 0.5;
 
-        REQUIRE( computeModulo( dividend, divisor ) == remainder );
+        REQUIRE(computeModulo(dividend, divisor) == remainder);
     }
 }
 
-TEST_CASE( "Test radian-to-degree conversion function", "[radians-to-degrees]")
+TEST_CASE("Test radian-to-degree conversion function", "[radians-to-degrees]")
 {
-    SECTION( "PI/2 radians to degrees" )
+    SECTION("Test PI/2 radians to degrees")
     {
-        REQUIRE( convertRadiansToDegrees( 3.14159265358979323846 / 2.0 ) == 90.0 );
+        REQUIRE(convertRadiansToDegrees(3.14159265358979323846/2.0) == 90.0);
     }
 
-    SECTION( "0 radians to degrees" )
+    SECTION("Test 0 radians to degrees")
     {
-        REQUIRE( convertRadiansToDegrees( 0.0 ) == 0.0 );
+        REQUIRE(convertRadiansToDegrees(0.0) == 0.0);
     }
 
-    SECTION( "PI radians to degrees" )
+    SECTION("Test PI radians to degrees")
     {
-        REQUIRE( convertRadiansToDegrees( 3.14159265358979323846 ) == 180.0 );
+        REQUIRE(convertRadiansToDegrees(3.14159265358979323846) == 180.0);
     }
 
-    SECTION( "Arbitrary radians to degrees" )
+    SECTION("Test arbitrary radians to degrees")
     {
-        REQUIRE( convertRadiansToDegrees( 2.573 )
-                 == Catch::Approx( 147.4220406871608 ).epsilon(
-                        std::numeric_limits< Real >::epsilon( ) ) );
+        REQUIRE(convertRadiansToDegrees(2.573)
+                 == Catch::Approx(147.4220406871608).epsilon(
+                        std::numeric_limits<Real>::epsilon()));
     }
 }
 
-TEST_CASE( "Test degree-to-radians conversion function", "[degrees-to-radians]")
+TEST_CASE("Test degree-to-radians conversion function", "[degrees-to-radians]")
 {
-    SECTION( "90 degrees to radians" )
+    SECTION("Test 90 degrees to radians")
     {
-        REQUIRE( convertDegreesToRadians( 90.0 ) == 3.14159265358979323846 / 2.0 );
+        REQUIRE(convertDegreesToRadians(90.0) == 3.14159265358979323846 / 2.0);
     }
 
-    SECTION( "0 degrees to radians" )
+    SECTION("Test 0 degrees to radians")
     {
-        REQUIRE( convertDegreesToRadians( 0.0 ) == 0.0 );
+        REQUIRE(convertDegreesToRadians(0.0) == 0.0);
     }
 
-    SECTION( "180 degrees to radians" )
+    SECTION("Test 180 degrees to radians")
     {
-        REQUIRE( convertDegreesToRadians( 180.0 ) == 3.14159265358979323846 );
+        REQUIRE(convertDegreesToRadians(180.0) == 3.14159265358979323846);
     }
 
-    SECTION( "Arbitrary degrees to radians" )
+    SECTION("Test arbitrary degrees to radians")
     {
-        REQUIRE( convertDegreesToRadians( 147.422 )
-                 == Catch::Approx( 2.572999289875080 ).epsilon(
-                        std::numeric_limits< Real >::epsilon( ) ) );
+        REQUIRE(convertDegreesToRadians(147.422)
+                 == Catch::Approx(2.572999289875080).epsilon(
+                        std::numeric_limits<Real>::epsilon()));
     }
 }
 

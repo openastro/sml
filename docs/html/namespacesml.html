@@ -183,7 +183,7 @@ template&lt;typename Real &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Computes the remainder of division of one real number by another. The remainder is in the range [ 0, divisor ).</p>
+<p >Computes the remainder of division of one real number by another. The remainder is in the range [0, divisor).</p>
 <p >The modulo computation is based on the mathematical definition of congruence, which is different from the implementation of std::fmod() in the cmath standard library.</p>
 <p >For a description of congruence see: <a href="http://mathworld.wolfram.com/Congruence.html">http://mathworld.wolfram.com/Congruence.html</a>.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -318,7 +318,7 @@ template&lt;typename Vector3 &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Computes the cross-product of two 3-vectors. Throws a runtime exception if either of the vectors do not have dimension 3. The cross-product <img class="formulaInl" alt="$\bar{R} = \bar{X} \times \bar{Y}$" src="form_3.png" width="63" height="11"/> is computed as follows:</p>
+<p >Computes the cross-product of two 3-vectors. The cross-product <img class="formulaInl" alt="$\bar{R} = \bar{X} \times \bar{Y}$" src="form_3.png" width="63" height="11"/> is computed as follows:</p>
 <p class="formulaDsp">
 <img class="formulaDsp" alt="\begin{eqnarray*}
      R_{1} &amp;=&amp; X_{2} * Y_{3} - X_{3} * Y{2} \\
@@ -327,9 +327,9 @@ template&lt;typename Vector3 &gt; </div>
 \end{eqnarray*}" src="form_4.png" width="149" height="50"/>
 </p>
 <p >Note that the Vector3 type must support the following operation/functions:</p><ul>
-<li>[ ] (element access operator, returning floating-point number)</li>
+<li>[] (element access operator, returning floating-point number)</li>
 <li>= (equals operator)</li>
-<li>.size( ) (vector length function)</li>
+<li>.size() (vector length function)</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -346,7 +346,7 @@ template&lt;typename Vector3 &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector resulting from cross-product </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00039">39</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00040">40</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -377,15 +377,15 @@ template&lt;typename Real , typename Vector &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Computes the dot-product (inner-product) of two vectors of length N. Throws a runtime exception if the vectors are unequal in length. The dot-product <img class="formulaInl" alt="$r = \bar{X} \cdot \bar{Y}$" src="form_5.png" width="54" height="11"/> is computed as follows:</p>
+<p >Computes the dot-product (inner-product) of two vectors of length N. The dot-product <img class="formulaInl" alt="$r = \bar{X} \cdot \bar{Y}$" src="form_5.png" width="54" height="11"/> is computed as follows:</p>
 <p class="formulaDsp">
 <img class="formulaDsp" alt="\[
      r = \sum_{i=1}^{N} X_{i} * Y_{i}
 \]" src="form_6.png" width="80" height="38"/>
 </p>
 <p >Note that the Vector type must support the following operation/functions:</p><ul>
-<li>[ ] (element access operator, returning floating-point number)</li>
-<li>.size( ) (vector length function)</li>
+<li>[] (element access operator, returning floating-point number)</li>
+<li>.size() (vector length function)</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -403,7 +403,7 @@ template&lt;typename Real , typename Vector &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Scalar resulting from dot-product </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00078">78</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00070">70</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -424,15 +424,15 @@ template&lt;typename Real , typename Vector &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Computes the square of the Euclidean norm of a vector of length N. This is computed as the dot- product of the vector with itself. The squared-norm <img class="formulaInl" alt="$r$" src="form_7.png" width="8" height="6"/> of vector <img class="formulaInl" alt="$X$" src="form_8.png" width="13" height="10"/> is computed as follows:</p>
+<p >Computes the square of the Euclidean norm of a vector of length N. This is computed as the dot-product of the vector with itself. The squared-norm <img class="formulaInl" alt="$r$" src="form_7.png" width="8" height="6"/> of vector <img class="formulaInl" alt="$X$" src="form_8.png" width="13" height="10"/> is computed as follows:</p>
 <p class="formulaDsp">
 <img class="formulaDsp" alt="\[
      r = \sum_{i=1}^{N} X_{i}^{2}
 \]" src="form_9.png" width="60" height="38"/>
 </p>
 <p >Note that the Vector type must support the following operation/functions:</p><ul>
-<li>[ ] (element access operator, returning floating-point number)</li>
-<li>.size( ) (vector length function)</li>
+<li>[] (element access operator, returning floating-point number)</li>
+<li>.size() (vector length function)</li>
 </ul>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacesml.html#ada9f4bff1a65b87090ca1a604b8ea663" title="Compute dot-product of two equal-length vectors.">dot</a> </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -450,7 +450,7 @@ template&lt;typename Real , typename Vector &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Scalar squared-norm of vector </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00119">119</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00102">102</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -478,8 +478,8 @@ template&lt;typename Real , typename Vector &gt; </div>
 \]" src="form_10.png" width="74" height="45"/>
 </p>
 <p >Note that the Vector type must support the following operation/functions:</p><ul>
-<li>[ ] (element access operator, returning floating-point number)</li>
-<li>.size( ) (vector length function)</li>
+<li>[] (element access operator, returning floating-point number)</li>
+<li>.size() (vector length function)</li>
 </ul>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacesml.html#a805dd265cb260d6066d83553503340df" title="Compute squared-norm of vector.">squaredNorm</a>, <a class="el" href="namespacesml.html#ada9f4bff1a65b87090ca1a604b8ea663" title="Compute dot-product of two equal-length vectors.">dot</a> </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -497,7 +497,7 @@ template&lt;typename Real , typename Vector &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Scalar norm of vector </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00145">145</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00128">128</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -525,8 +525,8 @@ template&lt;typename Real , typename Vector &gt; </div>
 \]" src="form_11.png" width="49" height="33"/>
 </p>
 <p >Note that the Vector type must support the following operation/functions:</p><ul>
-<li>[ ] (element access operator, returning floating-point number)</li>
-<li>.size( ) (vector length function)</li>
+<li>[] (element access operator, returning floating-point number)</li>
+<li>.size() (vector length function)</li>
 </ul>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacesml.html#acba5c44ce8f89b22258201262435afdf" title="Compute norm of vector.">norm</a>, <a class="el" href="namespacesml.html#ada9f4bff1a65b87090ca1a604b8ea663" title="Compute dot-product of two equal-length vectors.">dot</a> </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -544,7 +544,7 @@ template&lt;typename Real , typename Vector &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Normalized vector </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00170">170</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00155">155</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -567,7 +567,7 @@ template&lt;typename Vector3 &gt; </div>
 <p >Returns unit-vector in the x-direction as column vector.</p>
 <p >Note that the Vector type must support the following operation/functions:</p><ul>
 <li>constructor to create object with array of specified length</li>
-<li>[ ] (element access operator, returning floating-point number)</li>
+<li>[] (element access operator, returning floating-point number)</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -577,7 +577,7 @@ template&lt;typename Vector3 &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unit-vector in x-direction </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00200">200</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00178">178</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -600,7 +600,7 @@ template&lt;typename Vector3 &gt; </div>
 <p >Returns unit-vector in the y-direction as column vector.</p>
 <p >Note that the Vector type must support the following operation/functions:</p><ul>
 <li>constructor to create object with array of specified length</li>
-<li>[ ] (element access operator, returning floating-point number)</li>
+<li>[] (element access operator, returning floating-point number)</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -610,7 +610,7 @@ template&lt;typename Vector3 &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unit-vector in y-direction </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00224">224</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00199">199</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +633,7 @@ template&lt;typename Vector3 &gt; </div>
 <p >Returns unit-vector in the z-direction as column vector.</p>
 <p >Note that the Vector type must support the following operation/functions:</p><ul>
 <li>constructor to create object with array of specified length</li>
-<li>[ ] (element access operator, returning floating-point number)</li>
+<li>[] (element access operator, returning floating-point number)</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -643,7 +643,7 @@ template&lt;typename Vector3 &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Unit-vector in z-direction </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00248">248</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00220">220</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -675,10 +675,10 @@ template&lt;typename Real , typename Vector &gt; </div>
       </table>
 </div><div class="memdoc">
 <p >Multiply each element of a vector of length N by a scalar.</p>
-<ul>
+<p >Note that the Vector type must support the following operation/functions:</p><ul>
 <li>copy constructor</li>
-<li>[ ] (element access operator, returning floating-point number)</li>
-<li>.size( ) (vector length function)</li>
+<li>[] (element access operator, returning floating-point number)</li>
+<li>.size() (vector length function)</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -696,7 +696,7 @@ template&lt;typename Real , typename Vector &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector multiplied element-wise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00275">275</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00245">245</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -728,10 +728,10 @@ template&lt;typename Real , typename Vector &gt; </div>
       </table>
 </div><div class="memdoc">
 <p >Add a scalar to each element of a vector of length N.</p>
-<ul>
+<p >Note that the Vector type must support the following operation/functions:</p><ul>
 <li>copy constructor</li>
-<li>[ ] (element access operator, returning floating-point number)</li>
-<li>.size( ) (vector length function)</li>
+<li>[] (element access operator, returning floating-point number)</li>
+<li>.size() (vector length function)</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -749,7 +749,7 @@ template&lt;typename Real , typename Vector &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector added to element-wise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00303">303</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00271">271</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>
@@ -781,10 +781,10 @@ template&lt;typename Vector &gt; </div>
       </table>
 </div><div class="memdoc">
 <p >Add two vectors of length N element-wise.</p>
-<ul>
+<p >Note that the Vector type must support the following operation/functions:</p><ul>
 <li>copy constructor</li>
-<li>[ ] (element access operator, returning floating-point number)</li>
-<li>.size( ) (vector length function)</li>
+<li>[] (element access operator, returning floating-point number)</li>
+<li>.size() (vector length function)</li>
 </ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -801,7 +801,7 @@ template&lt;typename Vector &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector resulting from element-wise addition of two vectors </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00330">330</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linearAlgebra_8hpp_source.html#l00296">296</a> of file <a class="el" href="linearAlgebra_8hpp_source.html">linearAlgebra.hpp</a>.</p>
 
 </div>
 </div>

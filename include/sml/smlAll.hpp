@@ -9,4 +9,3 @@
 #include "sml/basicFunctions.hpp"
 #include "sml/constants.hpp"
 #include "sml/linearAlgebra.hpp"
-

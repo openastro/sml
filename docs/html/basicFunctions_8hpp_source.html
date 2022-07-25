@@ -102,22 +102,22 @@ $(document).ready(function(){initNavTree('basicFunctions_8hpp_source.html',''); 
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">template</span>&lt; <span class="keyword">typename</span> Real &gt;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespacesml.html#ab26ceb16aed143c1a37f4acfbcd63de8">   32</a></span>Real <a class="code hl_function" href="namespacesml.html#ab26ceb16aed143c1a37f4acfbcd63de8">computeModulo</a>( <span class="keyword">const</span> Real dividend, <span class="keyword">const</span> Real divisor )</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Real&gt;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespacesml.html#ab26ceb16aed143c1a37f4acfbcd63de8">   32</a></span>Real <a class="code hl_function" href="namespacesml.html#ab26ceb16aed143c1a37f4acfbcd63de8">computeModulo</a>(<span class="keyword">const</span> Real dividend, <span class="keyword">const</span> Real divisor)</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">return</span> dividend - divisor * std::floor( dividend / divisor );</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">return</span> dividend - divisor * std::floor(dividend / divisor);</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Real &gt;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="namespacesml.html#a93758fc3d553c1d8e18f45ebf61a8afb">   50</a></span>Real <a class="code hl_function" href="namespacesml.html#a93758fc3d553c1d8e18f45ebf61a8afb">convertRadiansToDegrees</a>( <span class="keyword">const</span> Real angleInRadians )</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Real&gt;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="namespacesml.html#a93758fc3d553c1d8e18f45ebf61a8afb">   50</a></span>Real <a class="code hl_function" href="namespacesml.html#a93758fc3d553c1d8e18f45ebf61a8afb">convertRadiansToDegrees</a>(<span class="keyword">const</span> Real angleInRadians)</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>{</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">return</span> angleInRadians / <a class="code hl_variable" href="namespacesml.html#a0de6c4d6b9d119a350d844894ddfa7de">SML_PI</a> * 180.0;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Real &gt;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespacesml.html#abf1a4db730c356d33f098cfc8942dc10">   68</a></span>Real <a class="code hl_function" href="namespacesml.html#abf1a4db730c356d33f098cfc8942dc10">convertDegreesToRadians</a>( <span class="keyword">const</span> Real angleInDegrees )</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Real&gt;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespacesml.html#abf1a4db730c356d33f098cfc8942dc10">   68</a></span>Real <a class="code hl_function" href="namespacesml.html#abf1a4db730c356d33f098cfc8942dc10">convertDegreesToRadians</a>(<span class="keyword">const</span> Real angleInDegrees)</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>{</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">return</span> angleInDegrees * <a class="code hl_variable" href="namespacesml.html#a0de6c4d6b9d119a350d844894ddfa7de">SML_PI</a> / 180.0;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
