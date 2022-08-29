@@ -16,6 +16,7 @@ set(
   TESTS_SOURCE_LIST
 	testBasicFunctions.cpp
 	testConstants.cpp
+  testLagrangeInterpolator.cpp
 	testLinearAlgebra.cpp
   )
 

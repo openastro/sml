@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['multiply_0',['multiply',['../namespacesml.html#aca839c7251a7c8ddecbc5106aab72d86',1,'sml']]]
+  ['lagrangeinterpolate_0',['lagrangeInterpolate',['../namespacesml.html#a157dfd03af2b76a6da7e38dc886d565d',1,'sml']]]
 ];

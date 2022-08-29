@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['squarednorm_0',['squaredNorm',['../namespacesml.html#a805dd265cb260d6066d83553503340df',1,'sml']]]
+  ['norm_0',['norm',['../namespacesml.html#acba5c44ce8f89b22258201262435afdf',1,'sml']]],
+  ['normalize_1',['normalize',['../namespacesml.html#a3f746e6de53f4b92a9492e275929bdc4',1,'sml']]]
 ];

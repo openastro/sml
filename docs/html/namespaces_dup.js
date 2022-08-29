@@ -4,6 +4,7 @@ var namespaces_dup =
       [ "computeModulo", "namespacesml.html#ab26ceb16aed143c1a37f4acfbcd63de8", null ],
       [ "convertRadiansToDegrees", "namespacesml.html#a93758fc3d553c1d8e18f45ebf61a8afb", null ],
       [ "convertDegreesToRadians", "namespacesml.html#abf1a4db730c356d33f098cfc8942dc10", null ],
+      [ "lagrangeInterpolate", "namespacesml.html#a157dfd03af2b76a6da7e38dc886d565d", null ],
       [ "cross", "namespacesml.html#a3a6dc4b8154e49f46d7d238ae7cc176d", null ],
       [ "dot", "namespacesml.html#ada9f4bff1a65b87090ca1a604b8ea663", null ],
       [ "squaredNorm", "namespacesml.html#a805dd265cb260d6066d83553503340df", null ],
