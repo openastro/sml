@@ -1,6 +1,9 @@
 <map id="linearAlgebra.hpp" name="linearAlgebra.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="76,5,199,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,79,80,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="105,79,170,104"/>
-<area shape="rect" id="node4" title=" " alt="" coords="195,79,253,104"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="75,5,197,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,80,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,34,71,72,68,68,118,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="104,79,168,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,31,139,64,133,64,133,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="193,79,250,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="152,29,198,67,194,72,149,34"/>
 </map>
