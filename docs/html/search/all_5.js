@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['lagrangeinterpolate_0',['lagrangeInterpolate',['../namespacesml.html#a157dfd03af2b76a6da7e38dc886d565d',1,'sml']]],
-  ['lagrangeinterpolator_2ehpp_1',['lagrangeInterpolator.hpp',['../lagrangeInterpolator_8hpp.html',1,'']]],
-  ['linearalgebra_2ehpp_2',['linearAlgebra.hpp',['../linearAlgebra_8hpp.html',1,'']]]
+  ['getxunitvector_0',['getXUnitVector',['../namespacesml.html#a14c071bdaab073455d85aa2da81912e6',1,'sml']]],
+  ['getyunitvector_1',['getYUnitVector',['../namespacesml.html#a5850b536b02401e88df84d2501aae619',1,'sml']]],
+  ['getzunitvector_2',['getZUnitVector',['../namespacesml.html#a0d29eea637c69448b58d37c0d2dc161f',1,'sml']]]
 ];

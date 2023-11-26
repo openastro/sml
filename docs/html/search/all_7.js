@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['norm_0',['norm',['../namespacesml.html#acba5c44ce8f89b22258201262435afdf',1,'sml']]],
-  ['normalize_1',['normalize',['../namespacesml.html#a3f746e6de53f4b92a9492e275929bdc4',1,'sml']]]
+  ['lagrangeinterpolate_0',['lagrangeInterpolate',['../namespacesml.html#a157dfd03af2b76a6da7e38dc886d565d',1,'sml']]],
+  ['lagrangeinterpolator_2ehpp_1',['lagrangeInterpolator.hpp',['../lagrangeInterpolator_8hpp.html',1,'']]],
+  ['linearalgebra_2ehpp_2',['linearAlgebra.hpp',['../linearAlgebra_8hpp.html',1,'']]],
+  ['list_3',['Todo List',['../todo.html',1,'']]]
 ];

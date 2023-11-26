@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sml_0',['sml',['../index.html',1,'']]]
+  ['list_0',['Todo List',['../todo.html',1,'']]]
 ];

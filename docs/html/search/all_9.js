@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['sml_0',['sml',['../index.html',1,'(Global Namespace)'],['../namespacesml.html',1,'sml']]],
-  ['sml_5fpi_1',['SML_PI',['../namespacesml.html#a0de6c4d6b9d119a350d844894ddfa7de',1,'sml']]],
-  ['smlall_2ehpp_2',['smlAll.hpp',['../smlAll_8hpp.html',1,'']]],
-  ['squarednorm_3',['squaredNorm',['../namespacesml.html#a805dd265cb260d6066d83553503340df',1,'sml']]]
+  ['norm_0',['norm',['../namespacesml.html#acba5c44ce8f89b22258201262435afdf',1,'sml']]],
+  ['normalize_1',['normalize',['../namespacesml.html#a3f746e6de53f4b92a9492e275929bdc4',1,'sml']]]
 ];
