@@ -26,3 +26,19 @@
 \_form#11=49x33:\[
      \hat{\bar{X}} = \frac{\bar{X}}{|\bar{X}|}
 \]
+\_form#12=93x26:\[     \theta_{deg} = \theta_{rad} * \frac{180}{\pi}
+\]
+\_form#13=93x24:\[     \theta_{rad} = \theta_{deg} * \frac{\pi}{180}
+\]
+\_form#14=149x50:\begin{eqnarray*}     R_{1} &=& X_{2} * Y_{3} - X_{3} * Y{2} \\
+     R_{2} &=& X_{3} * Y_{1} - X_{1} * Y{3} \\
+     R_{3} &=& X_{1} * Y_{2} - X_{2} * Y{1}
+\end{eqnarray*}
+\_form#15=80x38:\[     r = \sum_{i=1}^{N} X_{i} * Y_{i}
+\]
+\_form#16=60x38:\[     r = \sum_{i=1}^{N} X_{i}^{2}
+\]
+\_form#17=74x45:\[     r = \sqrt{\sum_{i=1}^{N} X_{i}^{2}}
+\]
+\_form#18=49x33:\[     \hat{\bar{X}} = \frac{\bar{X}}{|\bar{X}|}
+\]
